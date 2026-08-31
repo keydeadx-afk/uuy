@@ -1,34 +1,17 @@
 <!DOCTYPE html>
 <html lang="uk" class="scroll-smooth">
 <head>
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1049772264217854');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1049772264217854&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Легка Трансформація | Наукова система стрункості та любові до себе</title>
+  <title>Калькулятор податків та статусу студента в Польщі | Student Support PL</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Google Fonts: Manrope (Headings) + Plus Jakarta Sans (Body text) -->
+  <!-- Google Fonts: Manrope + Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800;900&display=swap" rel="stylesheet">
   
   <script>
     tailwind.config = {
@@ -36,26 +19,29 @@ src="https://www.facebook.com/tr?id=1049772264217854&ev=PageView&noscript=1"
         extend: {
           colors: {
             brand: {
-              bg: '#FDF7F2',
+              bg: '#F8FAFC',
               card: '#FFFFFF',
-              cardSoft: '#F9F1EA',
-              coral: '#FF6442',
-              coralHover: '#E85230',
-              dark: '#24211D',
-              muted: '#6E665B',
-              mint: '#BBDAC8',
-              sage: '#3B6E4C',
-              sageLight: '#EBF4EE',
+              border: '#E2E8F0',
+              borderLight: '#EDF2F7',
+              blue: '#2563EB',
+              blueDark: '#1D4ED8',
+              blueHover: '#1E40AF',
+              blueSoft: '#EFF6FF',
+              blueBorder: '#BFDBFE',
+              dark: '#0F172A',
+              text: '#1E293B',
+              muted: '#64748B',
+              accent: '#0EA5E9'
             }
           },
           fontFamily: {
             heading: ['"Manrope"', 'sans-serif'],
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['"Inter"', 'sans-serif'],
           },
           boxShadow: {
-            'warm': '0 12px 36px -8px rgba(215, 178, 154, 0.35)',
-            'warm-lg': '0 20px 45px -10px rgba(255, 100, 66, 0.28)',
-            'glass': '0 8px 32px 0 rgba(187, 218, 200, 0.25)',
+            'subtle': '0 4px 20px -2px rgba(15, 23, 42, 0.05)',
+            'card-hover': '0 12px 30px -4px rgba(37, 99, 235, 0.12)',
+            'blue-glow': '0 10px 30px -5px rgba(37, 99, 235, 0.25)',
           }
         }
       }
@@ -64,549 +50,326 @@ src="https://www.facebook.com/tr?id=1049772264217854&ev=PageView&noscript=1"
 
   <style>
     body {
-      background-color: #FDF7F2;
-      color: #24211D;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #F8FAFC;
+      color: #1E293B;
+      font-family: 'Inter', sans-serif;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.95);
+    .option-btn {
+      transition: all 0.2s ease;
     }
-    .ticker-scroll {
-      animation: ticker 25s linear infinite;
+    .option-btn:hover {
+      border-color: #2563EB;
+      background-color: #EFF6FF;
+      transform: translateY(-2px);
     }
-    @keyframes ticker {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .pulse-glow {
-      animation: pulseGlow 2.5s infinite;
-    }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 100, 66, 0.4); }
-      50% { box-shadow: 0 0 0 12px rgba(255, 100, 66, 0); }
+    .option-btn.selected {
+      border-color: #2563EB;
+      background-color: #EFF6FF;
+      box-shadow: 0 0 0 1px #2563EB;
     }
   </style>
 </head>
-<body class="selection:bg-brand-coral selection:text-white">
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-blue selection:text-white">
 
-  <!-- TOP PROMO BAR -->
-  <aside class="bg-brand-sage text-white text-xs md:text-sm py-2.5 px-4 text-center font-medium tracking-wide">
-    🌿 Осінній набір: знижка <span class="underline font-bold">-50%</span> та подарунковий бокс вітамінного супроводу.
-  </aside>
-
-  <!-- HEADER -->
-  <header class="sticky top-0 z-40 bg-brand-bg/95 backdrop-blur-md border-b border-[#eadcd1]/70 transition-all duration-300">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-18 py-3.5 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2.5">
-        <span class="w-8 h-8 rounded-full bg-brand-coral/15 flex items-center justify-center text-brand-coral font-heading font-bold text-base">✦</span>
-        <span class="font-heading font-extrabold text-xl tracking-tight text-brand-dark">Легка<span class="text-brand-coral font-medium">Трансформація</span></span>
-      </a>
-
-      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-brand-dark/80">
-        <a href="#about" class="hover:text-brand-coral transition">Для кого</a>
-        <a href="#approach" class="hover:text-brand-coral transition">Методика</a>
-        <a href="#program" class="hover:text-brand-coral transition">Програма</a>
-        <a href="#reviews" class="hover:text-brand-coral transition">Відгуки</a>
-        <a href="#faq" class="hover:text-brand-coral transition">FAQ</a>
-      </nav>
-
-      <a href="#offer" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-brand-coral text-white text-xs md:text-sm font-bold tracking-wide hover:bg-brand-coralHover transition shadow-md pulse-glow">
-        Приєднатися
+  <!-- TOP HEADER -->
+  <header class="border-b border-brand-border bg-white/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <span class="w-9 h-9 rounded-xl bg-brand-blue text-white flex items-center justify-center font-heading font-extrabold text-sm shadow-sm">PL</span>
+        <span class="font-heading font-extrabold text-lg tracking-tight text-brand-dark">Student Support <span class="text-brand-blue">PL</span></span>
+      </div>
+      <a href="https://t.me/+rlS8-BCiUmQyOGJi" target="_blank" class="px-4 py-2 rounded-lg bg-brand-blueSoft text-brand-blue border border-brand-blueBorder text-xs sm:text-sm font-bold hover:bg-brand-blue hover:text-white transition flex items-center gap-1.5">
+        <span>Консультація в Telegram</span> ➔
       </a>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="relative pt-10 pb-16 md:pt-16 md:pb-24 overflow-hidden">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-12 gap-10 md:gap-8 items-center">
-      
-      <!-- Left Content -->
-      <div class="md:col-span-7 text-left space-y-6">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-sageLight text-brand-sage text-xs font-bold uppercase tracking-wider">
-          <span>✨</span> Наукова система турботи про тіло
-        </div>
-        
-        <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark leading-[1.18] tracking-tight">
-          Стрункість без голоду. <br class="hidden sm:block">
-          <span class="text-brand-coral">Твоє оновлене тіло</span> за 28–90 днів
-        </h1>
-
-        <p class="text-base sm:text-lg text-brand-muted max-w-xl font-normal leading-relaxed">
-          М'яке зниження ваги без зривів, шкоди для гормонів та виснажливих тренувань. Раціон із щоденним легальним десертом за правилом 80/20 та 15 хвилин домашньої турботи.
-        </p>
-
-        <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-          <a href="#offer" class="px-8 py-4 rounded-full bg-brand-coral text-white text-center font-bold text-sm tracking-wide hover:bg-brand-coralHover transition-all shadow-warm-lg hover:-translate-y-0.5">
-            Отримати план харчування ➔
-          </a>
-          <a href="#lead-magnet" class="px-6 py-4 rounded-full border border-brand-dark/15 text-brand-dark text-center font-bold text-sm hover:bg-white/70 transition">
-            Безкоштовний тест-меню
-          </a>
-        </div>
-
-        <div class="pt-4 flex items-center gap-4 text-xs text-brand-muted">
-          <div class="flex -space-x-2">
-            <span class="inline-block w-8 h-8 rounded-full bg-[#e8cdba] border-2 border-white text-center leading-7 text-[10px] font-bold text-brand-dark">ОК</span>
-            <span class="inline-block w-8 h-8 rounded-full bg-[#c9dfd3] border-2 border-white text-center leading-7 text-[10px] font-bold text-brand-dark">МВ</span>
-            <span class="inline-block w-8 h-8 rounded-full bg-[#f3d4c7] border-2 border-white text-center leading-7 text-[10px] font-bold text-brand-dark">АН</span>
-          </div>
-          <div>
-            <p class="font-bold text-brand-dark text-sm">Понад 2 000+ дівчат</p>
-            <p class="text-xs">вже повернули легкість та улюблений розмір S-M</p>
-          </div>
-        </div>
+  <!-- MAIN WRAPPER -->
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 w-full flex-grow">
+    
+    <!-- Hero Text -->
+    <div class="text-center mb-8 space-y-3">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-blueSoft border border-brand-blueBorder text-brand-blue text-xs font-bold uppercase tracking-wider">
+        🇵🇱 Для українців у Польщі віком від 18 до 30 років
       </div>
-
-      <!-- Right Visual Card -->
-      <div class="md:col-span-5 relative">
-        <div class="relative mx-auto max-w-sm md:max-w-none">
-          <div class="bg-gradient-to-b from-[#F7ECE1] to-[#EAE0D5] rounded-3xl p-6 sm:p-8 shadow-warm border border-white/80 relative overflow-hidden">
-            
-            <div class="w-full h-52 bg-white/75 rounded-2xl flex flex-col items-center justify-center p-4 border border-white relative shadow-sm">
-              <svg class="w-20 h-20 text-brand-coral mb-2" viewBox="0 0 64 64" fill="none" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M32 54V30M32 30C32 20 22 14 14 20C6 26 18 36 32 30ZM32 30C32 20 42 14 50 20C58 26 46 36 32 30ZM32 30C24 16 32 6 32 6C32 6 40 16 32 30Z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke-dasharray="2 2" d="M10 52C20 48 44 48 54 52" />
-              </svg>
-              <p class="text-xs font-semibold text-brand-muted text-center px-4">«Стрункість — це розквіт вашої природної енергії, а не покарання дієтами»</p>
-            </div>
-
-            <!-- Floating Progress Glass Card -->
-            <div class="glass-card mt-4 p-4 rounded-2xl shadow-glass flex items-center justify-between border border-white">
-              <div>
-                <p class="text-[11px] font-bold uppercase tracking-wider text-brand-sage">Результат учасниць</p>
-                <p class="font-heading font-extrabold text-2xl text-brand-dark mt-0.5">-8...-12 кг</p>
-                <p class="text-[11px] text-brand-muted">за перші 60 днів програми</p>
-              </div>
-              <div class="w-16 h-10 bg-brand-sageLight rounded-xl flex items-center justify-center text-brand-sage text-xs font-extrabold">
-                ↗ 92%
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SOCIAL PROOF TICKER -->
-  <section class="py-4 bg-brand-cardSoft border-y border-[#ebdcd0]/80 overflow-hidden">
-    <div class="flex items-center gap-8 whitespace-nowrap ticker-scroll text-xs sm:text-sm font-bold text-brand-dark/85 tracking-wide uppercase">
-      <span>★ 3 472+ скинутих кілограмів</span>
-      <span>✦ 100% меню зі звичайних продуктів</span>
-      <span>★ Без підрахунку калорій на вагах</span>
-      <span>✦ Щоденний десерт за правилом 80/20</span>
-      <span>★ Понад 94% стабільних результатів</span>
-      <span>✦ 3 472+ скинутих кілограмів</span>
-      <span>★ 100% меню зі звичайних продуктів</span>
-      <span>✦ Без підрахунку калорій на вагах</span>
-    </div>
-  </section>
-
-  <!-- NUMBERS & PROMISES -->
-  <section class="py-14 max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white p-7 rounded-2xl border border-[#ede3da] shadow-sm hover:shadow-warm transition duration-300">
-        <p class="font-heading text-3xl sm:text-4xl font-extrabold text-brand-coral">-5 см у талії</p>
-        <p class="text-sm font-bold text-brand-dark mt-1">за перші 7 днів</p>
-        <p class="text-xs text-brand-muted mt-2 leading-relaxed font-normal">М'який лімфодренаж знімає внутрішні набряки без сечогінних чаїв та небезпечних пігулок.</p>
-      </div>
-
-      <div class="bg-white p-7 rounded-2xl border border-[#ede3da] shadow-sm hover:shadow-warm transition duration-300">
-        <p class="font-heading text-3xl sm:text-4xl font-extrabold text-brand-sage">15 хв на день</p>
-        <p class="text-sm font-bold text-brand-dark mt-1">без походів у спортзал</p>
-        <p class="text-xs text-brand-muted mt-2 leading-relaxed font-normal">Легкі домашні комплекси на килимку для пружних сідниць, рівної постави та тонусу шкіри.</p>
-      </div>
-
-      <div class="bg-white p-7 rounded-2xl border border-[#ede3da] shadow-sm hover:shadow-warm transition duration-300">
-        <p class="font-heading text-3xl sm:text-4xl font-extrabold text-brand-dark">0 заборон</p>
-        <p class="text-sm font-bold text-brand-dark mt-1">на улюблені страви</p>
-        <p class="text-xs text-brand-muted mt-2 leading-relaxed font-normal">Ви їсте пасту, запечену картоплю та шоколад, залишаючись у здоровому дефіциті енергії.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- LEAD MAGNET BOX -->
-  <section id="lead-magnet" class="max-w-4xl mx-auto px-4 sm:px-6 py-6">
-    <div class="bg-gradient-to-r from-brand-sageLight to-[#F6EDE4] border border-brand-mint rounded-3xl p-8 sm:p-10 text-center shadow-warm relative overflow-hidden">
-      <span class="inline-block px-3.5 py-1 rounded-full bg-white text-brand-sage text-xs font-extrabold mb-3 shadow-sm uppercase tracking-wider">ПОДАРУНОК ДЛЯ СТАРТУ</span>
-      <h2 class="font-heading text-2xl sm:text-3xl font-extrabold text-brand-dark">Заберіть безкоштовний PDF-гайд прямо зараз</h2>
-      <p class="text-sm text-brand-muted max-w-lg mx-auto mt-2 mb-6 font-normal">
-        «ТОП-5 прихованих помилок у сніданках, які блокують спалювання жиру + Індивідуальний калькулятор дефіциту»
+      <h1 class="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-brand-dark leading-tight">
+        Дізнайся, як отримати статус студента в Польщі та <span class="text-brand-blue">збільшити дохід на руки</span>
+      </h1>
+      <p class="text-sm sm:text-base text-brand-muted max-w-xl mx-auto font-normal">
+        Пройди тест за 1 хвилину: розрахуй надбавку до зарплати без сплати ZUS або отримай легальне перебування та роботу без дозволів.
       </p>
+    </div>
 
-      <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-3" onsubmit="event.preventDefault(); window.open('https://t.me/lizokbrazhnik', '_blank');">
-        <input type="text" placeholder="Ваше ім'я та Telegram" required class="flex-1 px-5 py-3.5 rounded-full border border-[#d6c7bc] bg-white text-sm outline-none focus:border-brand-coral transition font-medium">
-        <button type="submit" class="px-6 py-3.5 rounded-full bg-brand-coral text-white text-xs sm:text-sm font-bold hover:bg-brand-coralHover transition shadow-md whitespace-nowrap">
-          Отримати гайд ➔
-        </button>
+    <!-- QUIZ CONTAINER -->
+    <div class="bg-white rounded-3xl p-6 sm:p-10 border border-brand-border shadow-subtle relative overflow-hidden">
+      
+      <!-- Progress Bar -->
+      <div class="mb-8">
+        <div class="flex justify-between items-center text-xs font-bold text-brand-muted uppercase tracking-wider mb-2.5">
+          <span id="step-indicator" class="text-brand-blue">Питання 1 з 4</span>
+          <span id="percent-indicator" class="font-heading text-brand-dark">25%</span>
+        </div>
+        <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+          <div id="progress-bar" class="h-full bg-gradient-to-r from-brand-blue to-brand-accent transition-all duration-300 w-1/4 rounded-full"></div>
+        </div>
+      </div>
+
+      <!-- FORM STEPS -->
+      <form id="quiz-form">
+        
+        <!-- STEP 1: Вік (18-30 років) -->
+        <div class="quiz-step" data-step="1">
+          <h2 class="font-heading text-lg sm:text-xl font-bold text-brand-dark mb-4">1. Скільки тобі повних років?</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <button type="button" class="option-btn p-5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex flex-col justify-between gap-2" onclick="selectOption(1, 'age', 'under26')">
+              <span class="font-bold text-base text-brand-dark">18 – 25 років (до 26)</span>
+              <span class="text-xs text-brand-blue font-bold">🎯 0% ZUS + 0% PIT (дохід Brutto = Netto)</span>
+            </button>
+            <button type="button" class="option-btn p-5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex flex-col justify-between gap-2" onclick="selectOption(1, 'age', '26to30')">
+              <span class="font-bold text-base text-brand-dark">26 – 30 років</span>
+              <span class="text-xs text-emerald-600 font-bold">📄 Легалізація, Карта Побиту, знижки</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Тип договору -->
+        <div class="quiz-step hidden" data-step="2">
+          <h2 class="font-heading text-lg sm:text-xl font-bold text-brand-dark mb-4">2. За яким договором ти працюєш або плануєш працювати?</h2>
+          <div class="space-y-3">
+            <button type="button" class="option-btn w-full p-4.5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex items-center justify-between" onclick="selectOption(2, 'contract', 'zlecenie')">
+              <div>
+                <p class="font-bold text-brand-dark">Umowa Zlecenie (Договір доручення)</p>
+                <p class="text-xs text-brand-muted mt-0.5">Максимальна вигода: нульовий ZUS для студентів до 26 років</p>
+              </div>
+              <span class="text-brand-blue font-bold text-lg">➔</span>
+            </button>
+            <button type="button" class="option-btn w-full p-4.5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex items-center justify-between" onclick="selectOption(2, 'contract', 'praca')">
+              <div>
+                <p class="font-bold text-brand-dark">Umowa o Pracę (Трудовий договір)</p>
+                <p class="text-xs text-brand-muted mt-0.5">Пільга PIT-0% до 26 років + можливість оптимізації</p>
+              </div>
+              <span class="text-brand-blue font-bold text-lg">➔</span>
+            </button>
+            <button type="button" class="option-btn w-full p-4.5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex items-center justify-between" onclick="selectOption(2, 'contract', 'looking')">
+              <div>
+                <p class="font-bold text-brand-dark">Ще не працюю / У пошуку роботи</p>
+                <p class="text-xs text-brand-muted mt-0.5">Хочу підготувати студентські документи для вигідного старту</p>
+              </div>
+              <span class="text-brand-blue font-bold text-lg">➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Кількість годин -->
+        <div class="quiz-step hidden" data-step="3">
+          <h2 class="font-heading text-lg sm:text-xl font-bold text-brand-dark mb-4">3. Скільки робочих годин у тебе в середньому на місяць?</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <button type="button" class="option-btn p-4 rounded-2xl border border-brand-border bg-white text-center font-medium text-sm" onclick="selectOption(3, 'hours', '160')">
+              <p class="font-bold text-brand-dark text-base">~160 годин</p>
+              <p class="text-xs text-brand-muted mt-1">Стандартний графік</p>
+            </button>
+            <button type="button" class="option-btn p-4 rounded-2xl border border-brand-border bg-white text-center font-medium text-sm" onclick="selectOption(3, 'hours', '200')">
+              <p class="font-bold text-brand-dark text-base">200–240+ годин</p>
+              <p class="text-xs text-brand-muted mt-1">Понаднормова робота</p>
+            </button>
+            <button type="button" class="option-btn p-4 rounded-2xl border border-brand-border bg-white text-center font-medium text-sm" onclick="selectOption(3, 'hours', '100')">
+              <p class="font-bold text-brand-dark text-base">До 100 годин</p>
+              <p class="text-xs text-brand-muted mt-1">Часткова зайнятість</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Поточний стан документів -->
+        <div class="quiz-step hidden" data-step="4">
+          <h2 class="font-heading text-lg sm:text-xl font-bold text-brand-dark mb-4">4. Чи маєш ти зараз статус студента або чинну довідку в Польщі?</h2>
+          <div class="space-y-3">
+            <button type="button" class="option-btn w-full p-4.5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex items-center justify-between" onclick="selectOption(4, 'status', 'no')">
+              <span class="text-brand-dark font-medium">❌ Ніколи не мав(-ла), сплачую повні податки</span>
+              <span class="text-brand-blue font-bold">➔</span>
+            </button>
+            <button type="button" class="option-btn w-full p-4.5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex items-center justify-between" onclick="selectOption(4, 'status', 'lost')">
+              <span class="text-brand-dark font-medium">⚠️ Був статус, але відрахували / закінчився семестр</span>
+              <span class="text-brand-blue font-bold">➔</span>
+            </button>
+            <button type="button" class="option-btn w-full p-4.5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex items-center justify-between" onclick="selectOption(4, 'status', 'policealna')">
+              <span class="text-brand-dark font-medium">🎓 Хочу вступити до поліцеальної школи / ВНЗ для легалізації</span>
+              <span class="text-brand-blue font-bold">➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 5: Результат та лід-форма -->
+        <div class="quiz-step hidden" data-step="5">
+          <div class="text-center space-y-5">
+            
+            <div class="p-6 rounded-2xl bg-brand-blueSoft border border-brand-blueBorder text-center">
+              <p class="text-xs font-bold uppercase tracking-wider text-brand-blue mb-1">Твій розрахунковий результат:</p>
+              <h3 id="savings-result" class="font-heading text-2xl sm:text-3xl font-extrabold text-brand-dark">
+                +1 150 – 1 650 PLN / міс
+              </h3>
+              <p id="savings-desc" class="text-xs sm:text-sm text-brand-muted mt-2 max-w-md mx-auto">
+                Це кошти, які роботодавець зараз віддає в ZUS замість того, щоб виплачувати тобі на руки.
+              </p>
+            </div>
+
+            <div class="text-left space-y-3.5 pt-2 max-w-md mx-auto">
+              <p class="text-sm font-bold text-brand-dark text-center">
+                Куди надіслати персональний розрахунок та список акредитованих шкіл?
+              </p>
+              
+              <div class="space-y-3">
+                <input type="text" id="user-name" placeholder="Твоє ім'я" required class="w-full px-4 py-3.5 rounded-xl border border-brand-border bg-white text-brand-dark placeholder-brand-muted focus:border-brand-blue focus:ring-2 focus:ring-brand-blueSoft outline-none text-sm font-medium">
+                <input type="text" id="user-contact" placeholder="Telegram (@username) або номер телефону" required class="w-full px-4 py-3.5 rounded-xl border border-brand-border bg-white text-brand-dark placeholder-brand-muted focus:border-brand-blue focus:ring-2 focus:ring-brand-blueSoft outline-none text-sm font-medium">
+              </div>
+
+              <button type="button" id="submit-btn" onclick="submitQuiz()" class="w-full py-4 rounded-xl bg-brand-blue hover:bg-brand-blueHover text-white font-heading font-extrabold text-sm uppercase tracking-wider transition shadow-blue-glow flex items-center justify-center gap-2">
+                <span>Отримати консультацію та список шкіл</span> ➔
+              </button>
+            </div>
+
+            <p class="text-[11px] text-brand-muted text-center pt-2">
+              🔒 Конфіденційно. Жодного спаму. Офіційне зарахування до державних та приватних закладів Польщі.
+            </p>
+
+          </div>
+        </div>
+
       </form>
     </div>
-  </section>
 
-  <!-- AUDIENCE / WHO IT'S FOR -->
-  <section id="about" class="py-16 max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-dark">Ця програма створена для вас, якщо:</h2>
-      <p class="text-sm text-brand-muted mt-2 font-normal">Ми адаптували раціони під реальний ритм сучасного життя без виснаження</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      
-      <!-- Avatar 1 -->
-      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-[#ede3da] space-y-3">
-        <div class="w-12 h-12 rounded-2xl bg-brand-coral/10 text-brand-coral flex items-center justify-center text-xl font-bold">🍼</div>
-        <h3 class="font-heading text-lg font-bold text-brand-dark">Мама в декреті</h3>
-        <p class="text-xs sm:text-sm text-brand-muted leading-relaxed font-normal">
-          У вас немає годин на окреме готування та спортзал. Потрібні швидкі рецепти з простих продуктів на всю родину та легкість без стресу.
-        </p>
+    <!-- BENEFIT PILLS -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+      <div class="p-4 rounded-2xl border border-brand-border bg-white shadow-subtle text-center space-y-1">
+        <p class="text-brand-blue font-heading font-extrabold text-lg">⚡️ 2–3 дні</p>
+        <p class="text-xs text-brand-muted font-medium">Отримання офіційної довідки (Zaświadczenie)</p>
       </div>
-
-      <!-- Avatar 2 -->
-      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-[#ede3da] space-y-3">
-        <div class="w-12 h-12 rounded-2xl bg-brand-sage/10 text-brand-sage flex items-center justify-center text-xl font-bold">💻</div>
-        <h3 class="font-heading text-lg font-bold text-brand-dark">Ділова леді чи в офісі</h3>
-        <p class="text-xs sm:text-sm text-brand-muted leading-relaxed font-normal">
-          Сидяча робота, постійні перекуси кавою з печивом, пізні вечері після 20:00 та відсутність енергії вже на початку робочого дня.
-        </p>
+      <div class="p-4 rounded-2xl border border-brand-border bg-white shadow-subtle text-center space-y-1">
+        <p class="text-brand-blue font-heading font-extrabold text-lg">📚 Без вівдідування занять</p>
+        <p class="text-xs text-brand-muted font-medium">Заочна форма без відриву від роботи</p>
       </div>
-
-      <!-- Avatar 3 -->
-      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-[#ede3da] space-y-3">
-        <div class="w-12 h-12 rounded-2xl bg-[#9c6f5d]/10 text-[#9c6f5d] flex items-center justify-center text-xl font-bold">🔄</div>
-        <h3 class="font-heading text-lg font-bold text-brand-dark">Ви перепробували все</h3>
-        <p class="text-xs sm:text-sm text-brand-muted leading-relaxed font-normal">
-          Дієти на 1000 ккал, відмова від хліба та марафони закінчувалися зривом і поверненням ваги з надлишком. Ви втомилися від війни з їжею.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- THE PROBLEM VS SOLUTION -->
-  <section id="approach" class="py-16 bg-brand-cardSoft border-y border-[#ebdcd0]">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-dark">Чому жорсткі дієти більше не працюють?</h2>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8 items-stretch">
-        <!-- Old way -->
-        <div class="bg-white/80 p-8 rounded-3xl border border-red-100 space-y-4">
-          <div class="flex items-center gap-3 text-red-600 font-bold text-sm tracking-wide uppercase font-heading">
-            <span>✕</span> Звичні болісні марафони
-          </div>
-          <ul class="space-y-3 text-xs sm:text-sm text-brand-muted font-normal">
-            <li class="flex items-start gap-2"><span>▪</span> Повна відмова від солодкого та фруктів, що веде до нічного переїдання.</li>
-            <li class="flex items-start gap-2"><span>▪</span> Зважування кожного листка салату та паніка при поході в ресторан.</li>
-            <li class="flex items-start gap-2"><span>▪</span> Випадіння волосся, сухість шкіри та збій циклу через дефіцит жирів.</li>
-            <li class="flex items-start gap-2"><span>▪</span> Повернення всіх скинутих кілограмів у перший же місяць після закінчення дієти.</li>
-          </ul>
-        </div>
-
-        <!-- Our way -->
-        <div class="bg-white p-8 rounded-3xl border border-brand-mint shadow-warm space-y-4 relative">
-          <div class="flex items-center gap-3 text-brand-sage font-bold text-sm tracking-wide uppercase font-heading">
-            <span>✔</span> Система «Легка Трансформація»
-          </div>
-          <ul class="space-y-3 text-xs sm:text-sm text-brand-dark">
-            <li class="flex items-start gap-2 font-medium"><span class="text-brand-sage font-bold">✓</span> <strong>Гнучка система 80/20:</strong> їжте улюблені десерти після обіду без докорів сумління.</li>
-            <li class="flex items-start gap-2 font-medium"><span class="text-brand-sage font-bold">✓</span> <strong>Метод «Лінивої тарілки»:</strong> балансуйте порції за 15 секунд візуально без вагів.</li>
-            <li class="flex items-start gap-2 font-medium"><span class="text-brand-sage font-bold">✓</span> <strong>Вітамінна підтримка:</strong> протокол Омега-3, D3 та Магнію для сяючої шкіри.</li>
-            <li class="flex items-start gap-2 font-medium"><span class="text-brand-sage font-bold">✓</span> <strong>Реверс-дієта:</strong> плавний вихід на підтримуючу норму калорій без відкату ваги.</li>
-          </ul>
-        </div>
+      <div class="p-4 rounded-2xl border border-brand-border bg-white shadow-subtle text-center space-y-1">
+        <p class="text-brand-blue font-heading font-extrabold text-lg">🛡️ 100% легально</p>
+        <p class="text-xs text-brand-muted font-medium">Повний супровід та перевірка в ZUS/Ужонді</p>
       </div>
     </div>
-  </section>
 
-  <!-- HOW IT WORKS (4 STEPS) -->
-  <section class="py-16 max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-dark">Як влаштований ваш шлях до легкості</h2>
-      <p class="text-sm text-brand-muted mt-2 font-normal">4 прості кроки без перевантаження та стресу</p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="bg-white p-6 rounded-2xl border border-[#ede3da] relative">
-        <span class="text-brand-coral font-heading font-extrabold text-3xl">01</span>
-        <h4 class="font-heading font-bold text-brand-dark mt-2">Обираєте свою вагу</h4>
-        <p class="text-xs text-brand-muted mt-1 leading-relaxed font-normal">Отримуєте точні розрахунки порцій під вашу стартову категорію (від 60 до 120 кг).</p>
-      </div>
-
-      <div class="bg-white p-6 rounded-2xl border border-[#ede3da] relative">
-        <span class="text-brand-coral font-heading font-extrabold text-3xl">02</span>
-        <h4 class="font-heading font-bold text-brand-dark mt-2">Готуєте за 15 хвилин</h4>
-        <p class="text-xs text-brand-muted mt-1 leading-relaxed font-normal">Смачні та ситні страви з доступних продуктів із найближчого супермаркету.</p>
-      </div>
-
-      <div class="bg-white p-6 rounded-2xl border border-[#ede3da] relative">
-        <span class="text-brand-coral font-heading font-extrabold text-3xl">03</span>
-        <h4 class="font-heading font-bold text-brand-dark mt-2">15 хв легкої турботи</h4>
-        <p class="text-xs text-brand-muted mt-1 leading-relaxed font-normal">Домашні розминки на лімфодренаж та тонус сідниць без задишки та поту.</p>
-      </div>
-
-      <div class="bg-white p-6 rounded-2xl border border-[#ede3da] relative">
-        <span class="text-brand-coral font-heading font-extrabold text-3xl">04</span>
-        <h4 class="font-heading font-bold text-brand-dark mt-2">Закріплюєте форму</h4>
-        <p class="text-xs text-brand-muted mt-1 leading-relaxed font-normal">Залишаєтеся стрункою назавжди завдяки техніці безпечного виходу з дефіциту.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- REVIEWS (REAL BEFORE/AFTER IMAGES) -->
-  <section id="reviews" class="py-16 bg-brand-cardSoft border-y border-[#ebdcd0]">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-dark">Реальні історії трансформації</h2>
-        <p class="text-sm text-brand-muted mt-2 font-normal">Без фільтрів, голодувань та повернення ваги</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        <!-- Case 1 -->
-        <div class="bg-white p-5 sm:p-6 rounded-3xl border border-[#ede3da] shadow-sm space-y-4 flex flex-col justify-between">
-          <div class="space-y-4">
-            <div class="overflow-hidden rounded-2xl border border-[#ede3da] bg-white aspect-square shadow-inner">
-              <img 
-                src="https://n1s1.hsmedia.ru/41/38/68/413868a53aa01638f6e523f5fd83c73b/656x656_1_a640d1fcd1207298d5c8a2d9f31e4f4d@1280x1280_0xqFBcfzSd_4870009784071353111.jpg.webp" 
-                alt="Олена — результат схуднення До та Після" 
-                class="w-full h-full object-cover object-center hover:scale-105 transition duration-500"
-                loading="lazy"
-              >
-            </div>
-            <div class="flex items-center justify-between">
-              <h4 class="font-heading font-bold text-sm text-brand-dark">Олена, 34 роки</h4>
-              <span class="text-xs font-bold text-brand-sage px-2.5 py-0.5 bg-brand-sageLight rounded-full">-8 кг за 2 міс.</span>
-            </div>
-            <p class="text-xs text-brand-muted leading-relaxed font-normal">
-              «Я нарешті перестала боятися свят та вечерь з чоловіком. Мінус 2 розміри в одязі, шкіра підтягнута, енергії вистачає на весь день!»
-            </p>
-          </div>
-        </div>
-
-        <!-- Case 2 -->
-        <div class="bg-white p-5 sm:p-6 rounded-3xl border border-[#ede3da] shadow-sm space-y-4 flex flex-col justify-between">
-          <div class="space-y-4">
-            <div class="overflow-hidden rounded-2xl border border-[#ede3da] bg-white aspect-square shadow-inner">
-              <img 
-                src="https://n1s1.hsmedia.ru/16/3d/e7/163de7746bc012ad999111ca7dacae67/611x600_1_63eb0a5a729f4cdc15d5c89c1c981aa6@1106x1086_0xalPjHBD9_9909666963721755398.png.webp" 
-                alt="Марина — результат схуднення До та Після" 
-                class="w-full h-full object-cover object-center hover:scale-105 transition duration-500"
-                loading="lazy"
-              >
-            </div>
-            <div class="flex items-center justify-between">
-              <h4 class="font-heading font-bold text-sm text-brand-dark">Марина, 29 років</h4>
-              <span class="text-xs font-bold text-brand-sage px-2.5 py-0.5 bg-brand-sageLight rounded-full">-28 кг за 4.5 міс.</span>
-            </div>
-            <p class="text-xs text-brand-muted leading-relaxed font-normal">
-              «Найбільше шокувало те, що я щодня їла шоколад і худнела. Вперше в житті дієта не викликала бажання розтрощити холодильник».
-            </p>
-          </div>
-        </div>
-
-        <!-- Case 3 -->
-        <div class="bg-white p-5 sm:p-6 rounded-3xl border border-[#ede3da] shadow-sm space-y-4 flex flex-col justify-between">
-          <div class="space-y-4">
-            <div class="overflow-hidden rounded-2xl border border-[#ede3da] bg-white aspect-square shadow-inner">
-              <img 
-                src="https://i.obozrevatel.com/gallery/2021/3/1/shudla15.jpg" 
-                alt="Тетяна — результат схуднення До та Після" 
-                class="w-full h-full object-cover object-center hover:scale-105 transition duration-500"
-                loading="lazy"
-              >
-            </div>
-            <div class="flex items-center justify-between">
-              <h4 class="font-heading font-bold text-sm text-brand-dark">Тетяна, 42 роки</h4>
-              <span class="text-xs font-bold text-brand-sage px-2.5 py-0.5 bg-brand-sageLight rounded-full">-32 кг за 5 міс.</span>
-            </div>
-            <p class="text-xs text-brand-muted leading-relaxed font-normal">
-              «Зникли ранкові набряки та біль у колінах. Чоловік робить компліменти щодня, а я відчуваю себе знову на 25 років!»
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING & OFFER SECTION WITH JS COUNTDOWN TIMER -->
-  <section id="offer" class="py-20 max-w-4xl mx-auto px-4 sm:px-6">
-    <div class="bg-white rounded-3xl border-2 border-brand-coral p-8 sm:p-12 shadow-warm-lg text-center relative overflow-hidden">
-      
-      <div class="inline-block px-4 py-1.5 rounded-full bg-brand-coral text-white text-xs font-extrabold uppercase tracking-wider mb-4 shadow-sm">
-        🔥 Спеціальна пропозиція сьогодні
-      </div>
-
-      <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-brand-dark">Повний 90-денний курс трансформації</h2>
-      <p class="text-sm text-brand-muted mt-2 max-w-lg mx-auto font-normal">Отримайте все необхідне для безпечного схуднення на все життя</p>
-
-      <!-- Pricing -->
-      <div class="my-6 flex items-center justify-center gap-3">
-        <span class="text-base sm:text-lg text-brand-muted line-through font-semibold">1 490 ₴</span>
-        <span class="font-heading text-4xl sm:text-5xl font-extrabold text-brand-coral">390 ₴</span>
-      </div>
-
-      <!-- Live JS Timer -->
-      <div class="bg-brand-cardSoft py-3 px-6 rounded-2xl max-w-xs mx-auto border border-[#ebdcd0] mb-8">
-        <p class="text-[11px] uppercase font-bold tracking-wider text-brand-muted">Ціна зросте через:</p>
-        <div id="countdown-timer" class="font-heading text-2xl font-extrabold text-brand-dark tracking-widest mt-0.5">
-          02:34:11
-        </div>
-      </div>
-
-      <!-- Bonus features list -->
-      <div class="text-left max-w-md mx-auto space-y-3 mb-8 text-xs sm:text-sm text-brand-dark">
-        <div class="flex items-center gap-2.5">
-          <span class="w-5 h-5 rounded-full bg-brand-sageLight text-brand-sage flex items-center justify-center text-xs font-bold">✓</span>
-          <span><strong>12 покрокових модулів</strong> з меню під вагу 60–120 кг</span>
-        </div>
-        <div class="flex items-center gap-2.5">
-          <span class="w-5 h-5 rounded-full bg-brand-sageLight text-brand-sage flex items-center justify-center text-xs font-bold">✓</span>
-          <span><strong>3 комплекси домашніх розминок</strong> по 15 хв без інвентарю</span>
-        </div>
-        <div class="flex items-center gap-2.5">
-          <span class="w-5 h-5 rounded-full bg-brand-sageLight text-brand-sage flex items-center justify-center text-xs font-bold">✓</span>
-          <span><strong>Вітамінний протокол</strong> для шкіри, волосся та енергії</span>
-        </div>
-        <div class="flex items-center gap-2.5">
-          <span class="w-5 h-5 rounded-full bg-brand-sageLight text-brand-sage flex items-center justify-center text-xs font-bold">✓</span>
-          <span><strong>Бонус:</strong> PDF-гайд ресторанного меню та антикризовий чек-лист при зривах</span>
-        </div>
-      </div>
-
-      <a href="https://t.me/lizokbrazhnik" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-block px-10 py-4 rounded-full bg-brand-coral text-white font-bold text-sm sm:text-base tracking-wide hover:bg-brand-coralHover transition shadow-warm-lg pulse-glow">
-        Отримати доступ до курсу за 390 ₴ ➔
-      </a>
-
-      <p class="text-[11px] text-brand-muted mt-4 font-normal">Миттєвий доступ до всіх матеріалів у закритому Telegram-боті або на платформі</p>
-    </div>
-  </section>
-
-  <!-- FAQ ACCORDION -->
-  <section id="faq" class="py-16 max-w-4xl mx-auto px-4 sm:px-6">
-    <div class="text-center max-w-2xl mx-auto mb-10">
-      <h2 class="font-heading text-2xl sm:text-3xl font-extrabold text-brand-dark">Часті запитання</h2>
-      <p class="text-sm text-brand-muted mt-1 font-normal">Все, що варто знати перед стартом</p>
-    </div>
-
-    <div class="space-y-3" id="faq-container">
-      
-      <!-- FAQ 1 -->
-      <div class="bg-white rounded-2xl border border-[#ede3da] overflow-hidden">
-        <button class="w-full p-5 text-left font-bold text-sm text-brand-dark flex items-center justify-between focus:outline-none faq-btn font-heading">
-          <span>Що робити, якщо я зірвуся на святі або з'їм зайвого?</span>
-          <span class="text-brand-coral text-lg font-bold transition-transform duration-200 icon">+</span>
-        </button>
-        <div class="px-5 pb-5 text-xs sm:text-sm text-brand-muted leading-relaxed hidden faq-content font-normal">
-          У нашій системі немає покарань та відпрацювань у залі. Разовий перебір не відкладається в жир миттєво. В 11-му уроці є детальний протокол: ви просто продовжуєте харчуватися за планом з наступного прийому їжі без докорів сумління.
-        </div>
-      </div>
-
-      <!-- FAQ 2 -->
-      <div class="bg-white rounded-2xl border border-[#ede3da] overflow-hidden">
-        <button class="w-full p-5 text-left font-bold text-sm text-brand-dark flex items-center justify-between focus:outline-none faq-btn font-heading">
-          <span>Чи можна вживати келих вина або ходити в ресторани?</span>
-          <span class="text-brand-coral text-lg font-bold transition-transform duration-200 icon">+</span>
-        </button>
-        <div class="px-5 pb-5 text-xs sm:text-sm text-brand-muted leading-relaxed hidden faq-content font-normal">
-          Так! Ми вчимо жити в соціумі, а не в ізоляції. Урок 6 повністю присвячений походам у ресторани та посиденькам: ви навчитеся обирати смачні страви та напої, які не зупиняють процес спалювання жиру.
-        </div>
-      </div>
-
-      <!-- FAQ 3 -->
-      <div class="bg-white rounded-2xl border border-[#ede3da] overflow-hidden">
-        <button class="w-full p-5 text-left font-bold text-sm text-brand-dark flex items-center justify-between focus:outline-none faq-btn font-heading">
-          <span>Чому вага може зупинитися перед місячними?</span>
-          <span class="text-brand-coral text-lg font-bold transition-transform duration-200 icon">+</span>
-        </button>
-        <div class="px-5 pb-5 text-xs sm:text-sm text-brand-muted leading-relaxed hidden faq-content font-normal">
-          Це нормальний фізіологічний процес затримки 1–2 літрів рідини через підвищення прогестерону. Жир при цьому продовжує горіти. Урок 9 містить лімфодренажне калієве меню та рецепти ванн, які м'яко прибирають набряки.
-        </div>
-      </div>
-
-      <!-- FAQ 4 -->
-      <div class="bg-white rounded-2xl border border-[#ede3da] overflow-hidden">
-        <button class="w-full p-5 text-left font-bold text-sm text-brand-dark flex items-center justify-between focus:outline-none faq-btn font-heading">
-          <span>Чи підійде програма, якщо моя вага понад 100 кг?</span>
-          <span class="text-brand-coral text-lg font-bold transition-transform duration-200 icon">+</span>
-        </button>
-        <div class="px-5 pb-5 text-xs sm:text-sm text-brand-muted leading-relaxed hidden faq-content font-normal">
-          Ідеально підійде. У нас передбачена окрема Група D (105–120 кг) з високим комфортним калоражем дефіциту (2300–2450 ккал), яка забезпечує швидке скидання до 10 кг у перший місяць без слабкості, голоду та обвисання шкіри.
-        </div>
-      </div>
-
-    </div>
-  </section>
+  </main>
 
   <!-- FOOTER -->
-  <footer class="py-10 border-t border-[#ebdcd0] text-center text-xs text-brand-muted">
-    <div class="max-w-6xl mx-auto px-4 space-y-3">
-      <p class="font-heading font-extrabold text-brand-dark text-base">Легка<span class="text-brand-coral font-medium">Трансформація</span></p>
-      <p>© 2026 Всі права захищено. Програма усвідомленої турботи про тіло.</p>
-      <div class="flex justify-center gap-4 text-[11px] text-brand-muted/80 pt-2">
-        <a href="#" class="underline">Публічна оферта</a>
-        <a href="#" class="underline">Політика конфіденційності (GDPR)</a>
-        <a href="#" class="underline">Служба турботи</a>
-      </div>
+  <footer class="border-t border-brand-border py-6 text-center text-xs text-brand-muted bg-white">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <p class="font-heading font-bold text-brand-dark">Student Support PL</p>
+      <p>© 2026 Всі права захищено. Допомога зі вступом, поліцеальними школами та документами в Польщі.</p>
     </div>
   </footer>
 
-  <!-- STICKY MOBILE CTA -->
-  <div class="fixed bottom-0 left-0 right-0 p-3 bg-white/95 backdrop-blur-md border-t border-[#ebdcd0] sm:hidden z-50 flex items-center justify-between gap-3 shadow-lg">
-    <div>
-      <p class="text-[10px] text-brand-muted uppercase font-bold">Спецціна сьогодні:</p>
-      <p class="font-heading font-extrabold text-brand-coral text-lg">390 ₴ <s class="text-xs text-brand-muted font-normal">1490 ₴</s></p>
-    </div>
-    <a href="#offer" class="px-5 py-2.5 rounded-full bg-brand-coral text-white font-bold text-xs shadow-md">
-      Приєднатися ➔
-    </a>
-  </div>
-
-  <!-- VANILLA JS: ACCORDION & COUNTDOWN TIMER -->
+  <!-- QUIZ ENGINE & GOOGLE SHEETS INTEGRATION SCRIPT -->
   <script>
-    // FAQ Accordion
-    document.querySelectorAll('.faq-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const content = btn.nextElementSibling;
-        const icon = btn.querySelector('.icon');
-        const isOpen = !content.classList.contains('hidden');
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7OpgnGrpgdsq7SVG8wcAdgTDIvZQyBOghu553r-rCMSh7X6VH1eXfOsetO-ps-dtWvw/exec';
 
-        document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
-        document.querySelectorAll('.faq-btn .icon').forEach(i => i.textContent = '+');
+    const userAnswers = {
+      age: 'under26',
+      contract: '',
+      hours: '160',
+      status: ''
+    };
 
-        if (!isOpen) {
-          content.classList.remove('hidden');
-          icon.textContent = '−';
-        }
-      });
-    });
-
-    // Countdown Timer
-    let totalSeconds = 2 * 3600 + 34 * 60 + 11;
-    const timerElement = document.getElementById('countdown-timer');
-
-    function updateTimer() {
-      if (totalSeconds <= 0) {
-        totalSeconds = 2 * 3600;
-      }
-      const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-      const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-      const s = String(totalSeconds % 60).padStart(2, '0');
-      
-      if (timerElement) {
-        timerElement.textContent = `${h}:${m}:${s}`;
-      }
-      totalSeconds--;
+    function selectOption(currentStep, field, value) {
+      userAnswers[field] = value;
+      const nextStep = currentStep + 1;
+      goToStep(nextStep);
     }
-    setInterval(updateTimer, 1000);
-    updateTimer();
+
+    function goToStep(step) {
+      document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
+      const target = document.querySelector(`.quiz-step[data-step="${step}"]`);
+      if (target) {
+        target.classList.remove('hidden');
+      }
+
+      const totalSteps = 4;
+      if (step <= totalSteps) {
+        const percent = Math.round((step / totalSteps) * 100);
+        document.getElementById('step-indicator').textContent = `Питання ${step} з ${totalSteps}`;
+        document.getElementById('percent-indicator').textContent = `${percent}%`;
+        document.getElementById('progress-bar').style.width = `${percent}%`;
+      } else {
+        document.getElementById('step-indicator').textContent = 'Розрахунок готовий!';
+        document.getElementById('percent-indicator').textContent = '100%';
+        document.getElementById('progress-bar').style.width = '100%';
+        calculateSavings();
+      }
+    }
+
+    function calculateSavings() {
+      const resultElem = document.getElementById('savings-result');
+      const descElem = document.getElementById('savings-desc');
+      
+      let minSavings = 1100;
+      let maxSavings = 1650;
+
+      if (userAnswers.hours === '200') {
+        minSavings = 1450;
+        maxSavings = 2100;
+      } else if (userAnswers.hours === '100') {
+        minSavings = 650;
+        maxSavings = 950;
+      }
+
+      if (userAnswers.age === '26to30') {
+        resultElem.textContent = 'Легалізація + Робота без дозволів + Знижки';
+        descElem.textContent = 'Для віку 26–30 років статус студента поліцеальної школи чи ВНЗ відкриває підставу для Карти Побиту, роботу без окремих дозволів та знижки на транспорт.';
+      } else {
+        resultElem.textContent = `+${minSavings} – ${maxSavings} PLN / міс`;
+        descElem.textContent = 'Це сума податків ZUS, яку ти перестаєш переплачувати і офіційно отримуєш на руки щомісяця.';
+      }
+    }
+
+    async function submitQuiz() {
+      const nameInput = document.getElementById('user-name');
+      const contactInput = document.getElementById('user-contact');
+      const submitBtn = document.getElementById('submit-btn');
+
+      const name = nameInput.value.trim();
+      const contact = contactInput.value.trim();
+
+      if (!name || !contact) {
+        alert('Будь ласка, вкажіть ваше ім\'я та контактні дані для отримання списку шкіл.');
+        return;
+      }
+
+      // Візуальний стан завантаження
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Відправка даних...</span>';
+
+      const payload = {
+        name: name,
+        contact: contact,
+        age: userAnswers.age === 'under26' ? '18-25 років (до 26)' : '26-30 років',
+        contract: userAnswers.contract === 'zlecenie' ? 'Umowa Zlecenie' : (userAnswers.contract === 'praca' ? 'Umowa o Pracę' : 'Шукає роботу'),
+        hours: userAnswers.hours + ' годин',
+        status: userAnswers.status === 'no' ? 'Немає статусу' : (userAnswers.status === 'lost' ? 'Втрачений статус' : 'Потрібен вступ / легалізація')
+      };
+
+      try {
+        // Відправка даних у Google Таблицю
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        // Редирект у Telegram
+        window.location.href = 'https://t.me/+rlS8-BCiUmQyOGJi';
+      } catch (error) {
+        console.error('Помилка відправки:', error);
+        window.location.href = 'https://t.me/+rlS8-BCiUmQyOGJi';
+      }
+    }
   </script>
 
 </body>
