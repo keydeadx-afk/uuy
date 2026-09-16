@@ -1,393 +1,428 @@
 <!DOCTYPE html>
-<html lang="uk" class="scroll-smooth">
+<html lang="uk">
 <head>
-  <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2061222508162591');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2061222508162591&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Калькулятор податків та статусу студента в Польщі | Student Support PL</title>
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts: Manrope + Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800;900&display=swap" rel="stylesheet">
-  
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              bg: '#F8FAFC',
-              card: '#FFFFFF',
-              border: '#E2E8F0',
-              borderLight: '#EDF2F7',
-              blue: '#2563EB',
-              blueDark: '#1D4ED8',
-              blueHover: '#1E40AF',
-              blueSoft: '#EFF6FF',
-              blueBorder: '#BFDBFE',
-              dark: '#0F172A',
-              text: '#1E293B',
-              muted: '#64748B',
-              accent: '#0EA5E9'
-            }
-          },
-          fontFamily: {
-            heading: ['"Manrope"', 'sans-serif'],
-            sans: ['"Inter"', 'sans-serif'],
-          },
-          boxShadow: {
-            'subtle': '0 4px 20px -2px rgba(15, 23, 42, 0.05)',
-            'card-hover': '0 12px 30px -4px rgba(37, 99, 235, 0.12)',
-            'blue-glow': '0 10px 30px -5px rgba(37, 99, 235, 0.25)',
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шумоізоляція Авто Чернівці | Калькулятор Ціни 3GRID</title>
+    <style>
+        /* --- CSS Стилі (Дизайн) --- */
+        :root {
+            --bg-color: #0b0c10; /* Глибокий чорний */
+            --text-color: #c5c6c7; /* Світло-сірий */
+            --accent-cyan: #00f0ff; /* Електрик ціан */
+            --accent-hover: #00b8c4;
+            --card-bg: #1f2833; /* Темно-сірий для карток */
+            --border-color: #45a29e;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-      }
-    }
-  </script>
 
-  <style>
-    body {
-      background-color: #F8FAFC;
-      color: #1E293B;
-      font-family: 'Inter', sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-    .option-btn {
-      transition: all 0.2s ease;
-    }
-    .option-btn:hover {
-      border-color: #2563EB;
-      background-color: #EFF6FF;
-      transform: translateY(-2px);
-    }
-    .option-btn.selected {
-      border-color: #2563EB;
-      background-color: #EFF6FF;
-      box-shadow: 0 0 0 1px #2563EB;
-    }
-  </style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* Хедер */
+        header {
+            background-color: rgba(11, 12, 16, 0.9);
+            padding: 20px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .city {
+            font-size: 0.9rem;
+            color: var(--border-color);
+        }
+
+        /* Головна секція */
+        .hero {
+            margin-top: 120px;
+            padding: 0 5%;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: var(--accent-cyan);
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Калькулятор */
+        .calc-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .calc-section {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .calc-step-title {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 20px;
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Стилізація вибору кузова */
+        .type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .type-option {
+            position: relative;
+        }
+
+        .type-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .type-label {
+            display: block;
+            background-color: rgba(255,255,255,0.05);
+            border: 2px solid transparent;
+            padding: 15px;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: var(--text-color);
+        }
+
+        .type-option input:checked + .type-label {
+            border-color: var(--accent-cyan);
+            background-color: rgba(0, 240, 255, 0.1);
+            color: #fff;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        /* Стилізація зон (чекбокси) */
+        .zones-grid, .extra-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .checkbox-option, .radio-option {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 10px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 4px;
+        }
+
+        .checkbox-option input, .radio-option input {
+            margin-right: 15px;
+            accent-color: var(--accent-cyan);
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Пакет матеріалів */
+        .package-select {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        /* Підсумок ціни */
+        .total-section {
+            text-align: center;
+            position: sticky;
+            bottom: 20px;
+            z-index: 900;
+        }
+
+        .total-box {
+            background-color: var(--bg-color);
+            border: 2px solid var(--accent-cyan);
+            padding: 20px 40px;
+            border-radius: 50px;
+            display: inline-block;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        }
+
+        .total-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: var(--border-color);
+            letter-spacing: 1px;
+        }
+
+        .total-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .total-price span {
+            color: var(--accent-cyan);
+            font-size: 1.5rem;
+            margin-left: 5px;
+        }
+
+        .disclaimer {
+            font-size: 0.8rem;
+            color: var(--border-color);
+            margin-top: 5px;
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Адаптивність */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.8rem; }
+            .total-price { font-size: 2rem; }
+            .total-box { padding: 15px 25px; }
+        }
+    </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-brand-blue selection:text-white">
+<body>
 
-  <!-- TOP HEADER -->
-  <header class="border-b border-brand-border bg-white/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-2.5">
-        <span class="w-9 h-9 rounded-xl bg-brand-blue text-white flex items-center justify-center font-heading font-extrabold text-sm shadow-sm">PL</span>
-        <span class="font-heading font-extrabold text-lg tracking-tight text-brand-dark">Student Support <span class="text-brand-blue">PL</span></span>
-      </div>
-      <a href="https://t.me/+rlS8-BCiUmQyOGJi" target="_blank" class="px-4 py-2 rounded-lg bg-brand-blueSoft text-brand-blue border border-brand-blueBorder text-xs sm:text-sm font-bold hover:bg-brand-blue hover:text-white transition flex items-center gap-1.5">
-        <span>Консультація в Telegram</span> ➔
-      </a>
-    </div>
-  </header>
+<header>
+    <div class="logo">Noise<span style="color:#fff">Control</span></div>
+    <div class="city">м. Чернівці</div>
+</header>
 
-  <!-- MAIN WRAPPER -->
-  <main class="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 w-full flex-grow">
-    
-    <!-- Hero Text -->
-    <div class="text-center mb-8 space-y-3">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-blueSoft border border-brand-blueBorder text-brand-blue text-xs font-bold uppercase tracking-wider">
-        🇵🇱 Для українців у Польщі віком від 18 до 30 років
-      </div>
-      <h1 class="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-brand-dark leading-tight">
-        Дізнайся, як отримати статус студента в Польщі та <span class="text-brand-blue">збільшити дохід на руки</span>
-      </h1>
-      <p class="text-sm sm:text-base text-brand-muted max-w-xl mx-auto font-normal">
-        Пройди тест за 1 хвилину: розрахуй надбавку до зарплати без сплати ZUS або отримай легальне перебування та роботу без дозволів.
-      </p>
-    </div>
+<div class="hero">
+    <h1>Розрахунок <span>Шумоізоляції</span></h1>
+    <p>Оберіть параметри вашого автомобіля та зони обробки, щоб миттєво отримати приблизну вартість професійної тиші.</p>
+</div>
 
-    <!-- QUIZ CONTAINER -->
-    <div class="bg-white rounded-3xl p-6 sm:p-10 border border-brand-border shadow-subtle relative overflow-hidden">
-      
-      <!-- Progress Bar -->
-      <div class="mb-8">
-        <div class="flex justify-between items-center text-xs font-bold text-brand-muted uppercase tracking-wider mb-2.5">
-          <span id="step-indicator" class="text-brand-blue">Питання 1 з 4</span>
-          <span id="percent-indicator" class="font-heading text-brand-dark">25%</span>
+<div class="calc-container">
+
+    <!-- Крок 1: Кузов -->
+    <div class="calc-section">
+        <div class="calc-step-title">1. Оберіть тип кузова</div>
+        <div class="type-grid">
+            <div class="type-option">
+                <input type="radio" id="type_sedan" name="car_type" value="sedan" checked>
+                <label for="type_sedan" class="type-label">Седан</label>
+            </div>
+            <div class="type-option">
+                <input type="radio" id="type_hatch" name="car_type" value="hatchback">
+                <label for="type_hatch" class="type-label">Хетчбек</label>
+            </div>
+            <div class="type-option">
+                <input type="radio" id="type_suv" name="car_type" value="suv">
+                <label for="type_suv" class="type-label">Кросовер</label>
+            </div>
+            <div class="type-option">
+                <input type="radio" id="type_offroad" name="car_type" value="offroad">
+                <label for="type_offroad" class="type-label">Позашляховик</label>
+            </div>
         </div>
-        <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
-          <div id="progress-bar" class="h-full bg-gradient-to-r from-brand-blue to-brand-accent transition-all duration-300 w-1/4 rounded-full"></div>
-        </div>
-      </div>
+    </div>
 
-      <!-- FORM STEPS -->
-      <form id="quiz-form">
+    <!-- Крок 2: Зони Шумки -->
+    <div class="calc-section">
+        <div class="calc-step-title">2. Оберіть зони для шумоізоляції</div>
+        <div class="zones-grid">
+            <label class="checkbox-option"><input type="checkbox" name="zone" value="doors" checked>Двері (4 шт)</label>
+            <label class="checkbox-option"><input type="checkbox" name="zone" value="floor">Салон (Підлога)</label>
+            <label class="checkbox-option"><input type="checkbox" name="zone" value="trunk">Багажник</label>
+            <label class="checkbox-option"><input type="checkbox" name="zone" value="roof">Дах (Криша)</label>
+            <label class="checkbox-option"><input type="checkbox" name="zone" value="arches">Арки (Внутрішні)</label>
+            <label class="checkbox-option"><input type="checkbox" name="zone" value="hood">Капот</label>
+        </div>
+    </div>
+
+    <!-- Крок 3: Матеріал -->
+    <div class="calc-section">
+        <div class="calc-step-title">3. Оберіть пакет матеріалів</div>
+        <div class="package-select">
+            <label class="radio-option"><input type="radio" name="package" value="economy" checked>Економ</label>
+            <label class="radio-option"><input type="radio" name="package" value="premium">Преміум</label>
+        </div>
+    </div>
+
+    <!-- Крок 4: Додатково -->
+    <div class="calc-section">
+        <div class="calc-step-title">4. Додаткові послуги</div>
+        <div class="extra-grid">
+            <label class="checkbox-option"><input type="checkbox" name="extra" value="antiskryp">Повний Антискрип салону</label>
+            <label class="checkbox-option"><input type="checkbox" name="extra" value="antykor">Антикорозійна обробка</label>
+            <label class="checkbox-option"><input type="checkbox" name="extra" value="music">Установка музики (база)</label>
+        </div>
+    </div>
+
+    <!-- ПІДСУМОК (Прилипає знизу) -->
+    <div class="total-section">
+        <div class="total-box">
+            <div class="total-label">Орієнтовна вартість:</div>
+            <div class="total-price" id="final_price">0<span>грн</span></div>
+            <div class="disclaimer">*Точна ціна після огляду авто</div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 NoiseControl Чернівці. Професійна шумоізоляція.
+</footer>
+
+<script>
+    /* --- JAVASCRIPT ЛОГІКА (Калькулятор) --- */
+
+    // 1. Дані з ТЗ та оціночні коефіцієнти
+    const pricingData = {
+        // База: Двері Седана (Економ)
+        baseSedanDoorsEcon: 8000,
         
-        <!-- STEP 1: Вік (18-30 років) -->
-        <div class="quiz-step" data-step="1">
-          <h2 class="font-heading text-lg sm:text-xl font-bold text-brand-dark mb-4">1. Скільки тобі повних років?</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            <button type="button" class="option-btn p-5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex flex-col justify-between gap-2" onclick="selectOption(1, 'age', 'under26')">
-              <span class="font-bold text-base text-brand-dark">18 – 25 років (до 26)</span>
-              <span class="text-xs text-brand-blue font-bold">🎯 0% ZUS + 0% PIT (дохід Brutto = Netto)</span>
-            </button>
-            <button type="button" class="option-btn p-5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex flex-col justify-between gap-2" onclick="selectOption(1, 'age', '26to30')">
-              <span class="font-bold text-base text-brand-dark">26 – 30 років</span>
-              <span class="text-xs text-emerald-600 font-bold">📄 Легалізація, Карта Побиту, знижки</span>
-            </button>
-          </div>
-        </div>
+        // Різниця Економ/Преміум (у твоїх даних 8000 -> 10000 = +25%)
+        premiumMultiplier: 1.25,
 
-        <!-- STEP 2: Тип договору -->
-        <div class="quiz-step hidden" data-step="2">
-          <h2 class="font-heading text-lg sm:text-xl font-bold text-brand-dark mb-4">2. За яким договором ти працюєш або плануєш працювати?</h2>
-          <div class="space-y-3">
-            <button type="button" class="option-btn w-full p-4.5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex items-center justify-between" onclick="selectOption(2, 'contract', 'zlecenie')">
-              <div>
-                <p class="font-bold text-brand-dark">Umowa Zlecenie (Договір доручення)</p>
-                <p class="text-xs text-brand-muted mt-0.5">Максимальна вигода: нульовий ZUS для студентів до 26 років</p>
-              </div>
-              <span class="text-brand-blue font-bold text-lg">➔</span>
-            </button>
-            <button type="button" class="option-btn w-full p-4.5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex items-center justify-between" onclick="selectOption(2, 'contract', 'praca')">
-              <div>
-                <p class="font-bold text-brand-dark">Umowa o Pracę (Трудовий договір)</p>
-                <p class="text-xs text-brand-muted mt-0.5">Пільга PIT-0% до 26 років + можливість оптимізації</p>
-              </div>
-              <span class="text-brand-blue font-bold text-lg">➔</span>
-            </button>
-            <button type="button" class="option-btn w-full p-4.5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex items-center justify-between" onclick="selectOption(2, 'contract', 'looking')">
-              <div>
-                <p class="font-bold text-brand-dark">Ще не працюю / У пошуку роботи</p>
-                <p class="text-xs text-brand-muted mt-0.5">Хочу підготувати студентські документи для вигідного старту</p>
-              </div>
-              <span class="text-brand-blue font-bold text-lg">➔</span>
-            </button>
-          </div>
-        </div>
+        // Вартість зон Економ ВІДНОСНО бази дверей седана (коефіцієнти складності/площі)
+        zonesRel: {
+            doors: 1.0,   // 8000
+            floor: 1.4,   // 11200
+            trunk: 0.8,   // 6400
+            roof: 0.7,    // 5600
+            arches: 0.6,  // 4800
+            hood: 0.2     // 1600
+        },
 
-        <!-- STEP 3: Кількість годин -->
-        <div class="quiz-step hidden" data-step="3">
-          <h2 class="font-heading text-lg sm:text-xl font-bold text-brand-dark mb-4">3. Скільки робочих годин у тебе в середньому на місяць?</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <button type="button" class="option-btn p-4 rounded-2xl border border-brand-border bg-white text-center font-medium text-sm" onclick="selectOption(3, 'hours', '160')">
-              <p class="font-bold text-brand-dark text-base">~160 годин</p>
-              <p class="text-xs text-brand-muted mt-1">Стандартний графік</p>
-            </button>
-            <button type="button" class="option-btn p-4 rounded-2xl border border-brand-border bg-white text-center font-medium text-sm" onclick="selectOption(3, 'hours', '200')">
-              <p class="font-bold text-brand-dark text-base">200–240+ годин</p>
-              <p class="text-xs text-brand-muted mt-1">Понаднормова робота</p>
-            </button>
-            <button type="button" class="option-btn p-4 rounded-2xl border border-brand-border bg-white text-center font-medium text-sm" onclick="selectOption(3, 'hours', '100')">
-              <p class="font-bold text-brand-dark text-base">До 100 годин</p>
-              <p class="text-xs text-brand-muted mt-1">Часткова зайнятість</p>
-            </button>
-          </div>
-        </div>
+        // Специфічна ціна на двері Кросовера (Економ) з твого ТЗ
+        specialCrossoverDoorsEcon: 7500,
 
-        <!-- STEP 4: Поточний стан документів -->
-        <div class="quiz-step hidden" data-step="4">
-          <h2 class="font-heading text-lg sm:text-xl font-bold text-brand-dark mb-4">4. Чи маєш ти зараз статус студента або чинну довідку в Польщі?</h2>
-          <div class="space-y-3">
-            <button type="button" class="option-btn w-full p-4.5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex items-center justify-between" onclick="selectOption(4, 'status', 'no')">
-              <span class="text-brand-dark font-medium">❌ Ніколи не мав(-ла), сплачую повні податки</span>
-              <span class="text-brand-blue font-bold">➔</span>
-            </button>
-            <button type="button" class="option-btn w-full p-4.5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex items-center justify-between" onclick="selectOption(4, 'status', 'lost')">
-              <span class="text-brand-dark font-medium">⚠️ Був статус, але відрахували / закінчився семестр</span>
-              <span class="text-brand-blue font-bold">➔</span>
-            </button>
-            <button type="button" class="option-btn w-full p-4.5 rounded-2xl border border-brand-border bg-white text-left font-medium text-sm flex items-center justify-between" onclick="selectOption(4, 'status', 'policealna')">
-              <span class="text-brand-dark font-medium">🎓 Хочу вступити до поліцеальної школи / ВНЗ для легалізації</span>
-              <span class="text-brand-blue font-bold">➔</span>
-            </button>
-          </div>
-        </div>
+        // Коефіцієнти кузова (впливають на все, КРІМ ДВЕРЕЙ, бо двері специфічні)
+        bodyModifiers: {
+            hatchback: 0.9,
+            sedan: 1.0,
+            suv: 1.2, // Кросовер
+            offroad: 1.4 // Великий джип
+        },
 
-        <!-- STEP 5: Результат та лід-форма -->
-        <div class="quiz-step hidden" data-step="5">
-          <div class="text-center space-y-5">
-            
-            <div class="p-6 rounded-2xl bg-brand-blueSoft border border-brand-blueBorder text-center">
-              <p class="text-xs font-bold uppercase tracking-wider text-brand-blue mb-1">Твій розрахунковий результат:</p>
-              <h3 id="savings-result" class="font-heading text-2xl sm:text-3xl font-extrabold text-brand-dark">
-                +1 150 – 1 650 PLN / міс
-              </h3>
-              <p id="savings-desc" class="text-xs sm:text-sm text-brand-muted mt-2 max-w-md mx-auto">
-                Це кошти, які роботодавець зараз віддає в ZUS замість того, щоб виплачувати тобі на руки.
-              </p>
-            </div>
-
-            <div class="text-left space-y-3.5 pt-2 max-w-md mx-auto">
-              <p class="text-sm font-bold text-brand-dark text-center">
-                Куди надіслати персональний розрахунок та список акредитованих закладів?
-              </p>
-              
-              <div class="space-y-3">
-                <input type="text" id="user-name" placeholder="Твоє ім'я" required class="w-full px-4 py-3.5 rounded-xl border border-brand-border bg-white text-brand-dark placeholder-brand-muted focus:border-brand-blue focus:ring-2 focus:ring-brand-blueSoft outline-none text-sm font-medium">
-                <input type="text" id="user-contact" placeholder="Telegram (@username) або номер телефону" required class="w-full px-4 py-3.5 rounded-xl border border-brand-border bg-white text-brand-dark placeholder-brand-muted focus:border-brand-blue focus:ring-2 focus:ring-brand-blueSoft outline-none text-sm font-medium">
-              </div>
-
-              <button type="button" id="submit-btn" onclick="submitQuiz()" class="w-full py-4 rounded-xl bg-brand-blue hover:bg-brand-blueHover text-white font-heading font-extrabold text-sm uppercase tracking-wider transition shadow-blue-glow flex items-center justify-center gap-2">
-                <span>Отримати консультацію </span> ➔
-              </button>
-            </div>
-
-            <p class="text-[11px] text-brand-muted text-center pt-2">
-              🔒 Конфіденційно. Жодного спаму. Офіційне зарахування до державних та приватних закладів Польщі.
-            </p>
-
-          </div>
-        </div>
-
-      </form>
-    </div>
-
-    <!-- BENEFIT PILLS -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-      <div class="p-4 rounded-2xl border border-brand-border bg-white shadow-subtle text-center space-y-1">
-        <p class="text-brand-blue font-heading font-extrabold text-lg">⚡️ 2–3 дні</p>
-        <p class="text-xs text-brand-muted font-medium">Отримання офіційної довідки (Zaświadczenie)</p>
-      </div>
-      <div class="p-4 rounded-2xl border border-brand-border bg-white shadow-subtle text-center space-y-1">
-        <p class="text-brand-blue font-heading font-extrabold text-lg">📚 Без вівдідування занять</p>
-        <p class="text-xs text-brand-muted font-medium">Заочна форма без відриву від роботи</p>
-      </div>
-      <div class="p-4 rounded-2xl border border-brand-border bg-white shadow-subtle text-center space-y-1">
-        <p class="text-brand-blue font-heading font-extrabold text-lg">🛡️ 100% легально</p>
-        <p class="text-xs text-brand-muted font-medium">Повний супровід та перевірка в ZUS/Ужонді</p>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="border-t border-brand-border py-6 text-center text-xs text-brand-muted bg-white">
-    <div class="max-w-5xl mx-auto px-4 space-y-2">
-      <p class="font-heading font-bold text-brand-dark">Student Support PL</p>
-      <p>© 2026 Всі права захищено.Допомога студентам з документами в Польщі </p>
-    </div>
-  </footer>
-
-  <!-- QUIZ ENGINE & GOOGLE SHEETS INTEGRATION SCRIPT -->
-  <script>
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7OpgnGrpgdsq7SVG8wcAdgTDIvZQyBOghu553r-rCMSh7X6VH1eXfOsetO-ps-dtWvw/exec';
-
-    const userAnswers = {
-      age: 'under26',
-      contract: '',
-      hours: '160',
-      status: ''
+        // Фіксовані ціни на допи
+        extras: {
+            antiskryp: 3000,
+            antykor: 6000,
+            music: 2500
+        }
     };
 
-    function selectOption(currentStep, field, value) {
-      userAnswers[field] = value;
-      const nextStep = currentStep + 1;
-      goToStep(nextStep);
-    }
+    // 2. Функція розрахунку
+    function calculatePrice() {
+        let total = 0;
 
-    function goToStep(step) {
-      document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
-      const target = document.querySelector(`.quiz-step[data-step="${step}"]`);
-      if (target) {
-        target.classList.remove('hidden');
-      }
+        // Отримуємо вибрані дані з форми
+        const carType = document.querySelector('input[name="car_type"]:checked').value;
+        const selectedZones = document.querySelectorAll('input[name="zone"]:checked');
+        const packageType = document.querySelector('input[name="package"]:checked').value;
+        const selectedExtras = document.querySelectorAll('input[name="extra"]:checked');
 
-      const totalSteps = 4;
-      if (step <= totalSteps) {
-        const percent = Math.round((step / totalSteps) * 100);
-        document.getElementById('step-indicator').textContent = `Питання ${step} з ${totalSteps}`;
-        document.getElementById('percent-indicator').textContent = `${percent}%`;
-        document.getElementById('progress-bar').style.width = `${percent}%`;
-      } else {
-        document.getElementById('step-indicator').textContent = 'Розрахунок готовий!';
-        document.getElementById('percent-indicator').textContent = '100%';
-        document.getElementById('progress-bar').style.width = '100%';
-        calculateSavings();
-      }
-    }
+        // Модифікатор Преміуму
+        const isPremium = (packageType === 'premium');
+        const matMultiplier = isPremium ? pricingData.premiumMultiplier : 1;
 
-    function calculateSavings() {
-      const resultElem = document.getElementById('savings-result');
-      const descElem = document.getElementById('savings-desc');
-      
-      let minSavings = 1100;
-      let maxSavings = 1650;
+        // А. Розрахунок зон шумоізоляції
+        selectedZones.forEach(zoneCheckbox => {
+            const zone = zoneCheckbox.value;
+            let zonePrice = 0;
 
-      if (userAnswers.hours === '200') {
-        minSavings = 1450;
-        maxSavings = 2100;
-      } else if (userAnswers.hours === '100') {
-        minSavings = 650;
-        maxSavings = 950;
-      }
+            if (zone === 'doors') {
+                // Особлива логіка для дверей (з ТЗ)
+                if (carType === 'suv') {
+                    zonePrice = pricingData.specialCrossoverDoorsEcon;
+                } else {
+                    zonePrice = pricingData.baseSedanDoorsEcon;
+                }
+                // Застосовуємо націнку за преміум
+                zonePrice = zonePrice * matMultiplier;
+            } else {
+                // Стандартна логіка для інших зон
+                // 1. Базова ціна зони
+                zonePrice = pricingData.baseSedanDoorsEcon * pricingData.zonesRel[zone];
+                // 2. Модифікатор кузова
+                zonePrice = zonePrice * pricingData.bodyModifiers[carType];
+                // 3. Модифікатор Преміум матеріалу
+                zonePrice = zonePrice * matMultiplier;
+            }
 
-      if (userAnswers.age === '26to30') {
-        resultElem.textContent = 'Легалізація + Робота без дозволів + Знижки';
-        descElem.textContent = 'Для віку 26–30 років статус студента поліцеальної школи чи ВНЗ відкриває підставу для Карти Побиту, роботу без окремих дозволів та знижки на транспорт.';
-      } else {
-        resultElem.textContent = `+${minSavings} – ${maxSavings} PLN / міс`;
-        descElem.textContent = 'Це сума податків ZUS, яку ти перестаєш переплачувати і офіційно отримуєш на руки щомісяця.';
-      }
-    }
-
-    async function submitQuiz() {
-      const nameInput = document.getElementById('user-name');
-      const contactInput = document.getElementById('user-contact');
-      const submitBtn = document.getElementById('submit-btn');
-
-      const name = nameInput.value.trim();
-      const contact = contactInput.value.trim();
-
-      if (!name || !contact) {
-        alert('Будь ласка, вкажіть ваше ім\'я та контактні дані для отримання списку шкіл.');
-        return;
-      }
-
-      // Візуальний стан завантаження
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span>Відправка даних...</span>';
-
-      const payload = {
-        name: name,
-        contact: contact,
-        age: userAnswers.age === 'under26' ? '18-25 років (до 26)' : '26-30 років',
-        contract: userAnswers.contract === 'zlecenie' ? 'Umowa Zlecenie' : (userAnswers.contract === 'praca' ? 'Umowa o Pracę' : 'Шукає роботу'),
-        hours: userAnswers.hours + ' годин',
-        status: userAnswers.status === 'no' ? 'Немає статусу' : (userAnswers.status === 'lost' ? 'Втрачений статус' : 'Потрібен вступ / легалізація')
-      };
-
-      try {
-        // Відправка даних у Google Таблицю
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
-          body: JSON.stringify(payload)
+            total += zonePrice;
         });
 
-        // Редирект у Telegram
-        window.location.href = 'https://t.me/+rlS8-BCiUmQyOGJi';
-      } catch (error) {
-        console.error('Помилка відправки:', error);
-        window.location.href = 'https://t.me/+rlS8-BCiUmQyOGJi';
-      }
+        // Б. Додаємо доп послуги
+        selectedExtras.forEach(extraCheckbox => {
+            total += pricingData.extras[extraCheckbox.value];
+        });
+
+        // В. Округляємо та виводимо
+        const formattedPrice = Math.round(total).toLocaleString('uk-UA');
+        document.getElementById('final_price').innerHTML = `${formattedPrice}<span>грн</span>`;
     }
-  </script>
+
+    // 3. Підключаємо слухачі подій (щоб ціна змінювалася відразу)
+    const inputs = document.querySelectorAll('input[name="car_type"], input[name="zone"], input[name="package"], input[name="extra"]');
+    
+    inputs.forEach(input => {
+        input.addEventListener('change', calculatePrice);
+    });
+
+    // Початковий розрахунок при завантаженні
+    calculatePrice();
+
+</script>
 
 </body>
 </html>
