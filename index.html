@@ -2,719 +2,803 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Шумоізоляція Авто Чернівці | VSAUTO 0542</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Шумоізоляція Чернівці | VSAUTO 0542</title>
     <style>
         :root {
-            --bg-color: #08090c;
-            --card-bg: #131722;
-            --card-border: #1e2638;
-            --text-main: #e2e8f0;
-            --text-muted: #8492a6;
-            --accent-cyan: #00f0ff;
-            --accent-cyan-glow: rgba(0, 240, 255, 0.35);
-            --accent-magenta: #ff007f;
-            --accent-magenta-glow: rgba(255, 0, 127, 0.4);
-            --font: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            --bg-dark: #090a0f;
+            --card-bg: #12151f;
+            --card-border: #1f2738;
+            --text-white: #f8fafc;
+            --text-gray: #94a3b8;
+            --cyan: #00f0ff;
+            --cyan-glow: rgba(0, 240, 255, 0.3);
+            --magenta: #ff007f;
+            --magenta-glow: rgba(255, 0, 127, 0.35);
+            --radius: 14px;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: var(--font);
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            line-height: 1.5;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            background-image: radial-gradient(circle at 50% 20%, rgba(0, 240, 255, 0.05) 0%, transparent 70%);
+            padding-bottom: env(safe-area-inset-bottom, 20px);
         }
 
         /* Хедер */
         header {
-            background-color: rgba(8, 9, 12, 0.85);
-            backdrop-filter: blur(12px);
-            padding: 18px 6%;
+            background: rgba(9, 10, 15, 0.9);
+            backdrop-filter: blur(10px);
             position: fixed;
-            width: 100%;
             top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--card-border);
+            left: 0;
+            right: 0;
+            z-index: 999;
+            height: 60px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid var(--card-border);
         }
 
-        .logo {
-            font-size: 1.4rem;
+        .brand-logo {
+            font-size: 1.15rem;
             font-weight: 800;
-            color: var(--accent-cyan);
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
+            color: var(--cyan);
             text-transform: uppercase;
         }
 
-        .logo span {
+        .brand-logo span {
             color: #fff;
         }
 
-        .city-badge {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            border: 1px solid var(--card-border);
-            padding: 6px 14px;
+        .location-tag {
+            font-size: 0.78rem;
+            color: var(--text-gray);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
             border-radius: 20px;
-            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--card-border);
         }
 
-        /* Контейнер */
-        .quiz-wrapper {
-            max-width: 720px;
-            width: 90%;
-            margin: 110px auto 40px;
-            flex-grow: 1;
+        /* Основний блок */
+        main {
+            flex: 1;
+            padding: 76px 14px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         /* Прогрес-бар */
-        .progress-container {
-            margin-bottom: 25px;
+        .progress-box {
+            margin-bottom: 16px;
         }
 
-        .progress-info {
+        .progress-labels {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .progress-bar-bg {
-            width: 100%;
-            height: 6px;
-            background-color: var(--card-border);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            width: 20%;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
-            box-shadow: 0 0 10px var(--accent-cyan);
-            transition: width 0.4s ease;
-        }
-
-        /* Картка кроку */
-        .quiz-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 35px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-        }
-
-        .step-content {
-            display: none;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .step-content.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .step-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 8px;
-        }
-
-        .step-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-        }
-
-        /* Форма вводу авто */
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .input-field {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1.5px solid var(--card-border);
-            border-radius: 10px;
-            padding: 14px 18px;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .input-field:focus {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 12px var(--accent-cyan-glow);
-        }
-
-        /* Вибір сіткою (Кузов / Пакети) */
-        .grid-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 14px;
-        }
-
-        .radio-box {
-            position: relative;
-        }
-
-        .radio-box input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .radio-label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px 10px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1.5px solid var(--card-border);
-            border-radius: 12px;
-            cursor: pointer;
-            text-align: center;
-            font-weight: 600;
-            color: var(--text-main);
-            transition: all 0.3s ease;
-        }
-
-        .radio-label .sub-text {
             font-size: 0.78rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            margin-top: 4px;
-        }
-
-        .radio-box input:checked + .radio-label {
-            border-color: var(--accent-cyan);
-            background: rgba(0, 240, 255, 0.08);
-            color: #fff;
-            box-shadow: 0 0 15px var(--accent-cyan-glow);
-        }
-
-        /* Чекбокси зон */
-        .checkbox-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 12px;
-        }
-
-        .checkbox-card {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1.5px solid var(--card-border);
-            border-radius: 10px;
-            padding: 14px 16px;
-            cursor: pointer;
-            transition: border-color 0.2s, background 0.2s;
-        }
-
-        .checkbox-card:hover {
-            border-color: rgba(0, 240, 255, 0.5);
-        }
-
-        .checkbox-card input {
-            accent-color: var(--accent-cyan);
-            width: 18px;
-            height: 18px;
-            margin-right: 14px;
-        }
-
-        /* Екран аналізу (Лоадер) */
-        .loader-wrapper {
-            text-align: center;
-            padding: 40px 10px;
-        }
-
-        .cyber-spinner {
-            width: 70px;
-            height: 70px;
-            border: 4px solid var(--card-border);
-            border-top: 4px solid var(--accent-cyan);
-            border-right: 4px solid var(--accent-magenta);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 30px;
-            box-shadow: 0 0 20px var(--accent-cyan-glow);
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-title {
-            font-size: 1.3rem;
-            color: #fff;
-            margin-bottom: 12px;
-        }
-
-        .loading-status {
-            font-size: 0.95rem;
-            color: var(--accent-cyan);
-            font-family: monospace;
-            min-height: 24px;
-        }
-
-        /* Екран результату */
-        .result-box {
-            text-align: center;
-        }
-
-        .summary-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: left;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .summary-row:last-child {
-            border-bottom: none;
-        }
-
-        .summary-label {
-            color: var(--text-muted);
-        }
-
-        .summary-value {
-            color: #fff;
-            font-weight: 600;
-            text-align: right;
-            max-width: 65%;
-        }
-
-        .price-badge-wrap {
-            margin: 25px 0 30px;
-        }
-
-        .price-caption {
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--text-gray);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            font-weight: 600;
             margin-bottom: 6px;
         }
 
-        .price-value {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #fff;
-            text-shadow: 0 0 20px var(--accent-cyan-glow);
-        }
-
-        .price-value span {
-            color: var(--accent-cyan);
-            font-size: 1.6rem;
-            margin-left: 8px;
-        }
-
-        /* Кнопки навігації */
-        .nav-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 14px 28px;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: none;
-            outline: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-        }
-
-        .btn-prev {
-            background: transparent;
-            color: var(--text-muted);
-            border: 1.5px solid var(--card-border);
-        }
-
-        .btn-prev:hover {
-            color: #fff;
-            border-color: var(--text-muted);
-        }
-
-        .btn-next {
-            background: var(--accent-cyan);
-            color: #08090c;
-            box-shadow: 0 0 15px var(--accent-cyan-glow);
-            margin-left: auto;
-        }
-
-        .btn-next:hover {
-            background: #26f4ff;
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
-            transform: translateY(-2px);
-        }
-
-        .btn-telegram {
+        .progress-track {
             width: 100%;
-            background: linear-gradient(135deg, #0088cc, var(--accent-cyan));
+            height: 5px;
+            background: var(--card-border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 20%;
+            background: linear-gradient(90deg, var(--cyan), var(--magenta));
+            box-shadow: 0 0 10px var(--cyan-glow);
+            transition: width 0.3s ease;
+        }
+
+        /* Квіз картка */
+        .quiz-sheet {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 22px 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .quiz-step {
+            display: none;
+        }
+
+        .quiz-step.active {
+            display: block;
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-heading {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 6px;
             color: #fff;
-            padding: 18px 24px;
-            font-size: 1.1rem;
+        }
+
+        .step-subtext {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        /* Поля вводу */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .custom-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1.5px solid var(--card-border);
             border-radius: 12px;
-            box-shadow: 0 0 25px rgba(0, 136, 204, 0.4);
+            padding: 14px 16px;
+            font-size: 0.95rem;
+            color: #fff;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .custom-input:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan-glow);
+        }
+
+        /* Вибір кузовів (5 варіантів) */
+        .body-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
 
-        .btn-telegram:hover {
-            box-shadow: 0 0 35px rgba(0, 240, 255, 0.6);
-            transform: translateY(-2px);
+        .body-grid .body-item:last-child {
+            grid-column: span 2;
+        }
+
+        .body-item {
+            position: relative;
+        }
+
+        .body-item input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .body-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 8px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1.5px solid var(--card-border);
+            text-align: center;
+            transition: 0.2s all;
+        }
+
+        .body-label strong {
+            font-size: 0.95rem;
+            color: #fff;
+        }
+
+        .body-label span {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            margin-top: 2px;
+        }
+
+        .body-item input:checked + .body-label {
+            border-color: var(--cyan);
+            background: rgba(0, 240, 255, 0.08);
+            box-shadow: 0 0 12px var(--cyan-glow);
+        }
+
+        /* Вибір зон та допів (Чекбокси) */
+        .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1.5px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: 0.2s border-color;
+        }
+
+        .checkbox-row:active {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .checkbox-row input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--cyan);
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+
+        .checkbox-info strong {
+            display: block;
+            font-size: 0.92rem;
+            color: #fff;
+        }
+
+        .checkbox-info span {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--text-gray);
+            margin-top: 1px;
+        }
+
+        /* Вибір пакету */
+        .pack-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .pack-item input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .pack-label {
+            display: flex;
+            flex-direction: column;
+            padding: 16px 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1.5px solid var(--card-border);
+            cursor: pointer;
+            height: 100%;
+            text-align: center;
+        }
+
+        .pack-label strong {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .pack-label span {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+        }
+
+        .pack-item input:checked + .pack-label {
+            border-color: var(--cyan);
+            background: rgba(0, 240, 255, 0.08);
+            box-shadow: 0 0 12px var(--cyan-glow);
+        }
+
+        .pack-item input#pack_prem:checked + .pack-label {
+            border-color: var(--magenta);
+            background: rgba(255, 0, 127, 0.08);
+            box-shadow: 0 0 12px var(--magenta-glow);
+        }
+
+        /* Кнопки керування */
+        .btn-panel {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .btn-ui {
+            flex: 1;
+            height: 48px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s all;
+        }
+
+        .btn-back {
+            flex: 0 0 45%;
+            background: transparent;
+            color: var(--text-gray);
+            border: 1.5px solid var(--card-border);
+        }
+
+        .btn-next-action {
+            background: var(--cyan);
+            color: #000;
+            box-shadow: 0 0 14px var(--cyan-glow);
+        }
+
+        .btn-calc {
+            background: var(--magenta);
+            color: #fff;
+            box-shadow: 0 0 14px var(--magenta-glow);
+        }
+
+        /* Лоадер */
+        .loader-block {
+            text-align: center;
+            padding: 30px 10px;
+        }
+
+        .spinner-ring {
+            width: 54px;
+            height: 54px;
+            margin: 0 auto 20px;
+            border: 4px solid var(--card-border);
+            border-top: 4px solid var(--cyan);
+            border-right: 4px solid var(--magenta);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-title {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+
+        .loader-msg {
+            font-size: 0.85rem;
+            color: var(--cyan);
+            font-family: monospace;
+            min-height: 20px;
+        }
+
+        /* Фінальний екран */
+        .results-block {
+            text-align: center;
+        }
+
+        .summary-specs {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+        }
+
+        .spec-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .spec-line:last-child {
+            border-bottom: none;
+        }
+
+        .spec-key {
+            color: var(--text-gray);
+        }
+
+        .spec-val {
+            color: #fff;
+            font-weight: 600;
+            max-width: 65%;
+            text-align: right;
+        }
+
+        .price-output {
+            margin: 18px 0 22px;
+        }
+
+        .price-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-gray);
+        }
+
+        .price-digits {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 0 15px var(--cyan-glow);
+        }
+
+        .price-digits span {
+            color: var(--cyan);
+            font-size: 1.4rem;
+            margin-left: 4px;
+        }
+
+        /* Telegram CTA */
+        .telegram-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            height: 52px;
+            background: linear-gradient(135deg, #0088cc, var(--cyan));
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 136, 204, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .telegram-btn:active {
+            transform: scale(0.98);
+        }
+
+        .reset-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            text-decoration: underline;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
 
         footer {
             text-align: center;
-            padding: 24px;
-            border-top: 1px solid var(--card-border);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        @media (max-width: 600px) {
-            .quiz-card { padding: 25px 18px; }
-            .price-value { font-size: 2.3rem; }
-            .btn { font-size: 0.9rem; padding: 12px 20px; }
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            padding: 12px;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">VSAUTO <span>0542</span></div>
-    <div class="city-badge">м. Чернівці</div>
+    <div class="brand-logo">VSAUTO <span>0542</span></div>
+    <div class="location-tag">Чернівці</div>
 </header>
 
-<div class="quiz-wrapper">
-
-    <!-- Індикатор прогресу -->
-    <div class="progress-container" id="progress_block">
-        <div class="progress-info">
-            <span id="step_indicator">Крок 1 з 5</span>
+<main>
+    <!-- Прогрес -->
+    <div class="progress-box" id="progress_wrapper">
+        <div class="progress-labels">
+            <span id="step_label">Крок 1 з 5</span>
             <span id="step_percent">20%</span>
         </div>
-        <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="progress_fill"></div>
+        <div class="progress-track">
+            <div class="progress-bar" id="progress_bar"></div>
         </div>
     </div>
 
-    <div class="quiz-card">
+    <div class="quiz-sheet">
 
-        <!-- КРОК 1: Марка, Модель, Рік -->
-        <div class="step-content active" data-step="1">
-            <h2 class="step-title">Який у вас автомобіль?</h2>
-            <p class="step-desc">Вкажіть марку, модель та рік для розрахунку технологічної карти</p>
-            <div class="input-group">
-                <input type="text" id="car_model" class="input-field" placeholder="Марка та модель (напр. Nissan Qashqai, Kia Optima)" required>
-                <input type="number" id="car_year" class="input-field" placeholder="Рік випуску (напр. 2021)" min="1990" max="2026">
+        <!-- КРОК 1: Марка та рік -->
+        <div class="quiz-step active" data-step="1">
+            <div class="step-heading">1. Ваш автомобіль</div>
+            <div class="step-subtext">Вкажіть дані авто для точного підбору технологічної карти</div>
+            <div class="form-group">
+                <input type="text" id="input_car" class="custom-input" placeholder="Марка і модель (напр. Kia Optima)" autocomplete="off">
+                <input type="number" id="input_year" class="custom-input" placeholder="Рік випуску (напр. 2022)" min="1990" max="2026">
             </div>
-            <div class="nav-actions">
-                <button type="button" class="btn btn-next" onclick="goToStep(2)">Далі →</button>
+            <div class="btn-panel">
+                <button type="button" class="btn-ui btn-next-action" onclick="nextStep(2)">Далі →</button>
             </div>
         </div>
 
-        <!-- КРОК 2: Тип кузова -->
-        <div class="step-content" data-step="2">
-            <h2 class="step-title">Оберіть тип кузова</h2>
-            <p class="step-desc">Це впливає на площу розбору та об'єм необхідних листів віброізоляції</p>
-            <div class="grid-options">
-                <div class="radio-box">
-                    <input type="radio" id="body_sedan" name="car_type" value="sedan" checked>
-                    <label for="body_sedan" class="radio-label">
-                        Седан
-                        <span class="sub-text">Класичний кузов</span>
-                    </label>
-                </div>
-                <div class="radio-box">
-                    <input type="radio" id="body_hatch" name="car_type" value="hatchback">
-                    <label for="body_hatch" class="radio-label">
-                        Хетчбек
-                        <span class="sub-text">Компактний</span>
-                    </label>
-                </div>
-                <div class="radio-box">
-                    <input type="radio" id="body_suv" name="car_type" value="suv">
-                    <label for="body_suv" class="radio-label">
-                        Кросовер
-                        <span class="sub-text">Паркетник / SUV</span>
-                    </label>
-                </div>
-                <div class="radio-box">
-                    <input type="radio" id="body_offroad" name="car_type" value="offroad">
-                    <label for="body_offroad" class="radio-label">
-                        Позашляховик
-                        <span class="sub-text">Великий джип</span>
-                    </label>
-                </div>
+        <!-- КРОК 2: Тип кузова (5 варіантів) -->
+        <div class="quiz-step" data-step="2">
+            <div class="step-heading">2. Тип кузова</div>
+            <div class="step-subtext">Від цього залежить площа металу та об'єм розбору</div>
+            <div class="body-grid">
+                <label class="body-item">
+                    <input type="radio" name="body_type" value="sedan" checked>
+                    <div class="body-label">
+                        <strong>Седан</strong>
+                        <span>Kia Optima тощо</span>
+                    </div>
+                </label>
+                <label class="body-item">
+                    <input type="radio" name="body_type" value="crossover">
+                    <div class="body-label">
+                        <strong>Кросовер</strong>
+                        <span>Qashqai / RAV4</span>
+                    </div>
+                </label>
+                <label class="body-item">
+                    <input type="radio" name="body_type" value="hatchback">
+                    <div class="body-label">
+                        <strong>Хетчбек</strong>
+                        <span>Golf / Focus тощо</span>
+                    </div>
+                </label>
+                <label class="body-item">
+                    <input type="radio" name="body_type" value="wagon">
+                    <div class="body-label">
+                        <strong>Універсал</strong>
+                        <span>Passat Variant тощо</span>
+                    </div>
+                </label>
+                <label class="body-item">
+                    <input type="radio" name="body_type" value="suv">
+                    <div class="body-label">
+                        <strong>Позашляховик</strong>
+                        <span>LC Prado / Touareg</span>
+                    </div>
+                </label>
             </div>
-            <div class="nav-actions">
-                <button type="button" class="btn btn-prev" onclick="goToStep(1)">← Назад</button>
-                <button type="button" class="btn btn-next" onclick="goToStep(3)">Далі →</button>
+            <div class="btn-panel">
+                <button type="button" class="btn-ui btn-back" onclick="nextStep(1)">← Назад</button>
+                <button type="button" class="btn-ui btn-next-action" onclick="nextStep(3)">Далі →</button>
             </div>
         </div>
 
         <!-- КРОК 3: Зони обробки -->
-        <div class="step-content" data-step="3">
-            <h2 class="step-title">Які зони потребують обробки?</h2>
-            <p class="step-desc">Можна обрати декілька ключових зон або все авто</p>
-            <div class="checkbox-list">
-                <label class="checkbox-card">
+        <div class="quiz-step" data-step="3">
+            <div class="step-heading">3. Зони шумоізоляції</div>
+            <div class="step-subtext">Виберіть зони, які турбують найбільше</div>
+            <div class="item-list">
+                <label class="checkbox-row">
                     <input type="checkbox" name="zone" value="doors" checked>
-                    <div>
+                    <div class="checkbox-info">
                         <strong>Двері (передні + задні)</strong>
-                        <div style="font-size:0.8rem; color:var(--text-muted)">Для тиші та щільного басу акустики</div>
+                        <span>Забирає вуличний гул, покращує звучання динаміків</span>
                     </div>
                 </label>
-                <label class="checkbox-card">
+                <label class="checkbox-row">
                     <input type="checkbox" name="zone" value="floor">
-                    <div>
+                    <div class="checkbox-info">
                         <strong>Салон (Підлога)</strong>
-                        <div style="font-size:0.8rem; color:var(--text-muted)">Знижує гул коліс та вібрацію від днища</div>
+                        <span>Знижує шум коліс, днища та вихлопу</span>
                     </div>
                 </label>
-                <label class="checkbox-card">
+                <label class="checkbox-row">
                     <input type="checkbox" name="zone" value="trunk">
-                    <div>
-                        <strong>Багажне відділення</strong>
-                        <div style="font-size:0.8rem; color:var(--text-muted)">Прибирає резонанс задньої частини</div>
+                    <div class="checkbox-info">
+                        <strong>Багажник</strong>
+                        <span>Прибирає гул задніх арок та резонанс ляди</span>
                     </div>
                 </label>
-                <label class="checkbox-card">
+                <label class="checkbox-row">
                     <input type="checkbox" name="zone" value="arches">
-                    <div>
+                    <div class="checkbox-info">
                         <strong>Колісні арки</strong>
-                        <div style="font-size:0.8rem; color:var(--text-muted)">Шум каміння, води та тертя гуми</div>
+                        <span>Шум від шин, каміння та мокрої дороги</span>
                     </div>
                 </label>
-                <label class="checkbox-card">
+                <label class="checkbox-row">
                     <input type="checkbox" name="zone" value="roof">
-                    <div>
+                    <div class="checkbox-info">
                         <strong>Дах (Криша)</strong>
-                        <div style="font-size:0.8rem; color:var(--text-muted)">Захист від шуму дощу та аеродинаміки</div>
+                        <span>Прибирає дзвін дощу та аеродинамічний свист</span>
                     </div>
                 </label>
-                <label class="checkbox-card">
+                <label class="checkbox-row">
                     <input type="checkbox" name="zone" value="hood">
-                    <div>
+                    <div class="checkbox-info">
                         <strong>Капот</strong>
-                        <div style="font-size:0.8rem; color:var(--text-muted)">Зниження вібрацій від двигуна</div>
+                        <span>Знижує вібрації від двигуна у салон</span>
                     </div>
                 </label>
             </div>
-            <div class="nav-actions">
-                <button type="button" class="btn btn-prev" onclick="goToStep(2)">← Назад</button>
-                <button type="button" class="btn btn-next" onclick="goToStep(4)">Далі →</button>
+            <div class="btn-panel">
+                <button type="button" class="btn-ui btn-back" onclick="nextStep(2)">← Назад</button>
+                <button type="button" class="btn-ui btn-next-action" onclick="nextStep(4)">Далі →</button>
             </div>
         </div>
 
-        <!-- КРОК 4: Рівень матеріалів -->
-        <div class="step-content" data-step="4">
-            <h2 class="step-title">Оберіть пакет матеріалів</h2>
-            <p class="step-desc">Який рівень комфорту та ефективності ви очікуєте?</p>
-            <div class="grid-options" style="grid-template-columns: 1fr 1fr;">
-                <div class="radio-box">
-                    <input type="radio" id="pack_econ" name="package" value="economy" checked>
-                    <label for="pack_econ" class="radio-label">
-                        Економ
-                        <span class="sub-text">Базовий набір ефективних шарів. Оптимальна вартість.</span>
-                    </label>
-                </div>
-                <div class="radio-box">
-                    <input type="radio" id="pack_prem" name="package" value="premium">
-                    <label for="pack_prem" class="radio-label" style="border-color: rgba(255,0,127,0.3)">
-                        Преміум
-                        <span class="sub-text">Топові полегшені мастичні шари. Максимальна тиша.</span>
-                    </label>
-                </div>
+        <!-- КРОК 4: Пакет матеріалів -->
+        <div class="quiz-step" data-step="4">
+            <div class="step-heading">4. Матеріали</div>
+            <div class="step-subtext">Оберіть клас матеріалів та ефективність</div>
+            <div class="pack-grid">
+                <label class="pack-item">
+                    <input type="radio" id="pack_econ" name="pack_type" value="economy" checked>
+                    <div class="pack-label">
+                        <strong>Економ</strong>
+                        <span>Оптимальний баланс ціни та зменшення шуму</span>
+                    </div>
+                </label>
+                <label class="pack-item">
+                    <input type="radio" id="pack_prem" name="pack_type" value="premium">
+                    <div class="pack-label">
+                        <strong style="color: var(--magenta);">Преміум</strong>
+                        <span>Топові багатошарові мастики для максимальної тиші</span>
+                    </div>
+                </label>
             </div>
-            <div class="nav-actions">
-                <button type="button" class="btn btn-prev" onclick="goToStep(3)">← Назад</button>
-                <button type="button" class="btn btn-next" onclick="goToStep(5)">Далі →</button>
+            <div class="btn-panel">
+                <button type="button" class="btn-ui btn-back" onclick="nextStep(3)">← Назад</button>
+                <button type="button" class="btn-ui btn-next-action" onclick="nextStep(5)">Далі →</button>
             </div>
         </div>
 
         <!-- КРОК 5: Додаткові послуги -->
-        <div class="step-content" data-step="5">
-            <h2 class="step-title">Додаткові послуги майстерні</h2>
-            <p class="step-desc">Комплексні роботи, які вигідно робити під час розбору салону</p>
-            <div class="checkbox-list">
-                <label class="checkbox-card">
+        <div class="quiz-step" data-step="5">
+            <div class="step-heading">5. Додаткові послуги</div>
+            <div class="step-subtext">Роботи, які зручно поєднати з розбором салону</div>
+            <div class="item-list">
+                <label class="checkbox-row">
                     <input type="checkbox" name="extra" value="antiskryp">
-                    <div>
-                        <strong>Повний Антискрип</strong>
-                        <div style="font-size:0.8rem; color:var(--text-muted)">Обробка карт дверей та стиків торпеди</div>
+                    <div class="checkbox-info">
+                        <strong>Антискрип салону</strong>
+                        <span>Усунення скрипів стиків пластику та торпеди</span>
                     </div>
                 </label>
-                <label class="checkbox-card">
+                <label class="checkbox-row">
                     <input type="checkbox" name="extra" value="antykor">
-                    <div>
-                        <strong>Антикорозійна обробка</strong>
-                        <div style="font-size:0.8rem; color:var(--text-muted)">Захист прихованих порожнин та арок</div>
+                    <div class="checkbox-info">
+                        <strong>Антикор</strong>
+                        <span>Захист металу в прихованих порожнинах</span>
                     </div>
                 </label>
-                <label class="checkbox-card">
+                <label class="checkbox-row">
                     <input type="checkbox" name="extra" value="music">
-                    <div>
-                        <strong>Установка / Заміна музики</strong>
-                        <div style="font-size:0.8rem; color:var(--text-muted)">Монтаж акустики в підготовлені двері</div>
+                    <div class="checkbox-info">
+                        <strong>Установка музики</strong>
+                        <span>Монтаж акустики, прокладка проводки</span>
                     </div>
                 </label>
             </div>
-            <div class="nav-actions">
-                <button type="button" class="btn btn-prev" onclick="goToStep(4)">← Назад</button>
-                <button type="button" class="btn btn-next" style="background: var(--accent-magenta); color: #fff; box-shadow: 0 0 15px var(--accent-magenta-glow);" onclick="startAnalysis()">Розрахувати ⚡</button>
+            <div class="btn-panel">
+                <button type="button" class="btn-ui btn-back" onclick="nextStep(4)">← Назад</button>
+                <button type="button" class="btn-ui btn-calc" onclick="runAnalysis()">Розрахувати ⚡</button>
             </div>
         </div>
 
-        <!-- ЕКРАН ЗАВАНТАЖЕННЯ / АНАЛІЗУ -->
-        <div class="step-content" id="analysis_screen">
-            <div class="loader-wrapper">
-                <div class="cyber-spinner"></div>
-                <h3 class="loading-title">Аналізуємо дані автомобіля...</h3>
-                <div class="loading-status" id="loading_status_text">Звірка розрахункових площ кузова...</div>
+        <!-- ЕКРАН АНАЛІЗУ (Лоадер) -->
+        <div class="quiz-step" id="loader_step">
+            <div class="loader-block">
+                <div class="spinner-ring"></div>
+                <div class="loader-title">VSAUTO 0542 рахує кошторис...</div>
+                <div class="loader-msg" id="loader_status">Оцінка параметрів кузова...</div>
             </div>
         </div>
 
         <!-- ФІНАЛЬНИЙ ЕКРАН -->
-        <div class="step-content" id="result_screen">
-            <div class="result-box">
-                <h2 class="step-title" style="color: var(--accent-cyan);">Розрахунок завершено</h2>
-                <p class="step-desc">Сформовано попередній кошторис для сервісу VSAUTO 0542</p>
+        <div class="quiz-step" id="final_step">
+            <div class="results-block">
+                <div class="step-heading" style="color: var(--cyan);">Розрахунок готовий</div>
+                <div class="step-subtext">Попередній прорахунок для м. Чернівці</div>
 
-                <div class="summary-card">
-                    <div class="summary-row">
-                        <span class="summary-label">Автомобіль:</span>
-                        <span class="summary-value" id="res_car">Nissan Qashqai (2021)</span>
+                <div class="summary-specs">
+                    <div class="spec-line">
+                        <span class="spec-key">Автомобіль:</span>
+                        <span class="spec-val" id="res_car_title">—</span>
                     </div>
-                    <div class="summary-row">
-                        <span class="summary-label">Тип кузова:</span>
-                        <span class="summary-value" id="res_body">Кросовер</span>
+                    <div class="spec-line">
+                        <span class="spec-key">Кузов:</span>
+                        <span class="spec-val" id="res_body_title">—</span>
                     </div>
-                    <div class="summary-row">
-                        <span class="summary-label">Зони шумоізоляції:</span>
-                        <span class="summary-value" id="res_zones">Двері (4 шт)</span>
+                    <div class="spec-line">
+                        <span class="spec-key">Обрані зони:</span>
+                        <span class="spec-val" id="res_zones_title">—</span>
                     </div>
-                    <div class="summary-row">
-                        <span class="summary-label">Пакет матеріалів:</span>
-                        <span class="summary-value" id="res_package">Преміум</span>
+                    <div class="spec-line">
+                        <span class="spec-key">Пакет:</span>
+                        <span class="spec-val" id="res_pack_title">—</span>
                     </div>
-                    <div class="summary-row" id="res_extras_row" style="display:none;">
-                        <span class="summary-label">Додаткові послуги:</span>
-                        <span class="summary-value" id="res_extras">—</span>
+                    <div class="spec-line" id="res_extras_line" style="display: none;">
+                        <span class="spec-key">Додатково:</span>
+                        <span class="spec-val" id="res_extras_title">—</span>
                     </div>
                 </div>
 
-                <div class="price-badge-wrap">
-                    <div class="price-caption">Орієнтовна вартість робіт:</div>
-                    <div class="price-value" id="final_price_val">9 500 <span>грн</span></div>
+                <div class="price-output">
+                    <div class="price-title">Орієнтовна вартість:</div>
+                    <div class="price-digits" id="final_price_number">0 <span>грн</span></div>
                 </div>
 
-                <!-- Кнопка Telegram -->
-                <a id="telegram_cta_btn" href="https://t.me/Borovv" target="_blank" class="btn btn-telegram">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-                    Отримати повну вартість у Telegram
+                <a id="telegram_btn_link" href="https://t.me/Borovv" target="_blank" class="telegram-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                    Отримати повну вартість
                 </a>
 
-                <div style="margin-top: 20px;">
-                    <button type="button" class="btn btn-prev" onclick="resetQuiz()" style="font-size: 0.8rem; padding: 8px 16px;">
-                        Розрахувати для іншого авто
-                    </button>
+                <div>
+                    <button type="button" class="reset-link" onclick="restartQuiz()">Розрахувати для іншого авто</button>
                 </div>
             </div>
         </div>
 
     </div>
-</div>
+</main>
 
 <footer>
-    © 2026 VSAUTO 0542. м. Чернівці. Професійна шумоізоляція та автозвук.
+    © 2026 VSAUTO 0542 | м. Чернівці
 </footer>
 
 <script>
-    /* --- ДАНІ ЦІНОУТВОРЕННЯ (VSAUTO 0542) --- */
-    const pricingData = {
-        baseDoorsEcon: 8000,           // Kia Optima 2022 база дверей (Седан)
-        specialSuvDoorsEcon: 7500,     // Nissan Qashqai 2021 база дверей (Кросовер)
-        premiumMultiplier: 1.25,       // Преміум +25% (8000 -> 10000, 7500 -> 9375~9500)
+    /* --- ДАНІ ТА КОЕФІЦІЄНТИ --- */
+    const basePricing = {
+        // Базові двері за типами кузовів (Економ)
+        doorsByBody: {
+            sedan: 8000,      // Kia Optima
+            crossover: 7500,  // Nissan Qashqai
+            hatchback: 7000,
+            wagon: 8000,
+            suv: 9000
+        },
+        premiumRatio: 1.25, // Преміум +25% (8000 -> 10000, 7500 -> 9375/9500)
         
-        zonesRel: {
+        // Коефіцієнти площ інших зон відносно дверей
+        zonesCoeff: {
             doors: 1.0,
             floor: 1.4,
             trunk: 0.8,
             roof: 0.7,
             arches: 0.6,
-            hood: 0.2
+            hood: 0.25
         },
-        bodyModifiers: {
+        // Модифікатори кузова для зон крім дверей
+        bodyMod: {
             hatchback: 0.9,
             sedan: 1.0,
-            suv: 1.2,
-            offroad: 1.4
+            wagon: 1.15,
+            crossover: 1.2,
+            suv: 1.45
         },
-        extras: {
+        extrasPrice: {
             antiskryp: 3000,
             antykor: 6000,
             music: 2500
         }
     };
 
-    const dict = {
+    const dictionary = {
         sedan: 'Седан',
+        crossover: 'Кросовер',
         hatchback: 'Хетчбек',
-        suv: 'Кросовер',
-        offroad: 'Позашляховик',
+        wagon: 'Універсал',
+        suv: 'Позашляховик',
         doors: 'Двері',
         floor: 'Салон (Підлога)',
         trunk: 'Багажник',
-        roof: 'Дах',
         arches: 'Арки',
+        roof: 'Дах',
         hood: 'Капот',
         economy: 'Економ',
         premium: 'Преміум',
@@ -723,121 +807,113 @@
         music: 'Установка музики'
     };
 
-    let currentStep = 1;
-
     function updateProgress(step) {
         const percent = Math.round((step / 5) * 100);
-        document.getElementById('step_indicator').innerText = `Крок ${step} з 5`;
+        document.getElementById('step_label').innerText = `Крок ${step} з 5`;
         document.getElementById('step_percent').innerText = `${percent}%`;
-        document.getElementById('progress_fill').style.width = `${percent}%`;
+        document.getElementById('progress_bar').style.width = `${percent}%`;
     }
 
-    function goToStep(step) {
+    function nextStep(step) {
         if (step === 2) {
-            const carInput = document.getElementById('car_model').value.trim();
-            if (!carInput) {
-                alert('Будь ласка, вкажіть марку та модель вашого автомобіля');
-                document.getElementById('car_model').focus();
+            const carVal = document.getElementById('input_car').value.trim();
+            if (!carVal) {
+                alert('Будь ласка, введіть марку та модель вашого автомобіля');
+                document.getElementById('input_car').focus();
                 return;
             }
         }
 
-        document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
-        const target = document.querySelector(`.step-content[data-step="${step}"]`);
+        document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+        const target = document.querySelector(`.quiz-step[data-step="${step}"]`);
         if (target) {
             target.classList.add('active');
-            currentStep = step;
             updateProgress(step);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
 
-    function startAnalysis() {
-        document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
-        document.getElementById('progress_block').style.display = 'none';
-        
-        const loader = document.getElementById('analysis_screen');
+    function runAnalysis() {
+        document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+        document.getElementById('progress_wrapper').style.display = 'none';
+
+        const loader = document.getElementById('loader_step');
         loader.classList.add('active');
 
-        const statusElem = document.getElementById('loading_status_text');
-        
-        // Імітація обробки даних
-        setTimeout(() => {
-            statusElem.innerText = "Розрахунок витрат матеріалів (StP / Comfortmat)...";
-        }, 1000);
+        const status = document.getElementById('loader_status');
 
-        setTimeout(() => {
-            statusElem.innerText = "Формування персонального кошторису VSAUTO 0542...";
-        }, 2000);
-
+        setTimeout(() => { status.innerText = "Підбір товщини вібропоглинача StP/Comfortmat..."; }, 900);
+        setTimeout(() => { status.innerText = "Формування спеціальної пропозиції VSAUTO 0542..."; }, 1900);
         setTimeout(() => {
             loader.classList.remove('active');
-            showResults();
-        }, 3000);
+            renderResult();
+        }, 2800);
     }
 
-    function showResults() {
-        const carModel = document.getElementById('car_model').value.trim() || "Автомобіль клієнта";
-        const carYear = document.getElementById('car_year').value.trim();
-        const fullCarName = carYear ? `${carModel} (${carYear})` : carModel;
+    function renderResult() {
+        const car = document.getElementById('input_car').value.trim() || "Автомобіль клієнта";
+        const year = document.getElementById('input_year').value.trim();
+        const fullCar = year ? `${car} (${year})` : car;
 
-        const bodyType = document.querySelector('input[name="car_type"]:checked').value;
-        const selectedZones = Array.from(document.querySelectorAll('input[name="zone"]:checked')).map(el => el.value);
-        const packageType = document.querySelector('input[name="package"]:checked').value;
-        const selectedExtras = Array.from(document.querySelectorAll('input[name="extra"]:checked')).map(el => el.value);
+        const body = document.querySelector('input[name="body_type"]:checked').value;
+        const zones = Array.from(document.querySelectorAll('input[name="zone"]:checked')).map(el => el.value);
+        const pack = document.querySelector('input[name="pack_type"]:checked').value;
+        const extras = Array.from(document.querySelectorAll('input[name="extra"]:checked')).map(el => el.value);
 
-        // Розрахунок
-        const matMultiplier = (packageType === 'premium') ? pricingData.premiumMultiplier : 1;
-        const bodyMod = pricingData.bodyModifiers[bodyType];
+        const isPremium = (pack === 'premium');
+        const mult = isPremium ? basePricing.premiumRatio : 1.0;
+        const bodyMod = basePricing.bodyMod[body];
 
         let total = 0;
 
-        selectedZones.forEach(zone => {
-            let zonePrice = 0;
+        zones.forEach(zone => {
+            let zPrice = 0;
             if (zone === 'doors') {
-                zonePrice = (bodyType === 'suv') ? pricingData.specialSuvDoorsEcon : pricingData.baseDoorsEcon;
-                zonePrice *= matMultiplier;
+                zPrice = basePricing.doorsByBody[body] * mult;
             } else {
-                zonePrice = pricingData.baseDoorsEcon * pricingData.zonesRel[zone] * bodyMod * matMultiplier;
+                const baseSedanDoors = basePricing.doorsByBody.sedan;
+                zPrice = baseSedanDoors * basePricing.zonesCoeff[zone] * bodyMod * mult;
             }
-            total += zonePrice;
+            total += zPrice;
         });
 
-        selectedExtras.forEach(extra => {
-            total += pricingData.extras[extra];
+        extras.forEach(item => {
+            total += basePricing.extrasPrice[item];
         });
 
-        const formattedPrice = Math.round(total).toLocaleString('uk-UA');
+        const formatted = Math.round(total).toLocaleString('uk-UA');
 
-        // Заповнення полів картки
-        document.getElementById('res_car').innerText = fullCarName;
-        document.getElementById('res_body').innerText = dict[bodyType];
-        document.getElementById('res_zones').innerText = selectedZones.length > 0 ? selectedZones.map(z => dict[z]).join(', ') : 'Не обрано';
-        document.getElementById('res_package').innerText = dict[packageType];
+        // Запис у картку
+        document.getElementById('res_car_title').innerText = fullCar;
+        document.getElementById('res_body_title').innerText = dictionary[body];
+        document.getElementById('res_zones_title').innerText = zones.length > 0 ? zones.map(z => dictionary[z]).join(', ') : 'Не обрано';
+        document.getElementById('res_pack_title').innerText = dictionary[pack];
 
-        const extrasRow = document.getElementById('res_extras_row');
-        if (selectedExtras.length > 0) {
-            extrasRow.style.display = 'flex';
-            document.getElementById('res_extras').innerText = selectedExtras.map(e => dict[e]).join(', ');
+        const extRow = document.getElementById('res_extras_line');
+        if (extras.length > 0) {
+            extRow.style.display = 'flex';
+            document.getElementById('res_extras_title').innerText = extras.map(e => dictionary[e]).join(', ');
         } else {
-            extrasRow.style.display = 'none';
+            extRow.style.display = 'none';
         }
 
-        document.getElementById('final_price_val').innerHTML = `${formattedPrice} <span>грн</span>`;
+        document.getElementById('final_price_number').innerHTML = `${formatted} <span>грн</span>`;
 
-        // Формування посилання у Telegram з текстом заявки
-        const zonesString = selectedZones.map(z => dict[z]).join(', ');
-        const extrasString = selectedExtras.length > 0 ? ` + Допи: ${selectedExtras.map(e => dict[e]).join(', ')}` : '';
-        const messageText = `Привіт! Пройшов квіз VSAUTO 0542.%0A%0A🚗 Авто: ${encodeURIComponent(fullCarName)} (${dict[bodyType]})%0A📍 Зони: ${encodeURIComponent(zonesString)}%0A📦 Пакет: ${dict[packageType]}${encodeURIComponent(extrasString)}%0A💰 Орієнтовна ціна з квізу: ~${formattedPrice} грн.%0A%0AХочу дізнатися точну вартість та записатися на огляд!`;
+        // Генерація посилання в Telegram
+        const zonesTxt = zones.map(z => dictionary[z]).join(', ');
+        const extrasTxt = extras.length > 0 ? `%0A➕ Додатково: ${extras.map(e => dictionary[e]).join(', ')}` : '';
+        const tgMsg = `Вітаю! Пройшов розрахунок на сайті VSAUTO 0542.%0A%0A🚗 Авто: ${encodeURIComponent(fullCar)}%0A🚘 Кузов: ${dictionary[body]}%0A📍 Зони: ${encodeURIComponent(zonesTxt)}%0A📦 Пакет: ${dictionary[pack]}${encodeURIComponent(extrasTxt)}%0A💰 Орієнтовна сума: ~${formatted} грн.%0A%0AПідкажіть точну вартість та коли є вільне вікно на огляд?`;
 
-        document.getElementById('telegram_cta_btn').href = `https://t.me/Borovv?text=${messageText}`;
+        document.getElementById('telegram_btn_link').href = `https://t.me/Borovv?text=${tgMsg}`;
 
-        document.getElementById('result_screen').classList.add('active');
+        document.getElementById('final_step').classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function resetQuiz() {
-        document.getElementById('result_screen').classList.remove('active');
-        document.getElementById('progress_block').style.display = 'block';
-        goToStep(1);
+    function restartQuiz() {
+        document.getElementById('final_step').classList.remove('active');
+        document.getElementById('progress_wrapper').style.display = 'block';
+        nextStep(1);
     }
 </script>
 
