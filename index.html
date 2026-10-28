@@ -13,6 +13,7 @@
     --muted:#8a8a92;
     --gold:#c9a24b;
     --gold-soft:#e6c878;
+    --danger:#ff5722;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -76,7 +77,6 @@
   }
   .hero-cta:hover{ transform:translateY(-2px) }
 
-  /* Бегущая строка */
   .marquee{
     margin-top:56px; width:100%; max-width:1200px; overflow:hidden;
     border-top:1px solid var(--stroke); border-bottom:1px solid var(--stroke);
@@ -95,9 +95,9 @@
     position:relative;
     width:100%;
     min-height:100vh;
-    padding-top:80px;      /* отступ под fixed-шапку */
+    padding-top:80px;
     display:grid;
-    grid-template-rows: 1fr auto;   /* сцена + итог */
+    grid-template-rows: 1fr auto;
     grid-template-columns: 100%;
     background:radial-gradient(ellipse at 50% 40%, rgba(201,162,75,.05), transparent 60%);
     border-top:1px solid var(--stroke);
@@ -106,15 +106,14 @@
   .stage-wrap{
     position:relative;
     width:100%;
-    min-height:640px;
+    min-height:660px;
     display:grid;
-    grid-template-columns: 320px 1fr 340px;   /* левая | сцена | правая */
+    grid-template-columns: 320px 1fr 340px;
     gap:20px;
     padding:20px 24px;
     align-items:stretch;
   }
 
-  /* Канвас — центр */
   #scene{
     position:relative;
     width:100%;
@@ -128,7 +127,6 @@
     overflow:hidden;
     display:block;
   }
-  /* грузим поверх канваса сообщение «оберіть авто» */
   #scene-overlay{
     position:absolute; inset:0; display:flex; flex-direction:column;
     align-items:center; justify-content:center; gap:14px;
@@ -145,7 +143,6 @@
   #scene-overlay h4{ margin:0; font-size:22px; font-weight:300 }
   #scene-overlay p{ margin:0; color:var(--muted); font-size:13px; max-width:340px; line-height:1.5 }
 
-  /* Панели */
   .panel{
     background:var(--panel); backdrop-filter:blur(18px);
     border:1px solid var(--stroke); border-radius:18px; padding:18px;
@@ -167,6 +164,19 @@
   .chip:hover:not(:disabled){ background:rgba(255,255,255,.08) }
   .chip.active{ background:var(--gold); border-color:var(--gold); color:#0a0a0a; font-weight:600 }
   .chip:disabled{ opacity:.35; cursor:not-allowed }
+
+  .field{ margin-bottom:10px }
+  .field label{
+    display:block; font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:5px;
+  }
+  .field input{
+    width:100%; padding:11px 13px; background:rgba(255,255,255,.04);
+    border:1px solid var(--stroke); border-radius:11px; color:var(--text);
+    font-family:inherit; font-size:13px; outline:none; transition:.2s;
+  }
+  .field input:focus{ border-color:var(--gold); background:rgba(255,255,255,.07) }
+  .field input::placeholder{ color:#55555c }
 
   .zone-btn{
     display:flex; justify-content:space-between; align-items:center;
@@ -191,7 +201,6 @@
   }
   .zone-btn .lbl{ display:flex; align-items:center; flex:1 }
 
-  /* Помощник */
   #helper{
     display:flex; align-items:center; gap:12px; margin-top:14px;
     padding:12px; background:rgba(201,162,75,.06); border:1px solid rgba(201,162,75,.2);
@@ -201,7 +210,6 @@
   #helper .helper-text{ font-size:12px; line-height:1.4; color:var(--muted) }
   #helper .helper-text b{ color:var(--gold-soft); display:block; margin-bottom:2px; font-size:12px }
 
-  /* Итог — отдельная строка снизу конфигуратора, не поверх панелей */
   #total{
     display:flex; justify-content:space-between; align-items:center; gap:16px;
     padding:16px 32px;
@@ -212,21 +220,81 @@
   #total .lbl{ font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted) }
   #total .val{ font-size:24px; font-weight:600; color:var(--gold); line-height:1.1 }
   #total .val small{ font-size:12px; color:var(--muted); font-weight:400; margin-left:6px }
+  #total .btns{ display:flex; gap:10px; flex-wrap:wrap }
+
   .cta-call{
     display:inline-flex; align-items:center; gap:9px;
     padding:11px 22px; border-radius:999px; background:var(--gold); color:#0a0a0a;
     text-decoration:none; font-weight:700; font-size:13px;
-    transition:.2s; white-space:nowrap;
+    transition:.2s; white-space:nowrap; border:none; cursor:pointer; font-family:inherit;
   }
   .cta-call:hover{ transform:translateY(-1px) }
+  .cta-call:disabled{ opacity:.35; cursor:not-allowed; transform:none }
 
-  /* Звуковая линия */
+  .btn-ghost{
+    display:inline-flex; align-items:center; gap:9px;
+    padding:11px 22px; border-radius:999px;
+    background:transparent; color:var(--text); border:1px solid var(--stroke);
+    text-decoration:none; font-weight:600; font-size:13px;
+    cursor:pointer; font-family:inherit; transition:.2s; white-space:nowrap;
+  }
+  .btn-ghost:hover{ border-color:var(--gold); color:var(--gold) }
+
+  /* ---------- МОДАЛКА ФОРМЫ ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0; z-index:200;
+    background:rgba(4,4,6,.85); backdrop-filter:blur(10px);
+    display:none; align-items:center; justify-content:center;
+    padding:20px; overflow:auto;
+  }
+  .modal-backdrop.open{ display:flex }
+  .modal{
+    width:100%; max-width:480px;
+    background:rgba(18,18,22,.98); border:1px solid var(--stroke);
+    border-radius:22px; padding:32px; position:relative;
+    box-shadow:0 40px 120px -30px rgba(0,0,0,.9);
+    animation:modalIn .35s ease;
+  }
+  @keyframes modalIn{ from{ opacity:0; transform:translateY(16px) scale(.98) } to{ opacity:1; transform:none } }
+  .modal h2{ margin:0 0 8px; font-size:24px; font-weight:300 }
+  .modal h2 em{ font-style:italic; color:var(--gold) }
+  .modal p.sub{ margin:0 0 22px; color:var(--muted); font-size:13px; line-height:1.5 }
+  .modal .summary{
+    background:rgba(201,162,75,.07); border:1px solid rgba(201,162,75,.2);
+    border-radius:13px; padding:13px 15px; margin-bottom:20px; font-size:12px;
+    line-height:1.7; color:var(--muted);
+  }
+  .modal .summary b{ color:var(--gold-soft); font-weight:600 }
+  .modal .summary .sum{ color:var(--gold); font-size:16px; font-weight:600 }
+  .modal .close{
+    position:absolute; top:16px; right:16px; width:32px; height:32px;
+    border-radius:50%; border:1px solid var(--stroke); background:transparent;
+    color:var(--muted); cursor:pointer; font-size:18px; line-height:1;
+    display:flex; align-items:center; justify-content:center; transition:.2s;
+  }
+  .modal .close:hover{ border-color:var(--gold); color:var(--gold) }
+  .modal .submit{
+    width:100%; padding:14px; border-radius:999px; background:var(--gold);
+    color:#0a0a0a; border:none; font-weight:700; font-size:14px;
+    font-family:inherit; cursor:pointer; margin-top:6px; transition:.2s;
+  }
+  .modal .submit:hover{ transform:translateY(-1px) }
+
+  .thankyou{ text-align:center; padding:20px 0 }
+  .thankyou .checkmark{
+    width:64px; height:64px; border-radius:50%; background:var(--gold);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 20px;
+    animation:pop .4s ease;
+  }
+  @keyframes pop{ 0%{transform:scale(0)} 60%{transform:scale(1.15)} 100%{transform:scale(1)} }
+  .thankyou h3{ margin:0 0 10px; font-size:22px; font-weight:400 }
+  .thankyou p{ color:var(--muted); font-size:13px; line-height:1.6; margin:0 0 20px }
+
   #wave{
     position:absolute; bottom:0; left:0; right:0; height:50px;
     pointer-events:none; opacity:.6; z-index:1;
   }
 
-  /* ---------- ФУТЕР ---------- */
   footer{
     padding:56px 32px 36px; border-top:1px solid var(--stroke);
     background:linear-gradient(180deg, transparent, rgba(201,162,75,.03));
@@ -237,7 +305,6 @@
   footer .phone{ color:var(--text); font-size:16px; letter-spacing:.04em; text-decoration:none; margin-top:10px; display:inline-block }
   footer .phone:hover{ color:var(--gold) }
 
-  /* ---------- АДАПТИВ ---------- */
   @media (max-width:1100px){
     .stage-wrap{
       grid-template-columns: 1fr;
@@ -248,12 +315,13 @@
     .panel{ max-height:none }
     nav{ display:none }
     #total{ position:relative; padding:16px 20px }
+    #total .btns{ width:100% }
+    #total .btns > *{ flex:1; justify-content:center }
   }
 </style>
 </head>
 <body>
 
-<!-- ================= ШАПКА ================= -->
 <header>
   <div class="logo">VS <span>AUTO</span></div>
   <nav>
@@ -266,7 +334,6 @@
   </a>
 </header>
 
-<!-- ================= ГЕРОЙ ================= -->
 <section id="hero">
   <div class="hero-kicker">Шумоізоляція преміум-класу · Чернівці</div>
   <h1 class="hero-title">
@@ -300,18 +367,32 @@
   </div>
 </section>
 
-<!-- ================= КОНФИГУРАТОР ================= -->
 <section id="configurator">
   <div class="stage-wrap">
 
     <!-- ЛЕВАЯ ПАНЕЛЬ -->
     <div class="panel">
-      <h3>Крок 1 · Ваш автомобіль</h3>
-      <p class="hint">Оберіть тип кузова. Після цього з'явиться 3D-модель.</p>
+      <h3>Крок 1 · Автомобіль</h3>
+      <p class="hint">Оберіть тип кузова — з'явиться 3D-модель.</p>
+
+      <div class="chip-row">
+        <button class="chip" data-car="hatch">Хетчбек</button>
+        <button class="chip" data-car="wagon">Універсал</button>
+        <button class="chip" data-car="crossover">Кросовер</button>
+      </div>
       <div class="chip-row">
         <button class="chip" data-car="sedan">Седан</button>
-        <button class="chip" data-car="suv">SUV</button>
-        <button class="chip" data-car="hatch">Хетчбек</button>
+        <button class="chip" data-car="van">Бус</button>
+        <button class="chip" data-car="minibus">Мікроавтобус</button>
+      </div>
+
+      <div class="field" style="margin-top:14px">
+        <label>Марка та модель</label>
+        <input type="text" id="carModel" placeholder="напр. BMW 320d" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>Рік випуску</label>
+        <input type="text" id="carYear" placeholder="напр. 2019" inputmode="numeric" autocomplete="off">
       </div>
 
       <h3 style="margin-top:20px">Крок 2 · Матеріали</h3>
@@ -331,7 +412,7 @@
         </svg>
         <div class="helper-text">
           <b id="helper-title">Оберіть авто</b>
-          <span id="helper-msg">Спочатку оберіть тип кузова — після цього я підкажу, що робити далі.</span>
+          <span id="helper-msg">Спочатку оберіть тип кузова — після цього з'явиться 3D-модель.</span>
         </div>
       </div>
     </div>
@@ -341,7 +422,7 @@
       <canvas id="scene"></canvas>
       <div id="scene-overlay">
         <div class="badge">Крок 1</div>
-        <h4>Оберіть автомобіль зліва</h4>
+        <h4>Оберіть тип кузова</h4>
         <p>Після вибору тут з'явиться 3D-модель у розрізі — можна буде клікати по деталях.</p>
       </div>
       <canvas id="wave"></canvas>
@@ -389,14 +470,19 @@
       <div class="lbl">Орієнтовна вартість</div>
       <div class="val" id="total-val">— <small>₴</small></div>
     </div>
-    <a class="cta-call" href="tel:+380661038471">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
-      +380 66 103 84 71
-    </a>
+    <div class="btns">
+      <a class="btn-ghost" href="tel:+380661038471">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+        +380 66 103 84 71
+      </a>
+      <button class="cta-call" id="nextBtn" disabled>
+        Далі
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
   </div>
 </section>
 
-<!-- ================= ФУТЕР ================= -->
 <footer id="contacts">
   <div style="font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:var(--gold); margin-bottom:14px">VS Auto · Чернівці</div>
   <div>Працюємо за попереднім записом. Місце та час узгоджуємо телефоном.</div>
@@ -409,7 +495,13 @@
   <div style="margin-top:26px; font-size:11px; opacity:.5">© 2026 VS Auto. Усі права захищені.</div>
 </footer>
 
-<!-- ================= THREE.JS ================= -->
+<!-- ================= МОДАЛКА ФОРМИ ================= -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="modalContent">
+    <!-- содержимое подставляется скриптом -->
+  </div>
+</div>
+
 <script type="importmap">
 { "imports": {
   "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
@@ -429,19 +521,27 @@ const PRICES = {
   standard: { doors:2000, floor:3200, arches:2400, roof:1500, trunk:1200, hood:1000 },
   premium:  { doors:3500, floor:5500, arches:4200, roof:2600, trunk:2000, hood:1700 },
 };
-const CAR_COEF = { sedan:1, suv:1.35, hatch:0.9 };
+// коэффициенты по типу кузова
+const CAR_COEF = { hatch:0.9, wagon:1.1, crossover:1.25, sedan:1, van:1.4, minibus:1.5 };
+
+const CAR_LABELS = {
+  hatch:'Хетчбек', wagon:'Універсал', crossover:'Кросовер',
+  sedan:'Седан', van:'Бус', minibus:'Мікроавтобус'
+};
 
 /* ============================================================
    СОСТОЯНИЕ
    ============================================================ */
 const state = {
-  car: null,          // null = ещё не выбрано → 3D скрыто
-  material: null,     // null = ещё не выбрано
+  car: null,
+  material: null,
   zones: new Set(),
+  carModel: '',
+  carYear: '',
 };
 
 /* ============================================================
-   3D СЦЕНА (создаётся сразу, но группа авто пустая)
+   3D СЦЕНА
    ============================================================ */
 const canvas = document.getElementById('scene');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
@@ -452,47 +552,45 @@ renderer.toneMappingExposure = 1.1;
 
 const scene = new THREE.Scene();
 scene.background = null;
-scene.fog = new THREE.Fog(0x08080a, 9, 24);
+scene.fog = new THREE.Fog(0x08080a, 10, 28);
 
 const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-camera.position.set(4.2, 2.4, 5.2);
+camera.position.set(4.6, 2.6, 5.8);
 
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.autoRotate = true;
-controls.autoRotateSpeed = 1.0;
-controls.target.set(0, 0.7, 0);
-controls.minDistance = 4;
-controls.maxDistance = 10;
+controls.autoRotateSpeed = 0.9;
+controls.target.set(0, 0.8, 0);
+controls.minDistance = 4.5;
+controls.maxDistance = 13;
 controls.maxPolarAngle = Math.PI/2.1;
 
-/* Свет */
 scene.add(new THREE.HemisphereLight(0xfff6e6, 0x141418, 0.9));
 const key = new THREE.DirectionalLight(0xffe8c4, 2.4);
-key.position.set(5, 8, 4);
+key.position.set(5, 9, 4);
 key.castShadow = true;
 key.shadow.mapSize.set(1024,1024);
 scene.add(key);
 const rim = new THREE.DirectionalLight(0xc9a24b, 2.0);
 rim.position.set(-6, 3, -5);
 scene.add(rim);
-scene.add(new THREE.DirectionalLight(0x88aaff, 0.4).translateX(-3).translateY(1).translateZ(5));
+const fill = new THREE.DirectionalLight(0x88aaff, 0.4);
+fill.position.set(-3, 1, 5);
+scene.add(fill);
 
-/* Пол */
 const floor = new THREE.Mesh(
-  new THREE.CircleGeometry(12, 64),
+  new THREE.CircleGeometry(14, 64),
   new THREE.MeshStandardMaterial({ color:0x0d0d10, roughness:0.7, metalness:0.4 })
 );
 floor.rotation.x = -Math.PI/2;
 floor.receiveShadow = true;
 scene.add(floor);
 
-/* Группа авто — пустая до выбора */
 const carGroup = new THREE.Group();
 carGroup.visible = false;
 scene.add(carGroup);
 
-/* Материалы кузова */
 const bodyMat = new THREE.MeshPhysicalMaterial({
   color: 0x2a2a30, metalness: 0.85, roughness: 0.25,
   clearcoat: 1.0, clearcoatRoughness: 0.15,
@@ -511,23 +609,27 @@ function glowMat() {
 }
 
 /* ============================================================
-   ПОСТРОЕНИЕ АВТО (только после выбора)
+   ПАРАМЕТРЫ 6 ТИПОВ КУЗОВА
    ============================================================ */
-const glowTargets = [];      // объекты зон (для анимации + raycast)
-const zoneObjects = new Map(); // zone -> [meshes]
+const CAR_CFG = {
+  hatch:     { len:3.8, bodyH:0.62, cabLen:2.1, cabShift:-0.15, cabH:0.58, archR:0.4,  width:1.8 },
+  wagon:     { len:4.6, bodyH:0.65, cabLen:2.7, cabShift:-0.35, cabH:0.6,  archR:0.42, width:1.85 },
+  crossover: { len:4.5, bodyH:0.85, cabLen:2.4, cabShift:-0.1,  cabH:0.72, archR:0.5,  width:1.9 },
+  sedan:     { len:4.5, bodyH:0.62, cabLen:2.0, cabShift:0.1,   cabH:0.55, archR:0.42, width:1.85 },
+  van:       { len:5.0, bodyH:1.05, cabLen:3.2, cabShift:-0.4,  cabH:0.85, archR:0.46, width:2.0 },
+  minibus:   { len:5.4, bodyH:1.25, cabLen:3.8, cabShift:-0.5,  cabH:0.9,  archR:0.48, width:2.05 },
+};
+
+const glowTargets = [];
+const zoneObjects = new Map();
 
 function buildCar(type) {
   carGroup.clear();
   glowTargets.length = 0;
   zoneObjects.clear();
 
-  const cfg = {
-    sedan: { len:4.2, bodyH:0.62, cabLen:1.9, cabShift:0.1,  cabH:0.55, archR:0.42 },
-    suv:   { len:4.4, bodyH:0.85, cabLen:2.2, cabShift:-0.1, cabH:0.75, archR:0.5  },
-    hatch: { len:3.6, bodyH:0.6,  cabLen:1.7, cabShift:-0.1, cabH:0.55, archR:0.42 },
-  }[type];
-
-  const W = 1.85, baseY = 0.5;
+  const cfg = CAR_CFG[type];
+  const W = cfg.width, baseY = 0.5;
 
   // нижний кузов
   const lower = new THREE.Mesh(new THREE.BoxGeometry(W, cfg.bodyH, cfg.len), bodyMat);
@@ -536,17 +638,16 @@ function buildCar(type) {
   carGroup.add(lower);
 
   // кабина
-  const cabin = new THREE.Mesh(new THREE.BoxGeometry(W*0.9, cfg.cabH, cfg.cabLen), bodyMat);
+  const cabin = new THREE.Mesh(new THREE.BoxGeometry(W*0.92, cfg.cabH, cfg.cabLen), bodyMat);
   cabin.position.set(0, baseY + cfg.bodyH + cfg.cabH/2, cfg.cabShift);
   cabin.castShadow = true;
   carGroup.add(cabin);
 
-  // стёкла
-  const glass = new THREE.Mesh(new THREE.BoxGeometry(W*0.92, cfg.cabH*0.75, cfg.cabLen*0.9), glassMat);
+  // окна (светлый блок внутри кабины)
+  const glass = new THREE.Mesh(new THREE.BoxGeometry(W*0.94, cfg.cabH*0.72, cfg.cabLen*0.92), glassMat);
   glass.position.copy(cabin.position);
   carGroup.add(glass);
 
-  // ---- ЗОНЫ ----
   const addZone = (zone, mesh) => {
     mesh.userData.zone = zone;
     carGroup.add(mesh);
@@ -555,51 +656,68 @@ function buildCar(type) {
     zoneObjects.get(zone).push(mesh);
   };
 
-  // пол
-  const floorZone = new THREE.Mesh(new THREE.BoxGeometry(W*0.92, 0.06, cfg.len*0.85), glowMat());
+  // ---- ПОЛ ----
+  const floorZone = new THREE.Mesh(new THREE.BoxGeometry(W*0.9, 0.06, cfg.len*0.86), glowMat());
   floorZone.position.set(0, baseY + 0.1, 0);
   addZone('floor', floorZone);
 
-  // двери (два)
+  // ---- ДВЕРИ ----
+  // для длинных кузовов (van/minibus/wagon) — по 2 двери с каждой стороны
+  const doorCount = (type === 'van' || type === 'minibus') ? 2 : 1;
   [-1,1].forEach(s => {
-    const d = new THREE.Mesh(new THREE.BoxGeometry(0.06, cfg.bodyH*0.7, cfg.len*0.28), glowMat());
-    d.position.set(s*W/2, baseY + cfg.bodyH*0.55, 0.1);
-    addZone('doors', d);
+    for (let i = 0; i < doorCount; i++) {
+      const doorLen = cfg.len * (doorCount === 2 ? 0.24 : 0.32);
+      const zPos = doorCount === 2
+        ? (i === 0 ? 0.15 : -1.0) * cfg.len * 0.5
+        : 0.1;
+      const d = new THREE.Mesh(new THREE.BoxGeometry(0.06, cfg.bodyH*0.65, doorLen), glowMat());
+      d.position.set(s*W/2, baseY + cfg.bodyH*0.58, zPos);
+      addZone('doors', d);
+    }
   });
 
-  // крыша
-  const roof = new THREE.Mesh(new THREE.BoxGeometry(W*0.85, 0.05, cfg.cabLen*0.85), glowMat());
+  // ---- КРЫША ----
+  const roof = new THREE.Mesh(new THREE.BoxGeometry(W*0.88, 0.05, cfg.cabLen*0.86), glowMat());
   roof.position.set(0, baseY + cfg.bodyH + cfg.cabH + 0.03, cfg.cabShift);
   addZone('roof', roof);
 
-  // арки (4 дуги)
-  [-1,1].forEach(s => [-1,1].forEach(front => {
-    const arch = new THREE.Mesh(new THREE.TorusGeometry(cfg.archR, 0.07, 8, 24, Math.PI), glowMat());
-    arch.rotation.z = Math.PI;
-    arch.rotation.y = Math.PI/2;
-    arch.position.set(s*W*0.5, baseY + 0.05, front*cfg.len*0.32);
-    addZone('arches', arch);
-  }));
+  // ---- АРКИ (4) ----
+  const wheelZFront = cfg.len * 0.32;
+  const wheelZRear  = -cfg.len * 0.32;
+  [wheelZFront, wheelZRear].forEach(zPos => {
+    [-1,1].forEach(s => {
+      const arch = new THREE.Mesh(new THREE.TorusGeometry(cfg.archR, 0.07, 8, 24, Math.PI), glowMat());
+      arch.rotation.z = Math.PI;
+      arch.rotation.y = Math.PI/2;
+      arch.position.set(s*W*0.5, baseY + 0.05, zPos);
+      addZone('arches', arch);
+    });
+  });
 
-  // багажник
-  const trunk = new THREE.Mesh(new THREE.BoxGeometry(W*0.88, 0.05, 0.5), glowMat());
-  trunk.position.set(0, baseY + cfg.bodyH*0.9, -cfg.len/2 + 0.3);
+  // ---- БАГАЖНИК ----
+  // у хэтчбека/универсала багажник «в кузове», у седана — отдельный
+  const trunkZ = type === 'sedan' ? -cfg.len/2 + 0.35
+                : type === 'van' || type === 'minibus' ? -cfg.len/2 + 0.5
+                : -cfg.len/2 + 0.25;
+  const trunkLen = type === 'van' || type === 'minibus' ? 0.8 : 0.5;
+  const trunk = new THREE.Mesh(new THREE.BoxGeometry(W*0.86, 0.05, trunkLen), glowMat());
+  trunk.position.set(0, baseY + cfg.bodyH*0.9, trunkZ);
   addZone('trunk', trunk);
 
-  // капот
-  const hood = new THREE.Mesh(new THREE.BoxGeometry(W*0.88, 0.05, 0.7), glowMat());
-  hood.position.set(0, baseY + cfg.bodyH*0.9, cfg.len/2 - 0.5);
+  // ---- КАПОТ ----
+  const hood = new THREE.Mesh(new THREE.BoxGeometry(W*0.86, 0.05, cfg.len*0.18), glowMat());
+  hood.position.set(0, baseY + cfg.bodyH*0.9, cfg.len/2 - cfg.len*0.12);
   addZone('hood', hood);
 
-  // колёса (не зоны)
+  // ---- КОЛЁСА ----
   const wheelMat = new THREE.MeshStandardMaterial({ color:0x0a0a0a, roughness:0.7 });
   const rimMat = new THREE.MeshStandardMaterial({ color:0x2a2a2e, metalness:0.9, roughness:0.3 });
   const wheelGeo = new THREE.CylinderGeometry(cfg.archR, cfg.archR, 0.22, 24);
   const rimGeo = new THREE.CylinderGeometry(cfg.archR*0.55, cfg.archR*0.55, 0.24, 16);
-  [[-1,1],[1,1],[-1,-1],[1,-1]].forEach(([sx, sz])=>{
+  [[-1,wheelZFront],[1,wheelZFront],[-1,wheelZRear],[1,wheelZRear]].forEach(([sx, z])=>{
     const w = new THREE.Mesh(wheelGeo, wheelMat);
     w.rotation.z = Math.PI/2;
-    w.position.set(sx*W*0.5, baseY + cfg.archR*0.7, sz*cfg.len*0.32);
+    w.position.set(sx*W*0.5, baseY + cfg.archR*0.7, z);
     w.castShadow = true;
     carGroup.add(w);
     const r = new THREE.Mesh(rimGeo, rimMat);
@@ -608,7 +726,15 @@ function buildCar(type) {
     carGroup.add(r);
   });
 
-  // анимация появления
+  // ---- ФАРЫ (для узнаваемости) ----
+  const headMat = new THREE.MeshStandardMaterial({ color:0xfff2cc, emissive:0xfff2cc, emissiveIntensity:1.2 });
+  [-1,1].forEach(s=>{
+    const h = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.12, 0.05), headMat);
+    h.position.set(s*W*0.32, baseY + cfg.bodyH*0.65, cfg.len/2 - 0.02);
+    carGroup.add(h);
+  });
+
+  // появление
   carGroup.visible = true;
   carGroup.scale.setScalar(0.01);
   const t0 = performance.now();
@@ -619,85 +745,68 @@ function buildCar(type) {
     if (p < 1) requestAnimationFrame(grow);
   };
   grow();
+
+  // подгоняем камеру под длину
+  const dist = 5 + cfg.len * 0.5;
+  camera.position.set(dist * 0.75, 2.6 + cfg.bodyH * 0.6, dist);
+  controls.target.set(0, 0.6 + cfg.bodyH * 0.3, 0);
+  controls.update();
 }
 
 /* ============================================================
-   КЛИК ПО 3D-ДЕТАЛИ (raycast)
+   RAYCAST — клик по 3D-детали
    ============================================================ */
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 
 canvas.addEventListener('pointerdown', (e) => {
-  if (!state.car) return; // модель ещё не появилась
-
+  if (!state.car) return;
   const rect = canvas.getBoundingClientRect();
   pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
   pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-
   raycaster.setFromCamera(pointer, camera);
   const hits = raycaster.intersectObjects(glowTargets, false);
-  if (hits.length) {
-    const zone = hits[0].object.userData.zone;
-    toggleZone(zone);
-  }
+  if (hits.length) toggleZone(hits[0].object.userData.zone);
 });
 
 /* ============================================================
-   ЛОГИКА ЗОН
+   ЛОГИКА
    ============================================================ */
 function toggleZone(zone) {
   if (!state.car || !state.material) return;
-
   if (state.zones.has(zone)) state.zones.delete(zone);
   else state.zones.add(zone);
 
-  // синхронизируем кнопку в панели
   const btn = document.querySelector(`[data-zone="${zone}"]`);
-  if (btn) {
-    if (state.zones.has(zone)) btn.classList.add('active');
-    else btn.classList.remove('active');
-  }
+  if (btn) btn.classList.toggle('active', state.zones.has(zone));
 
   updatePrice();
   updateHelper();
 }
 
-// кнопки зон
 document.querySelectorAll('[data-zone]').forEach(btn => {
   btn.addEventListener('click', () => toggleZone(btn.dataset.zone));
 });
 
-/* ============================================================
-   ВЫБОР АВТО
-   ============================================================ */
+// типы кузова
 document.querySelectorAll('[data-car]').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('[data-car]').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     state.car = btn.dataset.car;
 
-    // сбрасываем выбранные зоны (т.к. модель новая)
     state.zones.clear();
     document.querySelectorAll('[data-zone]').forEach(b => b.classList.remove('active'));
 
-    // строим модель
     buildCar(state.car);
-
-    // прячем оверлей
     document.getElementById('scene-overlay').classList.add('hidden');
-
-    // активируем материалы (если ещё не выбран) и зоны
     enableControls();
-
-    // если материал уже выбран ранее — оставляем
     updatePrice();
     updateHelper();
   });
 });
 
-/* ============================================================
-   ВЫБОР МАТЕРИАЛА
-   ============================================================ */
+// материалы
 document.querySelectorAll('[data-mat]').forEach(btn => {
   btn.addEventListener('click', () => {
     if (btn.disabled) return;
@@ -709,29 +818,22 @@ document.querySelectorAll('[data-mat]').forEach(btn => {
   });
 });
 
-/* ============================================================
-   АКТИВАЦИЯ КНОПОК ПОСЛЕ ВЫБОРА АВТО
-   ============================================================ */
-function enableControls() {
-  // материалы
-  document.querySelectorAll('[data-mat]').forEach(b => b.disabled = false);
+// поля марки/года
+document.getElementById('carModel').addEventListener('input', e => state.carModel = e.target.value.trim());
+document.getElementById('carYear').addEventListener('input', e => state.carYear = e.target.value.trim());
 
-  // если материал ещё не выбран — авто-выбираем «Стандарт»
+function enableControls() {
+  document.querySelectorAll('[data-mat]').forEach(b => b.disabled = false);
   if (!state.material) {
     state.material = 'standard';
-    const std = document.querySelector('[data-mat="standard"]');
-    if (std) std.classList.add('active');
+    document.querySelector('[data-mat="standard"]').classList.add('active');
   }
-
-  // зоны
   document.querySelectorAll('[data-zone]').forEach(b => b.disabled = false);
-
-  // проставляем цены в кнопках под текущий материал
   refreshZonePrices();
 }
 
 function refreshZonePrices() {
-  if (!state.material) return;
+  if (!state.material || !state.car) return;
   document.querySelectorAll('[data-zone]').forEach(btn => {
     const z = btn.dataset.zone;
     const base = PRICES[state.material]?.[z] ?? 0;
@@ -740,26 +842,23 @@ function refreshZonePrices() {
   });
 }
 
-/* ============================================================
-   РАСЧЁТ СТОИМОСТИ
-   ============================================================ */
+function calcTotal() {
+  if (!state.car || !state.material) return 0;
+  let sum = 0;
+  state.zones.forEach(z => sum += PRICES[state.material][z] || 0);
+  return Math.round(sum * (CAR_COEF[state.car] || 1));
+}
+
 function updatePrice() {
-  if (!state.car || !state.material) {
-    document.getElementById('total-val').innerHTML = '— <small>₴</small>';
-    return;
-  }
+  const total = calcTotal();
+  const el = document.getElementById('total-val');
+  el.innerHTML = total > 0 ? total.toLocaleString('uk-UA') + ' <small>₴</small>' : '— <small>₴</small>';
 
   refreshZonePrices();
 
-  let sum = 0;
-  state.zones.forEach(z => {
-    sum += PRICES[state.material][z] || 0;
-  });
-  sum = Math.round(sum * (CAR_COEF[state.car] || 1));
-
-  const el = document.getElementById('total-val');
-  if (sum > 0) el.innerHTML = sum.toLocaleString('uk-UA') + ' <small>₴</small>';
-  else el.innerHTML = '— <small>₴</small>';
+  // кнопка «Далі» активна, когда есть авто + материал + хотя бы 1 зона
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.disabled = !(state.car && state.material && state.zones.size > 0);
 }
 
 /* ============================================================
@@ -772,10 +871,9 @@ const helperMouth = document.getElementById('helper-mouth');
 function updateHelper() {
   const face = document.getElementById('helper-face');
   const n = state.zones.size;
-
   if (!state.car) {
     helperTitle.textContent = 'Оберіть авто';
-    helperMsg.textContent = 'Спочатку оберіть тип кузова — після цього я підкажу, що робити далі.';
+    helperMsg.textContent = 'Спочатку оберіть тип кузова — з\'явиться 3D-модель.';
     helperMouth.setAttribute('d', 'M20 34 Q28 32 36 34');
     face.querySelector('circle').setAttribute('stroke', '#555');
   } else if (!state.material) {
@@ -807,20 +905,18 @@ function updateHelper() {
 }
 
 /* ============================================================
-   АНИМАЦИЯ СЦЕНЫ
+   АНИМАЦИЯ
    ============================================================ */
 const clock = new THREE.Clock();
 function animateScene() {
   const t = clock.getElapsedTime();
   const pulse = (Math.sin(t * 2.6) + 1) / 2;
-
   glowTargets.forEach(mesh => {
     const active = state.zones.has(mesh.userData.zone);
     const target = active ? (0.7 + pulse * 0.9) : 0.0;
     mesh.material.emissiveIntensity += (target - mesh.material.emissiveIntensity) * 0.12;
     mesh.material.opacity = 0.12 + (active ? 0.55 + pulse*0.3 : 0);
   });
-
   controls.update();
   renderer.render(scene, camera);
   requestAnimationFrame(animateScene);
@@ -828,7 +924,7 @@ function animateScene() {
 animateScene();
 
 /* ============================================================
-   РАЗМЕРЫ / RESIZE
+   RESIZE
    ============================================================ */
 function resize() {
   const rect = canvas.parentElement.getBoundingClientRect();
@@ -842,7 +938,7 @@ function resize() {
 addEventListener('resize', resize);
 
 /* ============================================================
-   ЗВУКОВАЯ ЛИНИЯ
+   ВОЛНА
    ============================================================ */
 const waveCanvas = document.getElementById('wave');
 const wctx = waveCanvas.getContext('2d');
@@ -858,11 +954,9 @@ function drawWave() {
   const W = waveCanvas.width, H = waveCanvas.height;
   if (!W || !H) { requestAnimationFrame(drawWave); return; }
   wctx.clearRect(0, 0, W, H);
-
   const totalZones = 6;
   const quietness = Math.min(state.zones.size / totalZones, 1);
   const noiseLevel = 1 - quietness;
-
   const amp   = 3 + noiseLevel * 22 * devicePixelRatio;
   const freq  = 0.008 + noiseLevel * 0.03;
   const speed = 0.4 + noiseLevel * 1.4;
@@ -874,11 +968,9 @@ function drawWave() {
   grad.addColorStop(0.5, 'rgba(230,200,120,1)');
   grad.addColorStop(0.8, 'rgba(201,162,75,0.65)');
   grad.addColorStop(1,   'rgba(201,162,75,0)');
-
   wctx.strokeStyle = grad;
   wctx.lineWidth = 2 * devicePixelRatio;
   wctx.beginPath();
-
   for (let x = 0; x < W; x += 3) {
     const nx = x * freq + waveOffset;
     const noise  = Math.sin(nx*7.3) * Math.sin(nx*3.1) * Math.cos(nx*11.7);
@@ -892,9 +984,117 @@ function drawWave() {
 }
 
 /* ============================================================
+   МОДАЛКА: ФОРМА ЗАЯВКИ
+   ============================================================ */
+const modalBackdrop = document.getElementById('modalBackdrop');
+const modalContent  = document.getElementById('modalContent');
+
+document.getElementById('nextBtn').addEventListener('click', openForm);
+
+function openForm() {
+  const total = calcTotal();
+  const zonesList = [...state.zones].map(z => ({
+    doors:'Двері', floor:'Підлога', arches:'Арки',
+    roof:'Дах', trunk:'Багажник', hood:'Капот'
+  }[z])).join(', ');
+  const matLabel = { eco:'Економ', standard:'Стандарт', premium:'Преміум' }[state.material];
+  const carLabel = CAR_LABELS[state.car];
+
+  modalContent.innerHTML = `
+    <button class="close" id="closeModal" aria-label="Закрити">×</button>
+    <h2>Оформлення <em>заявки</em></h2>
+    <p class="sub">Залиште контакти — ми зателефонуємо протягом години, уточнимо деталі та узгодимо час огляду.</p>
+
+    <div class="summary">
+      <div><b>Авто:</b> ${carLabel}${state.carModel ? ' · ' + escapeHtml(state.carModel) : ''}${state.carYear ? ' · ' + escapeHtml(state.carYear) + ' р.' : ''}</div>
+      <div><b>Матеріали:</b> ${matLabel}</div>
+      <div><b>Зони:</b> ${zonesList}</div>
+      <div style="margin-top:8px"><b>Орієнтовно:</b> <span class="sum">${total.toLocaleString('uk-UA')} ₴</span></div>
+    </div>
+
+    <form id="leadForm" novalidate>
+      <div class="field">
+        <label>Ваше ім'я *</label>
+        <input type="text" id="leadName" placeholder="Іван" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label>Телефон *</label>
+        <input type="tel" id="leadPhone" placeholder="+380 __ ___ __ __" required autocomplete="tel">
+      </div>
+      <button type="submit" class="submit">Надіслати заявку</button>
+      <div style="margin-top:12px; font-size:11px; color:var(--muted); text-align:center; line-height:1.5">
+        Натискаючи кнопку, ви погоджуєтесь на обробку персональних даних.
+      </div>
+    </form>
+  `;
+
+  modalBackdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('closeModal').addEventListener('click', closeModal);
+  document.getElementById('leadForm').addEventListener('submit', submitLead);
+}
+
+function closeModal() {
+  modalBackdrop.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+modalBackdrop.addEventListener('click', (e) => {
+  if (e.target === modalBackdrop) closeModal();
+});
+
+function submitLead(e) {
+  e.preventDefault();
+  const name  = document.getElementById('leadName').value.trim();
+  const phone = document.getElementById('leadPhone').value.trim();
+
+  if (!name || name.length < 2) {
+    document.getElementById('leadName').style.borderColor = '#ff5722';
+    return;
+  }
+  if (!phone || phone.replace(/\D/g,'').length < 9) {
+    document.getElementById('leadPhone').style.borderColor = '#ff5722';
+    return;
+  }
+
+  // ⚠️ ЗДЕСЬ ВЫ ОТПРАВЛЯЕТЕ ЗАЯВКУ КУДА НУЖНО
+  // Варианты (бесплатно):
+  // 1) Formspree — https://formspree.io — 50 заявок/мес бесплатно
+  // 2) Netlify Forms — просто добавьте data-netlify="true" на форму
+  // 3) Telegram Bot API — отправка в бота
+  //
+  // Пока просто показываем экран благодарности:
+  const payload = {
+    name, phone,
+    car: state.car, carModel: state.carModel, carYear: state.carYear,
+    material: state.material,
+    zones: [...state.zones],
+    total: calcTotal(),
+  };
+  console.log('LEAD:', payload);
+
+  // экран благодарности
+  modalContent.innerHTML = `
+    <div class="thankyou">
+      <div class="checkmark">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
+      </div>
+      <h3>Дякуємо, ${escapeHtml(name)}!</h3>
+      <p>Заявку отримано. Зателефонуємо найближчим часом.<br>Якщо питання термінове — телефонуйте:<br><a href="tel:+380661038471" style="color:var(--gold);text-decoration:none;font-weight:600">+380 66 103 84 71</a></p>
+      <button class="submit" id="closeThanks">Закрити</button>
+    </div>
+  `;
+  document.getElementById('closeThanks').addEventListener('click', closeModal);
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ============================================================
    СТАРТ
    ============================================================ */
-// ждём кадр, чтобы у контейнера появились размеры
 requestAnimationFrame(() => {
   resize();
   drawWave();
