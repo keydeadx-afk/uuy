@@ -1,812 +1,1076 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VS Auto · Шумоізоляція преміум-класу · Чернівці</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VS AUTO 0542 — преміальна шумоізоляція авто, Чернівці</title>
+<meta name="description" content="Преміальна шумоізоляція автомобіля в Чернівцях: повна та точкова, антирип, антикор, аудіосистеми під ключ. Онлайн-калькулятор вартості.">
+<meta name="theme-color" content="#08090b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#08080a;
-    --panel:rgba(18,18,22,.78);
-    --stroke:rgba(255,255,255,.09);
-    --text:#ececec;
-    --muted:#8a8a92;
-    --gold:#c9a24b;
-    --gold-soft:#e6c878;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
-  body{
-    font-family:'Inter','Helvetica Neue',system-ui,sans-serif;
-    background:var(--bg); color:var(--text);
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
+/* Шар: чорний лак + шампань-золото. Заголовки — Cormorant, інтерфейс — Onest. Спокійна розкіш, без надмірностей. */
+:root{
+  color-scheme:dark;
+  --bg:#08090b; --bg-2:#0d0f12; --panel:#101216; --field:#0b0d10; --line:rgba(201,169,110,.16); --line-2:rgba(236,230,218,.12);
+  --text:#f1ede6; --muted:#a39d93; --gold:#c9a96e; --gold-hi:#ead5a6; --gold-lo:#9c7c47; --ink:#17120a; --err:#f0937c;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif; --sans:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --hdr:72px; --ease:cubic-bezier(.22,.7,.18,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17.5px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+h1,h2,h3,p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:1.5px solid var(--gold);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cap{font-size:.72rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase}
+.gold-text{background:linear-gradient(100deg,var(--gold-lo),var(--gold-hi) 45%,var(--gold) 70%,var(--gold-lo));-webkit-background-clip:text;background-clip:text;color:transparent}
 
-  /* ---------- ШАПКА ---------- */
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    display:flex; justify-content:space-between; align-items:center;
-    padding:16px 28px;
-    backdrop-filter:blur(14px);
-    background:linear-gradient(180deg, rgba(8,8,10,.9), rgba(8,8,10,.4));
-    border-bottom:1px solid var(--stroke);
-  }
-  .logo{ font-size:13px; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); font-weight:600}
-  .logo span{ color:var(--text); font-weight:300}
-  nav a{ color:var(--muted); text-decoration:none; font-size:13px; margin-left:22px; transition:.2s}
-  nav a:hover{ color:var(--gold) }
-  .insta-btn{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:8px 16px; border:1px solid var(--stroke); border-radius:999px;
-    color:var(--text); text-decoration:none; font-size:12px;
-    transition:.2s;
-  }
-  .insta-btn:hover{ border-color:var(--gold); color:var(--gold) }
+/* ---------- заставка ---------- */
+#intro{position:fixed;inset:0;z-index:300;background:var(--bg);display:grid;place-items:center;animation:introOut .9s var(--ease) 1.5s forwards;pointer-events:none}
+#intro .in{text-align:center}
+#intro .name{font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:.3em;animation:introIn 1.2s var(--ease) both}
+#intro .rule{height:1px;width:180px;margin:18px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform-origin:center;animation:rule 1.2s var(--ease) .2s both}
+@keyframes introIn{from{opacity:0;letter-spacing:.6em}to{opacity:1}}
+@keyframes rule{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes introOut{to{opacity:0;visibility:hidden}}
 
-  /* ---------- ГЕРОЙ ---------- */
-  #hero{
-    min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
-    text-align:center; padding:120px 24px 80px;
-    background: radial-gradient(ellipse at 50% 20%, rgba(201,162,75,.10), transparent 60%);
-  }
-  .hero-kicker{ font-size:11px; letter-spacing:.5em; text-transform:uppercase; color:var(--gold); margin-bottom:22px; }
-  .hero-title{ font-size:clamp(36px, 6vw, 78px); line-height:1.04; font-weight:300; margin:0 0 22px; max-width:1000px; letter-spacing:-.02em; }
-  .hero-title em{ font-style:italic; color:var(--gold); font-weight:400 }
-  .hero-sub{ font-size:16px; color:var(--muted); max-width:540px; line-height:1.6; margin-bottom:34px }
-  .hero-phrases{ display:flex; gap:30px; flex-wrap:wrap; justify-content:center; margin-bottom:40px; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
-  .hero-phrases span{ position:relative; padding-left:16px }
-  .hero-phrases span::before{ content:''; position:absolute; left:0; top:50%; width:8px; height:1px; background:var(--gold) }
-  .hero-cta{ display:inline-block; padding:15px 38px; border-radius:999px; background:var(--gold); color:#0a0a0a; font-weight:600; letter-spacing:.1em; text-decoration:none; text-transform:uppercase; font-size:12px; transition:.25s; }
-  .hero-cta:hover{ transform:translateY(-2px) }
+/* ---------- курсор ---------- */
+.cur{position:fixed;left:0;top:0;z-index:150;pointer-events:none;display:none}
+@media (pointer:fine){ .cur{display:block} }
+.cur-dot{width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:var(--gold)}
+.cur-ring{width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;border:1px solid rgba(201,169,110,.45);transition:width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease),border-color .35s}
+.cur-ring.hot{width:58px;height:58px;margin:-29px 0 0 -29px;border-color:var(--gold)}
 
-  .marquee{ margin-top:56px; width:100%; max-width:1200px; overflow:hidden; border-top:1px solid var(--stroke); border-bottom:1px solid var(--stroke); padding:16px 0; }
-  .marquee-inner{ display:flex; gap:56px; white-space:nowrap; animation:scroll 42s linear infinite; font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); }
-  .marquee-inner span em{ color:var(--gold); font-style:normal; margin-right:10px }
-  @keyframes scroll{ to{ transform:translateX(-50%) } }
+/* ---------- шапка ---------- */
+.top{position:fixed;inset:0 0 auto;z-index:60;height:calc(var(--hdr) + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+.top.solid{background:rgba(8,9,11,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:var(--hdr)}
+.logo{text-decoration:none;display:flex;flex-direction:column;line-height:1}
+.logo b{font-family:var(--serif);font-weight:500;font-size:1.45rem;letter-spacing:.22em}
+.logo span{font-size:.58rem;letter-spacing:.42em;color:var(--gold);margin-top:5px;text-transform:uppercase}
+.nav{display:flex;align-items:center;gap:30px}
+.nav a.l{text-decoration:none;color:var(--muted);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;transition:color .3s}
+.nav a.l:hover{color:var(--gold-hi)}
+.call{display:inline-flex;align-items:center;gap:12px;text-decoration:none;font-weight:500;min-height:44px;letter-spacing:.04em}
+.call .ic{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line)}
+.call svg{width:17px;height:17px;color:var(--gold)}
 
-  /* ---------- КОНФИГУРАТОР ---------- */
-  #configurator{
-    position:relative; width:100%; min-height:100vh; padding-top:80px;
-    display:grid; grid-template-rows: 1fr auto; grid-template-columns: 100%;
-    background:radial-gradient(ellipse at 50% 40%, rgba(201,162,75,.05), transparent 60%);
-    border-top:1px solid var(--stroke);
-  }
-  .stage-wrap{
-    position:relative; width:100%; min-height:660px;
-    display:grid; grid-template-columns: 320px 1fr 340px; gap:20px; padding:20px 24px; align-items:stretch;
-  }
+/* ---------- кнопки ---------- */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:58px;padding:0 34px;border:0;border-radius:2px;
+  background:linear-gradient(110deg,var(--gold-lo),var(--gold) 40%,var(--gold-hi) 60%,var(--gold) 80%);background-size:220% 100%;background-position:100% 0;
+  color:var(--ink);font-weight:600;font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background-position .9s var(--ease),transform .25s var(--ease)}
+.btn:hover{background-position:0 0}
+.btn:active{transform:scale(.985)}
+.btn[disabled]{opacity:.55;cursor:wait}
+.btn svg{width:16px;height:16px}
+.btn-line{background:transparent;color:var(--text);box-shadow:inset 0 0 0 1px var(--line);}
+.btn-line:hover{box-shadow:inset 0 0 0 1px var(--gold);color:var(--gold-hi)}
 
-  /* Контейнер для SVG */
-  #scene-wrap{
-    position:relative; width:100%; height:100%; min-height:600px;
-    border-radius:20px; border:1px solid var(--stroke);
-    background: radial-gradient(ellipse at 50% 55%, rgba(201,162,75,.08), transparent 65%), #0a0a0c;
-    overflow:hidden; display:flex; align-items:center; justify-content:center;
-  }
-  #svg-stage{ width:95%; height:auto; max-height:85%; overflow:visible; }
-  
-  /* Стили SVG (Схема авто) */
-  .car-base { stroke: #555; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: stroke .3s; }
-  .zone { stroke: #777; stroke-width: 2; fill: rgba(255,255,255,0.02); cursor: pointer; transition: all .3s; }
-  .zone:hover { stroke: var(--gold-soft); fill: rgba(201,162,75,0.15); }
-  .zone.active { stroke: var(--gold); fill: rgba(201,162,75,0.35); }
-  .wheel { stroke: #555; stroke-width: 2.5; fill: #111; }
-  .wheel-inner { stroke: #555; stroke-width: 2; fill: none; }
-  
-  /* Анимация рисования при смене кузова */
-  @keyframes drawLine { to { stroke-dashoffset: 0; } }
-  .draw-anim .car-base, .draw-anim .zone, .draw-anim .wheel, .draw-anim .wheel-inner { 
-    stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: drawLine 1.5s ease-out forwards; 
-  }
+/* ---------- головний екран ---------- */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--hdr) + 56px) 0 0;overflow:hidden;
+  background:radial-gradient(80% 60% at 50% 110%,rgba(201,169,110,.10),transparent 60%),radial-gradient(50% 40% at 85% 10%,rgba(201,169,110,.05),transparent 70%),var(--bg)}
+.hero .frame{position:absolute;inset:calc(var(--hdr) + 18px) 24px 24px;border:1px solid var(--line);pointer-events:none}
+.hero .frame::before,.hero .frame::after{content:"";position:absolute;width:18px;height:18px;border:1px solid var(--gold)}
+.hero .frame::before{left:-1px;top:-1px;border-width:1px 0 0 1px}
+.hero .frame::after{right:-1px;bottom:-1px;border-width:0 1px 1px 0}
+.hero-in{position:relative;z-index:2;text-align:center}
+.hero .eyebrow{color:var(--gold);margin-bottom:34px}
+.phrases{position:relative;min-height:2.2em;font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,7vw,6.2rem);line-height:1.02;letter-spacing:-.01em}
+.phrases span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;filter:blur(12px);transform:translateY(14px);transition:opacity 1.2s var(--ease),filter 1.2s var(--ease),transform 1.2s var(--ease);text-wrap:balance}
+.phrases span.on{opacity:1;filter:none;transform:none}
+.phrases i{font-style:italic}
+.hero .lead{margin:30px auto 0;color:var(--muted);max-width:34em;font-size:1.06rem}
+.hero .ctas{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.wave{position:relative;margin-top:64px;height:150px}
+.wave canvas{width:100%;height:100%;display:block}
+.wave .lbl{position:absolute;bottom:14px;color:var(--muted)}
+.wave .lbl.l{left:max(40px,env(safe-area-inset-left,0px))}
+.wave .lbl.r{right:max(40px,env(safe-area-inset-right,0px));color:var(--gold)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);position:relative;z-index:2;background:rgba(8,9,11,.6)}
+.facts div{padding:22px 24px;text-align:center;color:var(--muted);font-size:.92rem}
+.facts div+div{border-left:1px solid var(--line)}
+.facts b{display:block;font-family:var(--serif);font-weight:500;font-size:1.5rem;color:var(--text);letter-spacing:.02em}
 
-  /* Пустой стейт */
-  #scene-overlay{
-    position:absolute; inset:0; display:flex; flex-direction:column;
-    align-items:center; justify-content:center; gap:14px;
-    pointer-events:none; text-align:center; z-index:2; transition:opacity .4s; padding:24px;
-    background: rgba(10,10,12,0.6); backdrop-filter:blur(4px);
-  }
-  #scene-overlay.hidden{ opacity:0; pointer-events:none }
-  #scene-overlay .badge{ font-size:11px; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:7px 18px; }
-  #scene-overlay h4{ margin:0; font-size:22px; font-weight:300 }
-  #scene-overlay p{ margin:0; color:var(--muted); font-size:13px; max-width:340px; line-height:1.5 }
+/* ---------- секції ---------- */
+section{padding:128px 0}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,26em);gap:24px 48px;align-items:end;margin-bottom:64px}
+.head .cap{color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.head .cap::before{content:"";width:34px;height:1px;background:var(--gold)}
+.head h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,5.6vw,4.8rem);line-height:1;letter-spacing:-.01em;text-wrap:balance}
+.head p{color:var(--muted)}
 
-  .panel{
-    background:var(--panel); backdrop-filter:blur(18px);
-    border:1px solid var(--stroke); border-radius:18px; padding:18px;
-    height:100%; max-height:calc(100vh - 120px); overflow:auto;
-  }
-  .panel h3{ margin:0 0 12px; font-size:11px; text-transform:uppercase; letter-spacing:.24em; color:var(--gold); font-weight:600; }
-  .panel .hint{ font-size:12px; color:var(--muted); margin:0 0 12px; line-height:1.5 }
+.svc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+.svc article{padding:44px 40px 44px 0;border-bottom:1px solid var(--line);position:relative}
+.svc article:nth-child(odd){border-right:1px solid var(--line)}
+.svc article:nth-child(even){padding-left:40px;padding-right:0}
+.svc h3{font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,3vw,2.4rem);line-height:1.1;margin-bottom:12px;transition:color .4s}
+.svc article:hover h3{color:var(--gold-hi)}
+.svc p{color:var(--muted);max-width:28em}
+.svc .cap{display:block;margin-top:18px;color:var(--gold)}
 
-  .chip-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:6px }
-  .chip{
-    flex:1; min-width:80px; padding:10px 10px; font-size:12px;
-    background:rgba(255,255,255,.04); border:1px solid var(--stroke);
-    color:var(--text); border-radius:12px; cursor:pointer; transition:.2s;
-    font-family:inherit; text-align:center;
-  }
-  .chip:hover:not(:disabled){ background:rgba(255,255,255,.08) }
-  .chip.active{ background:var(--gold); border-color:var(--gold); color:#0a0a0a; font-weight:600 }
-  .chip:disabled{ opacity:.35; cursor:not-allowed }
+/* ---------- калькулятор ---------- */
+#calc{background:linear-gradient(var(--bg),var(--bg-2) 40%)}
+.cfg{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:start}
+.stage{position:sticky;top:calc(var(--hdr) + 16px);display:flex;flex-direction:column;border:1px solid var(--line);background:radial-gradient(80% 70% at 50% 75%,rgba(201,169,110,.09),transparent 70%),linear-gradient(#0e1013,#08090b);overflow:hidden;--noise:1}
+.stage-top{display:flex;justify-content:space-between;gap:12px;padding:20px 24px 0}
+.stage-top .cap{color:var(--muted)}
+.stage-top b{display:block;font-family:var(--serif);font-weight:500;font-size:1.5rem;letter-spacing:.02em;color:var(--text);text-transform:none;margin-top:6px}
+.car-wrap{position:relative;padding:4px 10px 0}
+.car-wrap svg{display:block;width:100%;height:auto}
+.meter{border-top:1px solid var(--line);padding:14px 24px 16px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px}
+.meter canvas{width:100%;height:46px;display:block}
+.meter .cap{color:var(--muted)}
+.meter .state{font-family:var(--serif);font-size:1.35rem;color:var(--gold-hi);min-width:5.5em;text-align:right;transition:color .5s}
+.stage .hint{position:absolute;right:24px;top:22px;color:var(--muted);text-align:right;max-width:14em}
 
-  .field{ margin-bottom:10px }
-  .field label{ display:block; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:5px; }
-  .field input{
-    width:100%; padding:11px 13px; background:rgba(255,255,255,.04);
-    border:1px solid var(--stroke); border-radius:11px; color:var(--text);
-    font-family:inherit; font-size:13px; outline:none; transition:.2s;
-  }
-  .field input:focus{ border-color:var(--gold); background:rgba(255,255,255,.07) }
+/* SVG авто */
+.car .outline{fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linejoin:round}
+.car .paint{stroke:none}
+.car .interior{fill:none;stroke:rgba(236,213,166,.42);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}
+.car .interior .solid{fill:rgba(236,213,166,.05)}
+.car .glass{fill:url(#glass);stroke:rgba(236,213,166,.35);stroke-width:1}
+.car .seam{fill:none;stroke:rgba(0,0,0,.55);stroke-width:1.2}
+.car .seam-hi{fill:none;stroke:rgba(255,255,255,.14);stroke-width:1}
+.car.draw .outline{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.6s var(--ease) forwards}
+.car.draw .paint,.car.draw .glass,.car.draw .details{opacity:0;animation:fadeIn 1s var(--ease) .7s forwards}
+.car.draw .interior{opacity:0;animation:fadeIn 1s var(--ease) 1s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadeIn{to{opacity:1}}
+.zn{opacity:0;transition:opacity .6s var(--ease)}
+.zn .pad{fill:url(#pad)}
+.zn .sheen{fill:url(#sheen);mix-blend-mode:screen}
+.zn .edge{fill:none;stroke:var(--gold-hi);stroke-width:1.3}
+.zn.arch .pad,.zn.arch .sheen{fill:none}
+.zn.arch .edge{stroke-width:9;stroke:url(#archGrad);stroke-linecap:round}
+.zn.on{opacity:1;filter:url(#glow)}
+.zn.on.fresh{animation:settle 1s var(--ease) both}
+@keyframes settle{0%{opacity:0;transform:translate(var(--dx,0),var(--dy,0))}60%{opacity:1}100%{opacity:1;transform:none}}
+.zn.ghost{opacity:1;cursor:pointer}
+.zn.ghost .pad,.zn.ghost .sheen{opacity:0}
+.zn.ghost .edge{stroke-dasharray:5 5;opacity:.6;animation:dash 1.2s linear infinite}
+.zn.ghost.arch .edge{stroke:var(--gold);stroke-width:2;opacity:.55}
+.zn.ghost:hover .edge{opacity:1}
+@keyframes dash{to{stroke-dashoffset:-20}}
+.xt{opacity:0;transition:opacity .7s var(--ease)}
+.xt.on{opacity:1}
+.xt .spk{fill:none;stroke:var(--gold-hi);stroke-width:1.6}
+.xt.on .pulse{animation:pulse 1.4s var(--ease) infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.9);opacity:0}}
+.noisefx{opacity:var(--noise);transition:opacity 1.2s var(--ease)}
+.noisefx path{fill:none;stroke:rgba(240,147,124,.55);stroke-width:1.4;stroke-linecap:round}
+.noisefx .wv{animation:wv 1.6s linear infinite;transform-box:fill-box;transform-origin:50% 100%}
+.noisefx .wv:nth-child(2){animation-delay:.53s}.noisefx .wv:nth-child(3){animation-delay:1.06s}
+@keyframes wv{0%{transform:scale(.4);opacity:0}30%{opacity:1}100%{transform:scale(1.25);opacity:0}}
+.noisefx .wind{animation:wind 1.1s linear infinite;stroke:rgba(236,230,218,.35)}
+.noisefx .wind:nth-child(2n){animation-delay:.4s}
+@keyframes wind{from{transform:translateX(40px);opacity:0}30%{opacity:1}to{transform:translateX(-60px);opacity:0}}
+.arch-badge{font:600 15px var(--sans);fill:var(--ink)}
 
-  .zone-btn{
-    display:flex; justify-content:space-between; align-items:center;
-    width:100%; padding:11px 13px; margin-bottom:7px;
-    background:rgba(255,255,255,.03); border:1px solid var(--stroke);
-    color:var(--text); border-radius:12px; cursor:pointer; font-family:inherit;
-    font-size:13px; text-align:left; transition:.2s;
-  }
-  .zone-btn:hover:not(:disabled){ background:rgba(255,255,255,.07) }
-  .zone-btn.active{ background:rgba(201,162,75,.15); border-color:var(--gold) }
-  .zone-btn:disabled{ opacity:.35; cursor:not-allowed }
-  .zone-btn .price{ font-size:12px; color:var(--muted); white-space:nowrap; margin-left:8px }
-  .zone-btn.active .price{ color:var(--gold-soft) }
-  .zone-btn .check{
-    width:15px; height:15px; border-radius:50%; border:1px solid var(--stroke); margin-right:9px;
-    display:inline-block; flex-shrink:0; position:relative;
-  }
-  .zone-btn.active .check{ border-color:var(--gold); background:var(--gold) }
-  .zone-btn.active .check::after{
-    content:'✓'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    color:#0a0a0a; font-size:10px; font-weight:800;
-  }
-  .zone-btn .lbl{ display:flex; align-items:center; flex:1 }
+/* панель */
+.panel{background:var(--panel);border:1px solid var(--line);position:relative}
+.panel-body{padding:34px 34px 28px}
+.progress{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:30px 34px 0;margin:0;list-style:none}
+.progress li{height:1px;background:var(--line-2);position:relative;overflow:hidden}
+.progress li::after{content:"";position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease)}
+.progress li.done::after,.progress li.cur::after{transform:none}
+.step-label{padding:14px 34px 0;color:var(--muted)}
+.step{display:none}
+.step.on{display:block;animation:stepIn .6s var(--ease)}
+@keyframes stepIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.step h3{font-family:var(--serif);font-weight:500;font-size:2.3rem;line-height:1.08;margin-bottom:8px}
+.step .sub{color:var(--muted);margin-bottom:30px}
+.back{background:none;border:0;padding:0;margin:0 0 12px;min-height:44px;color:var(--muted);cursor:pointer}
+.back:hover{color:var(--gold-hi)}
+.fld{margin-bottom:22px}
+.fld>label,.lbl{display:block;font-weight:500;font-size:.92rem;margin-bottom:10px;color:#d8d2c8}
+.lbl small,.fld label small{font-weight:400;color:var(--muted)}
+.row2{display:grid;grid-template-columns:1.3fr 1fr;gap:14px}
+.input{width:100%;min-height:58px;border:1px solid var(--line-2);border-radius:2px;background:var(--field);color:var(--text);padding:14px 16px;font:400 1.04rem var(--sans);transition:border-color .3s,box-shadow .3s;appearance:none;-webkit-appearance:none}
+select.input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none' stroke='%23c9a96e' stroke-width='1.6'%3E%3Cpath d='M1 1l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center;padding-right:44px}
+select.input option{background:#101216;color:#f1ede6}
+textarea.input{min-height:110px;resize:vertical;line-height:1.5}
+.input::placeholder{color:#6f6a62}
+.input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,110,.14)}
+.input.bad{border-color:var(--err)}
+.tile input,.seg input,.chip input,.opt input{position:absolute;opacity:0;pointer-events:none}
+.bodies{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tile label{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;min-height:118px;padding:14px 8px;border:1px solid var(--line-2);background:var(--field);cursor:pointer;font-weight:500;font-size:.93rem;line-height:1.25;transition:border-color .3s,background .3s}
+.tile label small{font-weight:400;color:var(--muted);font-size:.78rem}
+.tile svg{width:68px;height:32px;color:var(--muted);transition:color .3s}
+.tile input:checked+label{border-color:var(--gold);background:rgba(201,169,110,.07)}
+.tile input:checked+label svg{color:var(--gold-hi)}
+.tile input:focus-visible+label,.seg input:focus-visible+label,.chip input:focus-visible+label,.opt input:focus-visible+label{outline:1.5px solid var(--gold);outline-offset:2px}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;padding:4px;background:var(--field);border:1px solid var(--line-2)}
+.seg label{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:58px;padding:8px 6px;cursor:pointer;font-weight:500;font-size:.95rem;line-height:1.2;color:var(--muted);transition:background .35s,color .35s}
+.seg label small{font-weight:400;font-size:.76rem;margin-top:4px;letter-spacing:.02em}
+.seg input:checked+label{background:linear-gradient(120deg,var(--gold-lo),var(--gold) 50%,var(--gold-hi));color:var(--ink)}
+.seg input:checked+label small{color:rgba(23,18,10,.75)}
+.chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:20px}
+.chip label{display:flex;align-items:center;gap:12px;min-height:58px;padding:8px 14px;border:1px solid var(--line-2);background:var(--field);cursor:pointer;font-weight:500;font-size:.94rem;line-height:1.25;transition:all .3s}
+.chip label::before{content:"";flex:none;width:9px;height:9px;transform:rotate(45deg);border:1px solid #6f6a62;transition:all .3s}
+.chip label small{display:block;font-weight:400;color:var(--muted);font-size:.8rem;margin-top:2px}
+.chip input:checked+label{border-color:var(--gold)}
+.chip input:checked+label::before{background:var(--gold);border-color:var(--gold);box-shadow:0 0 10px rgba(201,169,110,.8)}
+.chips.locked label{pointer-events:none}
+.stepper{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;padding:10px 10px 10px 16px;border:1px solid var(--line-2);background:var(--field)}
+.stepper[hidden]{display:none}
+.stepper .ctl{display:flex;align-items:center;gap:6px}
+.stepper button{width:44px;height:44px;border:1px solid var(--line);background:none;cursor:pointer;font-size:1.3rem;line-height:1;color:var(--gold-hi)}
+.stepper button:disabled{opacity:.35;cursor:default}
+.stepper output{min-width:2ch;text-align:center;font-family:var(--serif);font-size:1.6rem}
+.zone-hint{color:var(--muted);font-size:.9rem;margin-top:12px}
+.list{display:grid;gap:8px}
+.opt label{display:flex;align-items:center;gap:14px;min-height:58px;padding:12px 16px;border:1px solid var(--line-2);background:var(--field);cursor:pointer;font-weight:500;font-size:.98rem;line-height:1.35;transition:all .3s}
+.opt .mk{flex:none;width:18px;height:18px;border-radius:50%;border:1px solid #6f6a62;transition:all .3s}
+.opt input[type=checkbox]+label .mk{border-radius:2px}
+.opt .pr{margin-left:auto;font-size:.85rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.opt input:checked+label{border-color:var(--gold)}
+.opt input:checked+label .mk{border-color:var(--gold);background:var(--gold);box-shadow:inset 0 0 0 4px var(--field)}
+.group{margin-bottom:28px}
+.price{border:1px solid var(--line);padding:28px;background:linear-gradient(150deg,rgba(201,169,110,.12),transparent 55%)}
+.price .cap{color:var(--gold)}
+.price .v{font-family:var(--serif);font-weight:500;font-size:clamp(2.3rem,6vw,3.2rem);line-height:1.05;margin:12px 0 6px;font-variant-numeric:lining-nums}
+.price .car-name{color:var(--muted)}
+.price ul{list-style:none;padding:0;margin:18px 0 0}
+.price li{padding:10px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.96rem}
+.note{display:flex;gap:12px;margin:16px 0 32px;padding:14px 16px;border:1px solid var(--line);color:#dcc79f;font-size:.95rem}
+.note svg{flex:none;width:20px;height:20px;margin-top:2px}
+.lead-title{font-family:var(--serif);font-weight:500;font-size:2rem;margin-bottom:6px}
+.req{color:var(--gold)}
+.err{color:var(--err);font-size:.94rem;font-weight:500;margin-top:10px}
+.err:empty{display:none}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.thanks{text-align:center;padding:28px 0 12px}
+.thanks .tick{width:84px;height:84px;margin:0 auto 22px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;color:var(--gold)}
+.thanks .tick svg{width:36px;height:36px}
+.thanks h3{font-family:var(--serif);font-weight:500;font-size:2.6rem;margin-bottom:10px}
+.thanks p{color:var(--muted);max-width:26em;margin:0 auto}
+.thanks a{color:var(--gold-hi)}
+.bar{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 34px calc(14px + env(safe-area-inset-bottom,0px));background:rgba(16,18,22,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+.bar .cap{color:var(--muted)}
+.bar .v{font-family:var(--serif);font-weight:500;font-size:1.45rem;font-variant-numeric:lining-nums;line-height:1.25}
+.bar .v.dim{font-family:var(--sans);color:var(--muted);font-weight:400;font-size:.95rem}
+.bar .btn{flex:none;min-width:150px}
+.bar[hidden]{display:none}
 
-  #helper{
-    display:flex; align-items:center; gap:12px; margin-top:14px;
-    padding:12px; background:rgba(201,162,75,.06); border:1px solid rgba(201,162,75,.2);
-    border-radius:14px;
-  }
-  #helper svg{ flex-shrink:0 }
-  #helper .helper-text{ font-size:12px; line-height:1.4; color:var(--muted) }
-  #helper .helper-text b{ color:var(--gold-soft); display:block; margin-bottom:2px; font-size:12px }
+/* ---------- контакти ---------- */
+#contacts{border-top:1px solid var(--line);text-align:center;background:radial-gradient(60% 70% at 50% 100%,rgba(201,169,110,.08),transparent 70%)}
+#contacts .cap.t{color:var(--gold);display:block;margin-bottom:26px}
+.big-phone{display:inline-block;font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,7.4vw,6rem);line-height:1;text-decoration:none;transition:color .4s;letter-spacing:.01em}
+.big-phone:hover{color:var(--gold-hi)}
+.clinks{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:44px}
+.where{margin:40px auto 0;color:var(--muted);max-width:30em}
+footer{border-top:1px solid var(--line);color:var(--muted);padding:28px 0 calc(28px + env(safe-area-inset-bottom,0px))}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{text-decoration:none}
+footer a:hover{color:var(--gold-hi)}
+.rv{transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.js .rv.wait{opacity:0;transform:translateY(28px)}
 
-  #total{
-    display:flex; justify-content:space-between; align-items:center; gap:16px;
-    padding:16px 32px; background:rgba(14,14,18,.95);
-    border-top:1px solid var(--stroke); flex-wrap:wrap;
-  }
-  #total .lbl{ font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted) }
-  #total .val{ font-size:24px; font-weight:600; color:var(--gold); line-height:1.1 }
-  #total .val small{ font-size:12px; color:var(--muted); font-weight:400; margin-left:6px }
-  #total .btns{ display:flex; gap:10px; flex-wrap:wrap }
-
-  .cta-call{
-    display:inline-flex; align-items:center; gap:9px;
-    padding:11px 22px; border-radius:999px; background:var(--gold); color:#0a0a0a;
-    text-decoration:none; font-weight:700; font-size:13px;
-    transition:.2s; white-space:nowrap; border:none; cursor:pointer; font-family:inherit;
-  }
-  .cta-call:hover{ transform:translateY(-1px) }
-  .cta-call:disabled{ opacity:.35; cursor:not-allowed; transform:none }
-
-  .btn-ghost{
-    display:inline-flex; align-items:center; gap:9px;
-    padding:11px 22px; border-radius:999px; background:transparent; color:var(--text);
-    border:1px solid var(--stroke); text-decoration:none; font-weight:600; font-size:13px;
-    cursor:pointer; font-family:inherit; transition:.2s; white-space:nowrap;
-  }
-  .btn-ghost:hover{ border-color:var(--gold); color:var(--gold) }
-
-  /* Модалка */
-  .modal-backdrop{ position:fixed; inset:0; z-index:200; background:rgba(4,4,6,.85); backdrop-filter:blur(10px); display:none; align-items:center; justify-content:center; padding:20px; overflow:auto; }
-  .modal-backdrop.open{ display:flex }
-  .modal{ width:100%; max-width:480px; background:rgba(18,18,22,.98); border:1px solid var(--stroke); border-radius:22px; padding:32px; position:relative; box-shadow:0 40px 120px -30px rgba(0,0,0,.9); animation:modalIn .35s ease; }
-  @keyframes modalIn{ from{ opacity:0; transform:translateY(16px) scale(.98) } to{ opacity:1; transform:none } }
-  .modal h2{ margin:0 0 8px; font-size:24px; font-weight:300 }
-  .modal h2 em{ font-style:italic; color:var(--gold) }
-  .modal p.sub{ margin:0 0 22px; color:var(--muted); font-size:13px; line-height:1.5 }
-  .modal .summary{ background:rgba(201,162,75,.07); border:1px solid rgba(201,162,75,.2); border-radius:13px; padding:13px 15px; margin-bottom:20px; font-size:12px; line-height:1.7; color:var(--muted); }
-  .modal .summary b{ color:var(--gold-soft); font-weight:600 }
-  .modal .summary .sum{ color:var(--gold); font-size:16px; font-weight:600 }
-  .modal .close{ position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:50%; border:1px solid var(--stroke); background:transparent; color:var(--muted); cursor:pointer; font-size:18px; line-height:1; display:flex; align-items:center; justify-content:center; transition:.2s; }
-  .modal .close:hover{ border-color:var(--gold); color:var(--gold) }
-  .modal .submit{ width:100%; padding:14px; border-radius:999px; background:var(--gold); color:#0a0a0a; border:none; font-weight:700; font-size:14px; font-family:inherit; cursor:pointer; margin-top:6px; transition:.2s; }
-  .modal .submit:hover{ transform:translateY(-1px) }
-  .thankyou{ text-align:center; padding:20px 0 }
-  .thankyou .checkmark{ width:64px; height:64px; border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; margin:0 auto 20px; animation:pop .4s ease; }
-  @keyframes pop{ 0%{transform:scale(0)} 60%{transform:scale(1.15)} 100%{transform:scale(1)} }
-  .thankyou h3{ margin:0 0 10px; font-size:22px; font-weight:400 }
-  .thankyou p{ color:var(--muted); font-size:13px; line-height:1.6; margin:0 0 20px }
-
-  #wave{ position:absolute; bottom:0; left:0; right:0; height:50px; pointer-events:none; opacity:.6; z-index:1; }
-
-  footer{ padding:56px 32px 36px; border-top:1px solid var(--stroke); background:linear-gradient(180deg, transparent, rgba(201,162,75,.03)); font-size:13px; color:var(--muted); text-align:center; }
-  footer a{ color:var(--gold); text-decoration:none }
-  footer .row{ margin-top:14px; display:flex; gap:26px; justify-content:center; flex-wrap:wrap }
-  footer .phone{ color:var(--text); font-size:16px; letter-spacing:.04em; text-decoration:none; margin-top:10px; display:inline-block }
-  footer .phone:hover{ color:var(--gold) }
-
-  @media (max-width:1100px){
-    .stage-wrap{ grid-template-columns: 1fr; grid-template-rows: auto auto auto; min-height:auto; }
-    #scene-wrap{ min-height:340px; }
-    .panel{ max-height:none }
-    nav{ display:none }
-    #total{ position:relative; padding:16px 20px }
-    #total .btns{ width:100% }
-    #total .btns > *{ flex:1; justify-content:center }
-  }
+/* ---------- мобільна ---------- */
+@media (max-width:960px){
+  .nav a.l{display:none}
+  .head{grid-template-columns:1fr;margin-bottom:40px}
+  .cfg{grid-template-columns:1fr;gap:0}
+  .stage{top:calc(var(--hdr) + env(safe-area-inset-top,0px));z-index:20;margin:0 calc(-1 * max(20px,env(safe-area-inset-left,0px)));border-width:0 0 1px}
+  .stage .hint{display:none}
+  .stage-top{padding:12px 20px 0}
+  .stage-top b{font-size:1.15rem;margin-top:2px}
+  .car-wrap{padding:0 6px}
+  .meter{padding:6px 20px 8px;gap:12px}
+  .meter canvas{height:30px}
+  .meter .state{font-size:1.1rem;min-width:4.6em}
+  .panel{border-top:0}
+}
+@media (max-width:760px){
+  :root{--hdr:64px}
+  body{font-size:16.5px}
+  .wrap{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+  section{padding:88px 0}
+  .call .num{display:none}
+  .hero{padding-top:calc(var(--hdr) + 44px)}
+  .hero .frame{inset:calc(var(--hdr) + 10px) 10px 10px}
+  .hero-in{padding:0 8px}
+  .phrases{min-height:3.2em}
+  .hero .ctas .btn{flex:1 1 100%}
+  .wave{height:110px;margin-top:40px}
+  .wave .lbl.l{left:20px}.wave .lbl.r{right:20px}
+  .facts{grid-template-columns:1fr}
+  .facts div+div{border-left:0;border-top:1px solid var(--line)}
+  .facts div{padding:16px}
+  .svc{grid-template-columns:1fr}
+  .svc article,.svc article:nth-child(even){padding:32px 0;border-right:0}
+  .panel-body{padding:24px 18px 22px}
+  .progress{padding:20px 18px 0}
+  .step-label{padding:12px 18px 0}
+  .step h3{font-size:1.95rem}
+  .row2{grid-template-columns:1fr;gap:0}
+  .bodies{grid-template-columns:1fr 1fr}
+  .chips{grid-template-columns:1fr}
+  .bar{padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px))}
+  .bar .btn{min-width:0;padding:0 22px}
+  .bar .v{font-size:1.2rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  #intro{display:none}
+  .car.draw .outline{stroke-dashoffset:0}.car.draw .paint,.car.draw .glass,.car.draw .details,.car.draw .interior{opacity:1}
+}
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add("js")</script>
+<div id="intro" aria-hidden="true"><div class="in"><div class="name gold-text">VS AUTO</div><div class="rule"></div></div></div>
+<div class="cur cur-dot" id="curDot" aria-hidden="true"></div>
+<div class="cur cur-ring" id="curRing" aria-hidden="true"></div>
 
-<header>
-  <div class="logo">VS <span>AUTO</span></div>
-  <nav>
-    <a href="#configurator">Конфігуратор</a>
-    <a href="#contacts">Контакти</a>
-  </nav>
-  <a class="insta-btn" href="https://www.instagram.com/vsauto0542?vrfl=MXQ2M3Q1dzU4aGRwcw==" target="_blank" rel="noopener">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-    Instagram
-  </a>
+<!-- ============ ШАПКА ============ -->
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="VS AUTO 0542, на початок"><b>VS AUTO</b><span>0542 · Чернівці</span></a>
+    <nav class="nav">
+      <a class="l" href="#services">Послуги</a>
+      <a class="l" href="#calc">Вартість</a>
+      <a class="l" href="#" data-ig target="_blank" rel="noopener">Роботи</a>
+      <a class="call" href="tel:+380661038471" data-tel>
+        <span class="num" data-tel-text>+38 (066) 103 84 71</span>
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M5 3h3l2 5-2.5 1.5a11 11 0 0 0 7 7L16 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></span>
+        <span class="sr">Подзвонити</span>
+      </a>
+    </nav>
+  </div>
 </header>
 
-<section id="hero">
-  <div class="hero-kicker">Шумоізоляція преміум-класу · Чернівці</div>
-  <h1 class="hero-title">Тиша — це <em>розкіш</em>,<br>яку ви відчуєте з першої секунди</h1>
-  <p class="hero-sub">Ми не просто клеїмо матеріали — ми повертаємо вам комфорт, який мав бути з заводу.</p>
-  <div class="hero-phrases">
-    <span>Без компромісів</span><span>Перевірені матеріали</span><span>Гарантія на роботи</span>
+<main>
+<!-- ============ ВІТАННЯ ============ -->
+<section class="hero" aria-labelledby="h1" style="padding-bottom:0">
+  <div class="frame" aria-hidden="true"></div>
+  <div class="wrap hero-in">
+    <div class="eyebrow cap">Преміальна шумоізоляція · Чернівці</div>
+    <h1 id="h1" class="sr">VS AUTO 0542: шумоізоляція автомобіля в Чернівцях</h1>
+    <div class="phrases" id="phrases" aria-live="off">
+      <span class="on">Тиша —&nbsp;<i class="gold-text">нова розкіш</i></span>
+      <span>Чути музику, <i class="gold-text">а&nbsp;не&nbsp;дорогу</i></span>
+      <span>Ваш салон. <i class="gold-text">Ваша тиша</i></span>
+      <span>Комфорт <i class="gold-text">бізнес-класу</i> у&nbsp;вашому авто</span>
+    </div>
+    <p class="lead">Шумоізоляція, антирип, антикор і аудіосистеми під ключ. Працюємо акуратно, з увагою до кожної деталі салону.</p>
+    <div class="ctas">
+      <a class="btn" href="#calc">Розрахувати вартість</a>
+      <a class="btn btn-line" href="#" data-ig target="_blank" rel="noopener">Наші роботи в Instagram</a>
+    </div>
   </div>
-  <a class="hero-cta" href="#configurator">Розрахувати вартість</a>
+  <div class="wave" aria-hidden="true">
+    <canvas id="heroWave"></canvas>
+    <span class="lbl l cap">Шум дороги</span><span class="lbl r cap">Тиша в салоні</span>
+  </div>
+  <div class="facts">
+    <div><b>4 послуги</b>під ключ</div>
+    <div><b>3 класи</b>матеріалів на вибір</div>
+    <div><b>Онлайн</b>орієнтовна ціна за хвилину</div>
+  </div>
+</section>
 
-  <div class="marquee">
-    <div class="marquee-inner">
-      <span><em>01</em> Тиша — це не розкіш, це необхідність</span>
-      <span><em>02</em> Кожна деталь має значення</span>
-      <span><em>03</em> Відчуйте різницю вже сьогодні</span>
-      <span><em>04</em> Преміум-матеріали · Німеччина · Україна</span>
-      <span><em>05</em> Працюємо з 2014 року</span>
-      <span><em>01</em> Тиша — це не розкіш, це необхідність</span>
-      <span><em>02</em> Кожна деталь має значення</span>
-      <span><em>03</em> Відчуйте різницю вже сьогодні</span>
-      <span><em>04</em> Преміум-матеріали · Німеччина · Україна</span>
-      <span><em>05</em> Працюємо з 2014 року</span>
+<!-- ============ ПОСЛУГИ ============ -->
+<section id="services" aria-labelledby="svc-h">
+  <div class="wrap">
+    <div class="head rv">
+      <div><div class="cap">Послуги</div><h2 id="svc-h">Мистецтво тиші</h2></div>
+      <p>Легкові авто, кросовери, позашляховики й мінівени будь-якого року випуску.</p>
+    </div>
+    <div class="svc">
+      <article class="rv"><h3>Шумоізоляція</h3><p>Двері, дах, підлога, арки, капот і багажник. Повністю під ключ або лише там, де заважає шум.</p><span class="cap">Повна · точкова</span></article>
+      <article class="rv"><h3>Антирип салону</h3><p>Прибираємо скрипи й деренчання пластику, панелей та обшивок.</p><span class="cap">1–2 зони · весь салон</span></article>
+      <article class="rv"><h3>Антикор</h3><p>Захищаємо днище, пороги й приховані порожнини від іржі.</p><span class="cap">Днище · повний захист</span></article>
+      <article class="rv"><h3>Аудіосистеми</h3><p>Підбираємо й встановлюємо колонки, підсилювачі та сабвуфери під ключ.</p><span class="cap">Під ключ</span></article>
     </div>
   </div>
 </section>
 
-<section id="configurator">
-  <div class="stage-wrap">
-    <div class="panel">
-      <h3>Крок 1 · Автомобіль</h3>
-      <p class="hint">Оберіть тип кузова — з'явиться схема.</p>
-      <div class="chip-row">
-        <button class="chip" data-car="hatch">Хетчбек</button>
-        <button class="chip" data-car="wagon">Універсал</button>
-        <button class="chip" data-car="crossover">Кросовер</button>
-      </div>
-      <div class="chip-row">
-        <button class="chip" data-car="sedan">Седан</button>
-        <button class="chip" data-car="van">Бус</button>
-        <button class="chip" data-car="minibus">Мікроавтобус</button>
+<!-- ============ КАЛЬКУЛЯТОР ============ -->
+<section id="calc" aria-labelledby="calc-h">
+  <div class="wrap">
+    <div class="head rv">
+      <div><div class="cap">Калькулятор</div><h2 id="calc-h">Скільки коштує тиша</h2></div>
+      <p>Оберіть авто й зони. Схема в розрізі покаже кожен шар ізоляції, а ціна оновиться одразу.</p>
+    </div>
+
+    <div class="cfg">
+      <div class="stage" id="stage" aria-hidden="true">
+        <div class="stage-top"><div class="cap">Ваше авто<b id="capCar">Оберіть марку</b></div></div>
+        <div class="hint cap" id="capHint">Схема в розрізі</div>
+        <div class="car-wrap" id="carWrap"></div>
+        <div class="meter">
+          <span class="cap">Шум у салоні</span>
+          <canvas id="meterWave"></canvas>
+          <span class="state" id="noiseState">Гучно</span>
+        </div>
       </div>
 
-      <div class="field" style="margin-top:14px">
-        <label>Марка та модель</label>
-        <input type="text" id="carModel" placeholder="напр. BMW 320d" autocomplete="off">
-      </div>
-      <div class="field">
-        <label>Рік випуску</label>
-        <input type="text" id="carYear" placeholder="напр. 2019" inputmode="numeric" autocomplete="off">
-      </div>
+      <div class="panel" id="calcBox">
+        <ol class="progress" id="progress" aria-hidden="true"><li class="cur"></li><li></li><li></li><li></li></ol>
+        <div class="step-label cap" id="stepLabel">Крок 1 з 4 · Авто</div>
+        <div class="panel-body">
 
-      <h3 style="margin-top:20px">Крок 2 · Матеріали</h3>
-      <div class="chip-row">
-        <button class="chip" data-mat="eco" disabled>Економ</button>
-        <button class="chip" data-mat="standard" disabled>Стандарт</button>
-        <button class="chip" data-mat="premium" disabled>Преміум</button>
-      </div>
+          <div class="step on" data-step="1">
+            <h3>Ваш автомобіль</h3>
+            <p class="sub">Від марки, розміру та віку авто залежить обсяг роботи.</p>
+            <div class="row2">
+              <div class="fld">
+                <label for="brand">Марка</label>
+                <select class="input" id="brand"></select>
+                <input class="input" type="text" id="brandOther" placeholder="Напишіть марку" style="margin-top:10px" hidden maxlength="40">
+              </div>
+              <div class="fld">
+                <label for="year">Рік випуску</label>
+                <select class="input" id="year"></select>
+              </div>
+            </div>
+            <div class="fld" style="margin-bottom:0">
+              <span class="lbl" id="bodyLbl">Тип кузова</span>
+              <div class="bodies" id="bodies" role="radiogroup" aria-labelledby="bodyLbl"></div>
+            </div>
+            <div class="err" id="e1" role="alert"></div>
+          </div>
 
-      <div id="helper">
-        <svg id="helper-face" width="52" height="52" viewBox="0 0 56 56">
-          <circle cx="28" cy="28" r="26" fill="#1a1a1e" stroke="#c9a24b" stroke-width="1.5"/>
-          <circle cx="20" cy="24" r="2.5" fill="#e6c878"/><circle cx="36" cy="24" r="2.5" fill="#e6c878"/>
-          <path id="helper-mouth" d="M20 34 Q28 32 36 34" stroke="#e6c878" stroke-width="2" fill="none" stroke-linecap="round"/>
-        </svg>
-        <div class="helper-text">
-          <b id="helper-title">Оберіть авто</b>
-          <span id="helper-msg">Спочатку оберіть тип кузова.</span>
+          <div class="step" data-step="2">
+            <button class="back cap" type="button" data-back>← Назад</button>
+            <h3>Шумоізоляція</h3>
+            <p class="sub">Повна дає найбільший ефект. Точкова підходить, якщо заважає щось конкретне.</p>
+            <div class="seg" role="radiogroup" aria-label="Варіант шумоізоляції">
+              <input type="radio" name="ins" id="ins-full" value="full" checked><label for="ins-full">Повна<small>під ключ</small></label>
+              <input type="radio" name="ins" id="ins-part" value="part"><label for="ins-part">Точкова<small>окремі зони</small></label>
+              <input type="radio" name="ins" id="ins-none" value="none"><label for="ins-none">Не треба<small>інші послуги</small></label>
+            </div>
+            <div id="insBox">
+              <div class="fld" style="margin:26px 0 0">
+                <span class="lbl" id="matLbl">Клас матеріалів</span>
+                <div class="seg" role="radiogroup" aria-labelledby="matLbl">
+                  <input type="radio" name="mat" id="mat-e" value="eco"><label for="mat-e">Економ<small>надійна база</small></label>
+                  <input type="radio" name="mat" id="mat-s" value="std" checked><label for="mat-s">Стандарт<small>оптимальний</small></label>
+                  <input type="radio" name="mat" id="mat-p" value="prem"><label for="mat-p">Преміум<small>максимальна тиша</small></label>
+                </div>
+              </div>
+              <div class="chips" id="zones" role="group" aria-label="Зони шумоізоляції"></div>
+              <div class="stepper" id="archStep" hidden>
+                <span>Кількість арок</span>
+                <span class="ctl"><button type="button" id="archMinus" aria-label="Менше арок">−</button><output id="archN" aria-live="polite">4</output><button type="button" id="archPlus" aria-label="Більше арок">+</button></span>
+              </div>
+              <p class="zone-hint" id="zoneHint"></p>
+            </div>
+            <div class="err" id="e2" role="alert"></div>
+          </div>
+
+          <div class="step" data-step="3">
+            <button class="back cap" type="button" data-back>← Назад</button>
+            <h3>Додатково</h3>
+            <p class="sub">За бажанням. Можна пропустити.</p>
+            <div class="group">
+              <span class="lbl" id="sqLbl">Антирип салону</span>
+              <div class="seg" role="radiogroup" aria-labelledby="sqLbl" id="squeak"></div>
+            </div>
+            <div class="group">
+              <span class="lbl" id="ruLbl">Антикор</span>
+              <div class="list" role="radiogroup" aria-labelledby="ruLbl" id="rust"></div>
+            </div>
+            <div class="group" style="margin-bottom:0">
+              <span class="lbl" id="auLbl">Аудіосистема <small>· робота, обладнання окремо</small></span>
+              <div class="list" role="group" aria-labelledby="auLbl" id="audio"></div>
+            </div>
+            <div class="err" id="e3" role="alert"></div>
+          </div>
+
+          <div class="step" data-step="4">
+            <div id="leadWrap">
+              <button class="back cap" type="button" data-back>← Змінити параметри</button>
+              <div class="price" aria-live="polite">
+                <div class="cap">Орієнтовна вартість</div>
+                <div class="v" id="finalSum">—</div>
+                <div class="car-name" id="finalCar"></div>
+                <ul id="finalList"></ul>
+              </div>
+              <div class="note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.5"/></svg>
+                <span>Ціна орієнтовна. Точну суму назвемо після огляду автомобіля.</span>
+              </div>
+              <form id="leadForm" novalidate>
+                <div class="lead-title">Залиште заявку</div>
+                <p class="sub" style="color:var(--muted);margin-bottom:22px">Передзвонимо, відповімо на питання й домовимося про огляд.</p>
+                <div class="fld">
+                  <label for="name">Ваше ім'я <span class="req" aria-hidden="true">*</span></label>
+                  <input class="input" type="text" id="name" autocomplete="given-name" required maxlength="80">
+                </div>
+                <div class="fld">
+                  <label for="phone">Номер телефону <span class="req" aria-hidden="true">*</span></label>
+                  <input class="input" type="tel" id="phone" autocomplete="tel" inputmode="tel" required maxlength="19" placeholder="+380 __ ___ __ __">
+                </div>
+                <div class="fld" style="margin-bottom:0">
+                  <label for="comment">Що турбує найбільше <small>· необов'язково</small></label>
+                  <textarea class="input" id="comment" maxlength="1000" placeholder="Наприклад: гул від коліс на трасі, скрипить панель"></textarea>
+                </div>
+                <div class="hp" aria-hidden="true"><label>Не заповнюйте<input type="text" id="website" tabindex="-1" autocomplete="off"></label></div>
+                <div class="err" id="e4" role="alert"></div>
+                <button type="submit" class="sr">Надіслати</button>
+              </form>
+            </div>
+            <div class="thanks" id="done" hidden>
+              <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+              <h3>Дякуємо</h3>
+              <p>Заявку отримано. Зателефонуємо найближчим часом. Якщо питання термінове, телефонуйте: <a href="tel:+380661038471" data-tel data-tel-text>+38 (066) 103 84 71</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bar" id="bar">
+          <div><div class="cap">Орієнтовно</div><div class="v dim" id="barSum">оберіть кузов</div></div>
+          <button class="btn" type="button" id="next">Далі</button>
         </div>
       </div>
     </div>
-
-    <div style="position:relative">
-      <div id="scene-wrap">
-        <svg id="svg-stage" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet"></svg>
-      </div>
-      <div id="scene-overlay">
-        <div class="badge">Крок 1</div>
-        <h4>Оберіть тип кузова</h4>
-        <p>Тут з'явиться схема авто. Клікайте по деталях, щоб обрати шумоізоляцію.</p>
-      </div>
-      <canvas id="wave"></canvas>
-    </div>
-
-    <div class="panel">
-      <h3>Крок 3 · Шумоізоляція</h3>
-      <p class="hint">Клікніть по кнопці або прямо по деталі на схемі.</p>
-
-      <button class="zone-btn" data-zone="doors" disabled><span class="lbl"><span class="check"></span>Двері (передні + задні)</span><span class="price">—</span></button>
-      <button class="zone-btn" data-zone="floor" disabled><span class="lbl"><span class="check"></span>Підлога</span><span class="price">—</span></button>
-      <button class="zone-btn" data-zone="arches" disabled><span class="lbl"><span class="check"></span>Арки (4 шт)</span><span class="price">—</span></button>
-      <button class="zone-btn" data-zone="roof" disabled><span class="lbl"><span class="check"></span>Дах</span><span class="price">—</span></button>
-      <button class="zone-btn" data-zone="trunk" disabled><span class="lbl"><span class="check"></span>Багажник + кришка</span><span class="price">—</span></button>
-      <button class="zone-btn" data-zone="hood" disabled><span class="lbl"><span class="check"></span>Капот</span><span class="price">—</span></button>
-
-      <div style="margin-top:14px; font-size:11px; color:var(--muted); line-height:1.5">* Ціни орієнтовні. Точну суму назвемо після огляду.</div>
-    </div>
-  </div>
-
-  <div id="total">
-    <div>
-      <div class="lbl">Орієнтовна вартість</div>
-      <div class="val" id="total-val">— <small>₴</small></div>
-    </div>
-    <div class="btns">
-      <a class="btn-ghost" href="tel:+380661038471">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
-        +380 66 103 84 71
-      </a>
-      <button class="cta-call" id="nextBtn" disabled>Далі <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    </div>
   </div>
 </section>
 
-<footer id="contacts">
-  <div style="font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:var(--gold); margin-bottom:14px">VS Auto · Чернівці</div>
-  <div>Працюємо за попереднім записом. Місце та час узгоджуємо телефоном.</div>
-  <a class="phone" href="tel:+380661038471">+380 66 103 84 71</a>
-  <div class="row">
-    <a href="https://www.instagram.com/vsauto0542?vrfl=MXQ2M3Q1dzU4aGRwcw==" target="_blank" rel="noopener">Instagram · наші роботи</a>
-    <a href="tel:+380661038471">Подзвонити</a>
+<!-- ============ КОНТАКТИ ============ -->
+<section id="contacts" aria-labelledby="ct-h">
+  <div class="wrap">
+    <span class="cap t rv">Запис і консультація</span>
+    <h2 id="ct-h" class="sr">Контакти</h2>
+    <a class="big-phone gold-text rv" href="tel:+380661038471" data-tel data-tel-text>+38 (066) 103 84 71</a>
+    <div class="clinks rv">
+      <a class="btn" href="tel:+380661038471" data-tel>Подзвонити</a>
+      <a class="btn btn-line" href="#" data-ig target="_blank" rel="noopener">Instagram · наші роботи</a>
+      <a class="btn btn-line" href="#" data-tg target="_blank" rel="noopener">Telegram-канал</a>
+    </div>
+    <p class="where rv">Працюємо в Чернівцях на різних локаціях, тому місце й час узгоджуємо телефоном.</p>
   </div>
-  <div style="margin-top:26px; font-size:11px; opacity:.5">© 2026 VS Auto. Усі права захищені.</div>
-</footer>
-
-<div class="modal-backdrop" id="modalBackdrop">
-  <div class="modal" id="modalContent"></div>
-</div>
+</section>
+</main>
+<footer><div class="wrap cap"><span>© VS AUTO 0542</span><a href="#" data-ig target="_blank" rel="noopener">Instagram</a><span>Чернівці</span></div></footer>
 
 <script>
-/* ============================================================
-   ВАШ ПРАЙС (грн)
-   ============================================================ */
-const PRICES = {
-  eco:      { doors:9740, floor:9040,  arches:1740, roof:4170, trunk:6960,  hood:1390 },
-  standard: { doors:12250, floor:10710, arches:2160, roof:5570, trunk:9040,  hood:1670 },
-  premium:  { doors:13220, floor:11830, arches:2440, roof:6260, trunk:9740,  hood:1740 },
+/* =========================================================
+   НАЛАШТУВАННЯ: міняйте тут
+   ========================================================= */
+window.CONFIG = {
+  phoneHref: "+380661038471",
+  phoneText: "+38 (066) 103 84 71",
+  instagram: "https://www.instagram.com/vsauto0542",
+  telegramChannel: "https://t.me/your_channel",   // ← вставте посилання на канал
+  endpoint: "/api/lead",
+  demo: false,                                    // true = не відправляти заявку (для превʼю)
+
+  // Ціни шумоізоляції, грн: eco = Економ, std = Стандарт, prem = Преміум
+  zones: [
+    { id:"doors", name:"Двері", hint:"передні й задні", eco:9740, std:12250, prem:13220 },
+    { id:"roof",  name:"Дах",   hint:"",                eco:4170, std:5570,  prem:6260 },
+    { id:"floor", name:"Підлога", hint:"",              eco:9040, std:10710, prem:11830 },
+    { id:"arch",  name:"Арки",  hint:"ціна за 1 арку",  eco:1740, std:2160,  prem:2440, perUnit:true },
+    { id:"hood",  name:"Капот", hint:"",                eco:1390, std:1670,  prem:1740 },
+    { id:"trunk", name:"Багажник", hint:"з кришкою",    eco:6960, std:9040,  prem:9740 },
+  ],
+  matNames: { eco:"економ", std:"стандарт", prem:"преміум" },
+  squeak: [
+    { id:"",   name:"Не треба",   price:0 },
+    { id:"s1", name:"1–2 зони",   price:1020 },
+    { id:"s2", name:"Весь салон", price:3060 },
+  ],
+  rust: [
+    { id:"",   name:"Не потрібно", price:0 },
+    { id:"r1", name:"Днище, базовий", price:1530 },
+    { id:"r2", name:"Днище, преміум (гумо-бітум)", price:3740 },
+    { id:"r3", name:"Повний: днище, пороги, порожнини", price:5950 },
+  ],
+  audio: [
+    { id:"a2",  name:"Заміна 2 колонок", price:680, group:"spk" },
+    { id:"a4",  name:"Заміна 4 колонок", price:1360, group:"spk" },
+    { id:"amp", name:"Встановлення підсилювача", price:1700 },
+    { id:"sub", name:"Встановлення сабвуфера", price:1190 },
+  ],
+  // Коефіцієнт за розміром кузова (шумоізоляція й антикор). Поставте всім 1, якщо ціна не залежить від розміру.
+  sizes: [
+    { id:"small", name:"Малий",   hint:"хетчбек A/B", k:0.9,  icon:"M6,24 L6,17 Q7,14 12,13 L20,12 L28,6 L44,6 Q48,6 50,10 L54,14 Q58,15 58,19 L58,24 Z" },
+    { id:"mid",   name:"Середній", hint:"седан, універсал", k:1.0, icon:"M3,24 L3,18 Q4,15 9,15 L18,14 L25,7 L41,7 L49,14 L58,15 Q61,16 61,19 L61,24 Z" },
+    { id:"big",   name:"Великий", hint:"бізнес, кросовер", k:1.1, icon:"M3,24 L3,14 Q4,11 9,11 L16,10 L22,4 L44,4 L52,10 L58,11 Q61,12 61,16 L61,24 Z" },
+    { id:"suv",   name:"Позашляховик", hint:"мінівен, бус", k:1.2, icon:"M3,24 L3,7 Q3,3 8,3 L46,3 Q50,3 53,8 L58,14 Q61,15 61,18 L61,24 Z" },
+  ],
+  oldYears: 15, oldExtra: 0.10,   // авто старші за 15 років: +10% до шумоізоляції й антикору
+  spread: 0.10,                   // діапазон ціни: ±10%
+  brands: ["Audi","BMW","Chevrolet","Citroën","Dacia","Daewoo","Fiat","Ford","Honda","Hyundai","Kia","Lada (ВАЗ)","Land Rover","Lexus","Mazda","Mercedes-Benz","Mitsubishi","Nissan","Opel","Peugeot","Porsche","Renault","Seat","Škoda","Subaru","Suzuki","Tesla","Toyota","Volkswagen","Volvo","ЗАЗ"],
 };
+</script>
 
-const CAR_LABELS = { 
-  hatch:'Хетчбек', wagon:'Універсал', crossover:'Кросовер', 
-  sedan:'Седан', van:'Бус', minibus:'Мікроавтобус' 
+<script>
+(() => {
+const CONFIG = window.CONFIG;
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const money = n => Math.round(n).toLocaleString("uk-UA").replace(/\s/g, " ");
+const r100 = n => Math.round(n / 100) * 100;
+const NOW = new Date().getFullYear();
+
+/* ---------- контакти ---------- */
+$$("[data-tel]").forEach(a => a.href = "tel:" + CONFIG.phoneHref);
+$$("[data-tel-text]").forEach(e => e.textContent = CONFIG.phoneText);
+$$("[data-tg]").forEach(a => a.href = CONFIG.telegramChannel);
+$$("[data-ig]").forEach(a => a.href = CONFIG.instagram);
+
+/* ---------- шапка, поява ---------- */
+const top = $("#top");
+const onScroll = () => top.classList.toggle("solid", scrollY > 30);
+addEventListener("scroll", onScroll, { passive: true }); onScroll();
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove("wait"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -6% 0px" });
+$$(".rv").forEach(el => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add("wait"); io.observe(el); } });
+
+/* ---------- курсор ---------- */
+if (matchMedia("(pointer:fine)").matches && !reduce) {
+  const dot = $("#curDot"), ring = $("#curRing"); let mx = -99, my = -99, rx = -99, ry = -99;
+  addEventListener("pointermove", e => { mx = e.clientX; my = e.clientY; dot.style.transform = `translate(${mx}px,${my}px)`;
+    ring.classList.toggle("hot", !!e.target.closest?.("a,button,label,select,input,textarea,.zn.ghost")); });
+  (function loop() { rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16; ring.style.transform = `translate(${rx}px,${ry}px)`; requestAnimationFrame(loop); })();
+}
+
+/* ---------- фрази на вітанні ---------- */
+{ const ps = $$("#phrases span"); let i = 0;
+  if (!reduce) setInterval(() => { ps[i].classList.remove("on"); i = (i + 1) % ps.length; ps[i].classList.add("on"); }, 4200); }
+
+/* ---------- звукові лінії ---------- */
+let noise = 1, noiseGoal = 1;
+function waveCanvas(cv, opts) {
+  const ctx = cv.getContext("2d"); let W, H;
+  const size = () => { const d = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); };
+  size(); addEventListener("resize", size);
+  return t => {
+    if (!W) return;
+    ctx.clearRect(0, 0, W, H);
+    const mid = H / 2, lines = opts.lines;
+    for (let k = 0; k < lines; k++) {
+      ctx.beginPath();
+      for (let x = 0; x <= W; x += 2) {
+        const u = x / W;
+        const env = opts.env(u);                                  // де шумить
+        const rough = Math.sin(x * 0.045 + t * 2.1 + k) * 0.55 + Math.sin(x * 0.11 - t * 3.3 + k * 2) * 0.3 + Math.sin(x * 0.23 + t * 5 + k * 3) * 0.15;
+        const calm = Math.sin(x * 0.012 + t * 0.7 + k * 0.6);      // плавна хвиля тиші
+        const a = env * opts.amp(H);
+        const y = mid + (rough * a + calm * opts.calm(H) * (1 - env)) * (1 - k * 0.22);
+        x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+      }
+      const g = ctx.createLinearGradient(0, 0, W, 0);
+      g.addColorStop(0, `rgba(201,169,110,${0.1})`); g.addColorStop(0.35, `rgba(234,213,166,${0.75 - k * 0.2})`); g.addColorStop(1, `rgba(201,169,110,${0.5 - k * 0.12})`);
+      ctx.strokeStyle = g; ctx.lineWidth = k ? 0.8 : 1.4; ctx.stroke();
+    }
+  };
+}
+const smooth = (a, b, x) => { const k = Math.max(0, Math.min(1, (x - a) / (b - a))); return k * k * (3 - 2 * k); };
+const heroWave = waveCanvas($("#heroWave"), { lines: 3, env: u => Math.pow(1 - smooth(0.05, 0.7, u), 1.4), amp: H => H * 0.42, calm: H => H * 0.05 });
+const meterWave = waveCanvas($("#meterWave"), { lines: 2, env: () => noise, amp: H => H * 0.46, calm: H => H * 0.16 });
+let heroVis = true; new IntersectionObserver(([e]) => heroVis = e.isIntersecting).observe($("#heroWave"));
+let tw = 0;
+(function frame() {
+  tw += reduce ? 0 : 0.016;
+  noise += (noiseGoal - noise) * 0.04;
+  if (heroVis) heroWave(tw);
+  meterWave(tw);
+  $("#stage").style.setProperty("--noise", noise.toFixed(3));
+  requestAnimationFrame(frame);
+})();
+
+/* =========================================================
+   Авто в розрізі (SVG)
+   ========================================================= */
+const BASE = {
+  small: { L: 3.85, belt: 0.92, roof: 1.47, r: 0.31, wb: 2.45, fo: 0.72, hood: 0.85, deck: 0.10, style: "hatch", ws: 0.78, rp: 0.42 },
+  mid:   { L: 4.55, belt: 0.93, roof: 1.43, r: 0.33, wb: 2.70, fo: 0.90, hood: 1.15, deck: 0.95, style: "sedan", ws: 0.80, rp: 0.62 },
+  big:   { L: 4.65, belt: 1.04, roof: 1.66, r: 0.37, wb: 2.75, fo: 0.92, hood: 1.10, deck: 0.16, style: "cross", ws: 0.80, rp: 0.38 },
+  suv:   { L: 4.85, belt: 1.10, roof: 1.90, r: 0.37, wb: 2.90, fo: 0.85, hood: 0.95, deck: 0.08, style: "box",   ws: 0.70, rp: 0.12 },
 };
+const PREMIUM = new Set(["Audi","BMW","Mercedes-Benz","Lexus","Volvo","Land Rover","Tesla","Porsche"]);
+const BUDGET = new Set(["Daewoo","ЗАЗ","Lada (ВАЗ)","Dacia"]);
+const PAINT = { Audi:"#8e959c", BMW:"#2f4c6e", "Mercedes-Benz":"#a9adb2", Lexus:"#b9b2a4", Volvo:"#4c6680", "Land Rover":"#4a5644", Tesla:"#d9d9d6",
+  Toyota:"#d6d2c9", Volkswagen:"#556f86", "Škoda":"#56705f", Mazda:"#7a1c24", Subaru:"#2b5590", Ford:"#2e4a72", Porsche:"#9a9fa3" };
+const PALETTE = ["#8f959b","#b3aea4","#54697c","#6b776e","#8a7c69","#c4c3bf","#5d6166","#7a5f4f"];
+const hash = s => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+const rnd = (h, i) => ((Math.sin(h * 12.9898 + i * 78.233) * 43758.5453) % 1 + 1) % 1;
+const mix = (hex, t) => { const n = parseInt(hex.slice(1), 16), c = [n >> 16, (n >> 8) & 255, n & 255].map(v => Math.round(t >= 0 ? v + (255 - v) * t : v * (1 + t))); return "#" + c.map(v => v.toString(16).padStart(2, "0")).join(""); };
 
-const state = { car: null, material: null, zones: new Set(), carModel: '', carYear: '' };
-
-/* ============================================================
-   SVG СХЕМЫ АВТО
-   ============================================================ */
-const svgStage = document.getElementById('svg-stage');
-
-const SVG_STYLES = `
-  <style>
-    .car-base { stroke: #555; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: stroke .3s; }
-    .zone { stroke: #777; stroke-width: 2; fill: rgba(255,255,255,0.02); cursor: pointer; transition: all .3s; }
-    .zone:hover { stroke: #e6c878; fill: rgba(201,162,75,0.15); }
-    .zone.active { stroke: #c9a24b; fill: rgba(201,162,75,0.35); }
-    .wheel { stroke: #555; stroke-width: 2.5; fill: #111; }
-    .wheel-inner { stroke: #555; stroke-width: 2; fill: none; }
-  </style>
-`;
-
-const CAR_SVGS = {
-  // Седан
-  sedan: `
-    <g class="draw-anim">
-      <path class="car-base" d="M 120,260 L 160,260 Q 170,200 220,190 L 300,180 L 340,140 Q 400,130 500,140 L 580,190 L 680,200 Q 710,200 710,230 L 710,260 L 680,260"/>
-      <path class="car-base" d="M 340,150 L 390,145 L 430,190 L 330,190 Z M 450,145 L 500,145 L 560,190 L 450,190 Z"/>
-      <path class="zone" data-zone="arches" d="M 160,260 A 50,50 0 0,1 260,260"/>
-      <path class="zone" data-zone="arches" d="M 560,260 A 50,50 0 0,1 660,260"/>
-      <path class="zone" data-zone="floor" d="M 260,260 L 560,260"/>
-      <path class="zone" data-zone="doors" d="M 340,195 L 340,255 L 440,255 L 440,195 Z"/>
-      <path class="zone" data-zone="doors" d="M 450,195 L 450,255 L 550,255 L 550,195 Z"/>
-      <path class="zone" data-zone="roof" d="M 350,145 Q 450,135 550,145 L 560,190 L 340,190 Z"/>
-      <path class="zone" data-zone="trunk" d="M 580,195 L 680,205 L 700,255 L 580,255 Z"/>
-      <path class="zone" data-zone="hood" d="M 220,195 L 330,190 L 330,210 L 220,215 Z"/>
-      <circle class="wheel" cx="210" cy="260" r="40"/><circle class="wheel-inner" cx="210" cy="260" r="20"/>
-      <circle class="wheel" cx="610" cy="260" r="40"/><circle class="wheel-inner" cx="610" cy="260" r="20"/>
-    </g>
-  `,
-  // Хэтчбек
-  hatch: `
-    <g class="draw-anim">
-      <path class="car-base" d="M 140,260 L 180,260 Q 190,200 240,190 L 320,180 L 360,140 Q 420,130 520,140 L 620,200 L 680,210 Q 700,210 700,240 L 700,260 L 660,260"/>
-      <path class="car-base" d="M 360,150 L 410,145 L 450,190 L 350,190 Z M 470,145 L 520,145 L 580,190 L 470,190 Z"/>
-      <path class="zone" data-zone="arches" d="M 180,260 A 50,50 0 0,1 280,260"/>
-      <path class="zone" data-zone="arches" d="M 580,260 A 50,50 0 0,1 680,260"/>
-      <path class="zone" data-zone="floor" d="M 280,260 L 580,260"/>
-      <path class="zone" data-zone="doors" d="M 360,195 L 360,255 L 460,255 L 460,195 Z"/>
-      <path class="zone" data-zone="doors" d="M 470,195 L 470,255 L 570,255 L 570,195 Z"/>
-      <path class="zone" data-zone="roof" d="M 370,145 Q 470,135 570,145 L 580,190 L 360,190 Z"/>
-      <path class="zone" data-zone="trunk" d="M 600,200 L 680,215 L 690,255 L 600,255 Z"/>
-      <path class="zone" data-zone="hood" d="M 240,195 L 350,190 L 350,210 L 240,215 Z"/>
-      <circle class="wheel" cx="230" cy="260" r="40"/><circle class="wheel-inner" cx="230" cy="260" r="20"/>
-      <circle class="wheel" cx="630" cy="260" r="40"/><circle class="wheel-inner" cx="630" cy="260" r="20"/>
-    </g>
-  `,
-  // Универсал
-  wagon: `
-    <g class="draw-anim">
-      <path class="car-base" d="M 120,260 L 160,260 Q 170,200 220,190 L 300,180 L 340,140 Q 450,130 600,140 L 660,190 L 720,200 Q 740,200 740,230 L 740,260 L 700,260"/>
-      <path class="car-base" d="M 340,150 L 400,145 L 440,190 L 330,190 Z M 460,145 L 520,145 L 560,190 L 460,190 Z M 580,145 L 630,145 L 640,190 L 580,190 Z"/>
-      <path class="zone" data-zone="arches" d="M 160,260 A 50,50 0 0,1 260,260"/>
-      <path class="zone" data-zone="arches" d="M 620,260 A 50,50 0 0,1 720,260"/>
-      <path class="zone" data-zone="floor" d="M 260,260 L 620,260"/>
-      <path class="zone" data-zone="doors" d="M 340,195 L 340,255 L 440,255 L 440,195 Z"/>
-      <path class="zone" data-zone="doors" d="M 450,195 L 450,255 L 550,255 L 550,195 Z"/>
-      <path class="zone" data-zone="doors" d="M 560,195 L 560,255 L 620,255 L 620,195 Z"/>
-      <path class="zone" data-zone="roof" d="M 350,145 Q 480,135 640,145 L 650,190 L 340,190 Z"/>
-      <path class="zone" data-zone="trunk" d="M 650,195 L 720,205 L 740,255 L 650,255 Z"/>
-      <path class="zone" data-zone="hood" d="M 220,195 L 330,190 L 330,210 L 220,215 Z"/>
-      <circle class="wheel" cx="210" cy="260" r="40"/><circle class="wheel-inner" cx="210" cy="260" r="20"/>
-      <circle class="wheel" cx="670" cy="260" r="40"/><circle class="wheel-inner" cx="670" cy="260" r="20"/>
-    </g>
-  `,
-  // Кроссовер
-  crossover: `
-    <g class="draw-anim">
-      <path class="car-base" d="M 110,240 L 150,240 Q 160,170 220,160 L 300,150 L 340,110 Q 420,100 540,110 L 620,160 L 700,170 Q 720,170 720,200 L 720,240 L 680,240"/>
-      <path class="car-base" d="M 340,120 L 400,115 L 440,160 L 330,160 Z M 460,115 L 520,115 L 580,160 L 460,160 Z"/>
-      <path class="zone" data-zone="arches" d="M 150,240 A 55,55 0 0,1 260,240"/>
-      <path class="zone" data-zone="arches" d="M 580,240 A 55,55 0 0,1 690,240"/>
-      <path class="zone" data-zone="floor" d="M 260,240 L 580,240"/>
-      <path class="zone" data-zone="doors" d="M 340,165 L 340,235 L 450,235 L 450,165 Z"/>
-      <path class="zone" data-zone="doors" d="M 460,165 L 460,235 L 570,235 L 570,165 Z"/>
-      <path class="zone" data-zone="roof" d="M 350,115 Q 450,105 560,115 L 580,160 L 340,160 Z"/>
-      <path class="zone" data-zone="trunk" d="M 600,170 L 690,180 L 710,235 L 600,235 Z"/>
-      <path class="zone" data-zone="hood" d="M 220,165 L 330,160 L 330,180 L 220,185 Z"/>
-      <circle class="wheel" cx="205" cy="240" r="45"/><circle class="wheel-inner" cx="205" cy="240" r="22"/>
-      <circle class="wheel" cx="635" cy="240" r="45"/><circle class="wheel-inner" cx="635" cy="240" r="22"/>
-    </g>
-  `,
-  // Бус
-  van: `
-    <g class="draw-anim">
-      <path class="car-base" d="M 120,260 L 160,260 Q 170,160 220,140 L 300,120 L 360,90 Q 450,80 600,90 L 680,130 L 740,150 Q 760,160 760,200 L 760,260 L 720,260"/>
-      <path class="car-base" d="M 360,100 L 420,95 L 450,140 L 350,140 Z M 470,95 L 530,95 L 560,140 L 470,140 Z M 580,95 L 630,100 L 650,140 L 580,140 Z"/>
-      <path class="zone" data-zone="arches" d="M 160,260 A 50,50 0 0,1 260,260"/>
-      <path class="zone" data-zone="arches" d="M 620,260 A 50,50 0 0,1 720,260"/>
-      <path class="zone" data-zone="floor" d="M 260,260 L 620,260"/>
-      <path class="zone" data-zone="doors" d="M 360,145 L 360,255 L 460,255 L 460,145 Z"/>
-      <path class="zone" data-zone="doors" d="M 470,145 L 470,255 L 570,255 L 570,145 Z"/>
-      <path class="zone" data-zone="doors" d="M 580,145 L 580,255 L 680,255 L 680,145 Z"/>
-      <path class="zone" data-zone="roof" d="M 370,95 Q 500,85 640,95 L 660,140 L 360,140 Z"/>
-      <path class="zone" data-zone="trunk" d="M 680,135 L 740,155 L 760,255 L 680,255 Z"/>
-      <path class="zone" data-zone="hood" d="M 220,145 L 350,140 L 350,165 L 220,170 Z"/>
-      <circle class="wheel" cx="210" cy="260" r="40"/><circle class="wheel-inner" cx="210" cy="260" r="20"/>
-      <circle class="wheel" cx="670" cy="260" r="40"/><circle class="wheel-inner" cx="670" cy="260" r="20"/>
-    </g>
-  `,
-  // Микроавтобус
-  minibus: `
-    <g class="draw-anim">
-      <path class="car-base" d="M 100,260 L 140,260 Q 150,140 210,120 L 290,100 L 350,70 Q 450,60 620,70 L 700,110 L 760,130 Q 780,140 780,190 L 780,260 L 740,260"/>
-      <path class="car-base" d="M 350,80 L 420,75 L 450,120 L 340,120 Z M 470,75 L 530,75 L 560,120 L 470,120 Z M 580,75 L 640,80 L 660,120 L 580,120 Z"/>
-      <path class="zone" data-zone="arches" d="M 140,260 A 55,55 0 0,1 250,260"/>
-      <path class="zone" data-zone="arches" d="M 630,260 A 55,55 0 0,1 740,260"/>
-      <path class="zone" data-zone="floor" d="M 250,260 L 630,260"/>
-      <path class="zone" data-zone="doors" d="M 350,125 L 350,255 L 460,255 L 460,125 Z"/>
-      <path class="zone" data-zone="doors" d="M 470,125 L 470,255 L 580,255 L 580,125 Z"/>
-      <path class="zone" data-zone="doors" d="M 590,125 L 590,255 L 700,255 L 700,125 Z"/>
-      <path class="zone" data-zone="roof" d="M 360,75 Q 500,65 660,75 L 680,120 L 350,120 Z"/>
-      <path class="zone" data-zone="trunk" d="M 700,115 L 760,135 L 780,255 L 700,255 Z"/>
-      <path class="zone" data-zone="hood" d="M 210,125 L 340,120 L 340,145 L 210,150 Z"/>
-      <circle class="wheel" cx="195" cy="260" r="45"/><circle class="wheel-inner" cx="195" cy="260" r="22"/>
-      <circle class="wheel" cx="685" cy="260" r="45"/><circle class="wheel-inner" cx="685" cy="260" r="22"/>
-    </g>
-  `
-};
-
-function buildCar(type) {
-  svgStage.innerHTML = SVG_STYLES + CAR_SVGS[type];
-  svgStage.querySelectorAll('.zone').forEach(el => {
-    el.addEventListener('click', () => toggleZone(el.dataset.zone));
-  });
+function params(brand, size) {
+  const p = { ...(BASE[size] || BASE.mid) }, h = hash(brand || "car");
+  if (PREMIUM.has(brand)) { p.L *= 1.03; p.hood *= 1.1; p.belt -= 0.02; p.roof -= 0.02; p.r *= 1.06; }
+  if (BUDGET.has(brand)) { p.roof += 0.04; p.r *= 0.94; p.hood *= 0.94; }
+  if (brand) { p.roof += (rnd(h, 1) - 0.5) * 0.06; p.hood *= 1 + (rnd(h, 2) - 0.5) * 0.08; p.ws *= 1 + (rnd(h, 3) - 0.5) * 0.1; }
+  p.paint = PAINT[brand] || (brand ? PALETTE[h % PALETTE.length] : "#6f747a");
+  return p;
 }
 
-function toggleZone(zone) {
-  if (!state.car || !state.material) return;
-  if (state.zones.has(zone)) state.zones.delete(zone);
-  else state.zones.add(zone);
+function carSVG(p) {
+  const S = 178, GX = 500, GY = 368;
+  const { L, belt, roof, r, wb, fo, hood, deck, style, ws, rp } = p;
+  const xf = L / 2, xr = -L / 2, wf = xf - fo, wr = wf - wb, yb = r * 0.55, R = r + 0.07, cy = r;
+  const frontTop = belt - 0.17, gx1 = xf - hood, gx0 = xr + deck;
+  const bx = gx1 - (gx1 - (wr + R * 0.4)) * 0.48;
+  const wsx = h => gx1 - ws * (h - belt) / (roof - belt), rpx = h => gx0 + rp * (h - belt) / (roof - belt);
+  const X = x => (GX + x * S).toFixed(1), Y = y => (GY - y * S).toFixed(1);
+  const P = (x, y) => `${X(x)} ${Y(y)}`;
+  const arc = (x) => `L ${P(x - R, cy)} A ${(R * S).toFixed(1)} ${(R * S).toFixed(1)} 0 0 1 ${P(x + R, cy)}`;
+  const rect = (x0, y0, x1, y1) => `M ${P(x0, y0)} L ${P(x1, y0)} L ${P(x1, y1)} L ${P(x0, y1)} Z`;
 
-  const btn = document.querySelector(`[data-zone="${zone}"]`);
-  if (btn) btn.classList.toggle('active', state.zones.has(zone));
+  // контур кузова
+  let d = `M ${P(xr + 0.15, yb)} L ${P(wr - R, yb)} ${arc(wr)} L ${P(wr + R, yb)} L ${P(wf - R, yb)} ${arc(wf)} L ${P(wf + R, yb)} L ${P(xf - 0.2, yb)}`
+    + ` Q ${P(xf, yb)} ${P(xf, yb + 0.18)} L ${P(xf, frontTop - 0.1)} Q ${P(xf, frontTop)} ${P(xf - 0.22, frontTop + 0.02)}`
+    + ` Q ${P(gx1 + (xf - gx1) * 0.45, belt + 0.01)} ${P(gx1, belt + 0.02)}`
+    + ` L ${P(gx1 - ws + 0.14, roof - 0.04)} Q ${P(gx1 - ws, roof)} ${P(gx1 - ws - 0.16, roof)}`
+    + ` L ${P(gx0 + rp + 0.16, roof)} Q ${P(gx0 + rp, roof)} ${P(gx0 + rp - 0.08, roof - 0.05)} L ${P(gx0, belt + 0.02)}`;
+  d += style === "sedan"
+    ? ` Q ${P(xr + 0.35, belt + 0.05)} ${P(xr + 0.12, belt + 0.02)} Q ${P(xr, belt)} ${P(xr, belt - 0.14)}`
+    : ` Q ${P(xr, belt)} ${P(xr, belt - 0.14)}`;
+  d += ` L ${P(xr, yb + 0.16)} Q ${P(xr, yb)} ${P(xr + 0.15, yb)} Z`;
 
-  svgStage.querySelectorAll(`.zone[data-zone="${zone}"]`).forEach(el => {
-    el.classList.toggle('active', state.zones.has(zone));
-  });
+  // вікна
+  const wy0 = belt + 0.06, wy1 = roof - 0.08;
+  const winF = `M ${P(bx + 0.04, wy0)} L ${P(wsx(wy0) - 0.07, wy0)} L ${P(wsx(wy1) - 0.07, wy1)} L ${P(bx + 0.04, wy1)} Z`;
+  const winR = `M ${P(rpx(wy0) + 0.07, wy0)} L ${P(bx - 0.04, wy0)} L ${P(bx - 0.04, wy1)} L ${P(rpx(wy1) + 0.07, wy1)} Z`;
 
-  updatePrice();
-  updateHelper();
+  // салон
+  const fy = yb + 0.16;
+  const seat = (bk, len) => `M ${P(bk, fy + 0.1)} L ${P(bk + len, fy + 0.12)} Q ${P(bk + len + 0.04, fy + 0.2)} ${P(bk + len - 0.04, fy + 0.22)} L ${P(bk + 0.02, fy + 0.2)}`
+    + ` L ${P(bk - 0.1, belt + 0.3)} Q ${P(bk - 0.08, belt + 0.36)} ${P(bk + 0.0, belt + 0.33)} L ${P(bk + 0.1, fy + 0.22)}`
+    + ` M ${P(bk - 0.14, belt + 0.36)} L ${P(bk - 0.12, belt + 0.48)} Q ${P(bk - 0.05, belt + 0.52)} ${P(bk + 0.0, belt + 0.47)} L ${P(bk - 0.03, belt + 0.36)} Z`;
+  const fSeat = seat(bx + 0.08, 0.46);
+  const rBack = Math.max(rpx(belt + 0.3) + 0.14, wr - 0.05);
+  const rSeat = seat(rBack, Math.max(0.35, bx - 0.28 - rBack));
+  const dash = `M ${P(gx1 + 0.02, belt + 0.03)} Q ${P(gx1 - 0.2, belt + 0.1)} ${P(gx1 - 0.34, belt + 0.02)} L ${P(gx1 - 0.3, belt - 0.14)} L ${P(gx1 + 0.02, belt - 0.18)} Z`;
+  const wheelC = [gx1 - 0.4, belt + 0.12];
+  const engine = rect(gx1 + 0.12, yb + 0.3, xf - 0.3, frontTop - 0.1);
+  const engLines = [0.25, 0.5, 0.75].map(t => { const x = gx1 + 0.12 + (xf - 0.3 - gx1 - 0.12) * t; return `M ${P(x, frontTop - 0.1)} L ${P(x, frontTop - 0.04)}`; }).join(" ");
+
+  // зони ізоляції
+  const T = 0.065;
+  const doorPath = rect(bx + 0.03, yb + 0.12, gx1 - 0.05, belt - 0.03) + " " + rect(wr + R * 0.45, yb + 0.12, bx - 0.03, belt - 0.03);
+  const roofPath = `M ${P(rpx(roof - 0.03) + 0.08, roof - 0.02)} L ${P(wsx(roof - 0.03) - 0.08, roof - 0.02)} L ${P(wsx(roof - 0.03 - T) - 0.08, roof - 0.02 - T)} L ${P(rpx(roof - 0.03 - T) + 0.08, roof - 0.02 - T)} Z`;
+  const floorPath = rect(wr - R * 0.2, yb + 0.03, gx1 + 0.08, yb + 0.03 + T);
+  const hm = gx1 + (xf - gx1) * 0.45;
+  const hoodPath = `M ${P(gx1 + 0.03, belt - 0.02)} Q ${P(hm, belt - 0.02)} ${P(xf - 0.26, frontTop - 0.02)} L ${P(xf - 0.26, frontTop - 0.02 - T)} Q ${P(hm, belt - 0.02 - T)} ${P(gx1 + 0.03, belt - 0.02 - T)} Z`
+    + " " + rect(gx1 + 0.02, yb + 0.2, gx1 + 0.02 + T, belt - 0.06);
+  const trunkPath = style === "sedan"
+    ? rect(xr + 0.12, belt - 0.02, gx0 - 0.03, belt - 0.02 - T) + " " + rect(xr + 0.06, yb + 0.05, wr + 0.05, yb + 0.05 + T) + " " + rect(xr + 0.04, yb + 0.15, xr + 0.04 + T, belt - 0.1)
+    : `M ${P(xr + 0.03, yb + 0.18)} L ${P(xr + 0.03 + T, yb + 0.18)} L ${P(xr + 0.03 + T, belt - 0.04)} L ${P(rpx(roof - 0.1) + 0.06 + T, roof - 0.1)} L ${P(rpx(roof - 0.1) + 0.06, roof - 0.1)} L ${P(xr + 0.03, belt - 0.04)} Z`
+      + " " + rect(xr + 0.06, yb + 0.05, wr + 0.05, yb + 0.05 + T);
+  const archArc = x => `M ${P(x - R + 0.035, cy)} A ${((R - 0.035) * S).toFixed(1)} ${((R - 0.035) * S).toFixed(1)} 0 0 1 ${P(x + R - 0.035, cy)}`;
+  const zone = (id, path, dx, dy, extraCls = "") => `<g class="zn ${extraCls}" data-z="${id}" style="--dx:${dx}px;--dy:${dy}px"><path class="pad" d="${path}"/><path class="sheen" d="${path}"/><path class="edge" d="${path}"/></g>`;
+
+  // колесо
+  const wheel = x => {
+    const cx = X(x), cyy = Y(cy), rr = r * S;
+    let spokes = ""; for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2; spokes += `M ${(+cx + Math.cos(a) * rr * 0.2).toFixed(1)} ${(+cyy + Math.sin(a) * rr * 0.2).toFixed(1)} L ${(+cx + Math.cos(a + 0.12) * rr * 0.64).toFixed(1)} ${(+cyy + Math.sin(a + 0.12) * rr * 0.64).toFixed(1)} `; }
+    return `<g class="details"><circle cx="${cx}" cy="${cyy}" r="${rr}" fill="#0b0c0e" stroke="#25272b" stroke-width="2"/>
+      <circle cx="${cx}" cy="${cyy}" r="${rr * 0.86}" fill="none" stroke="#17181b" stroke-width="3"/>
+      <circle cx="${cx}" cy="${cyy}" r="${rr * 0.7}" fill="url(#rim)"/>
+      <circle cx="${cx}" cy="${cyy}" r="${rr * 0.48}" fill="none" stroke="#3a3d42" stroke-width="5" stroke-dasharray="2 3"/>
+      <path d="M ${(+cx - rr * 0.36).toFixed(1)} ${(+cyy - rr * 0.38).toFixed(1)} A ${rr * 0.52} ${rr * 0.52} 0 0 0 ${(+cx - rr * 0.52).toFixed(1)} ${(+cyy + rr * 0.06).toFixed(1)}" stroke="var(--gold)" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path d="${spokes}" stroke="#d9dbde" stroke-width="3.2" stroke-linecap="round" opacity=".85"/>
+      <circle cx="${cx}" cy="${cyy}" r="${rr * 0.13}" fill="#1a1b1e" stroke="#8c8f94"/></g>`;
+  };
+  // хвилі шуму від коліс і вітер
+  const waves = x => [0, 1, 2].map(() => `<path class="wv" d="M ${X(x - 0.3)} ${Y(0.02)} Q ${X(x)} ${Y(0.42)} ${X(x + 0.3)} ${Y(0.02)}"/>`).join("");
+  const wind = [0, 1, 2, 3].map(i => `<path class="wind" d="M ${X(gx1 - ws * 0.4 + 0.2 + i * 0.15)} ${Y(roof + 0.12 + (i % 2) * 0.08)} h 60"/>`).join("");
+
+  const xtSpk = (x, rr) => `<circle class="spk" cx="${X(x)}" cy="${Y(yb + 0.28)}" r="${rr}"/><circle class="spk pulse" cx="${X(x)}" cy="${Y(yb + 0.28)}" r="${rr}"/><circle cx="${X(x)}" cy="${Y(yb + 0.28)}" r="${rr * 0.4}" fill="var(--gold-hi)"/>`;
+  const subX = style === "sedan" ? (xr + gx0) / 2 : xr + 0.3, subY = style === "sedan" ? belt - 0.22 : yb + 0.42;
+  const paint = p.paint;
+
+  return `<svg class="car" viewBox="0 0 1000 420" role="img" aria-label="Схема автомобіля в розрізі">
+  <defs>
+    <linearGradient id="paint" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix(paint, 0.35)}"/><stop offset=".42" stop-color="${paint}"/><stop offset=".55" stop-color="${mix(paint, -0.35)}"/><stop offset="1" stop-color="${mix(paint, -0.75)}"/></linearGradient>
+    <linearGradient id="refl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a3138" stop-opacity=".55"/><stop offset=".5" stop-color="#0b0e11" stop-opacity=".45"/><stop offset="1" stop-color="#3a4249" stop-opacity=".5"/></linearGradient>
+    <radialGradient id="rim"><stop offset="0" stop-color="#2b2e33"/><stop offset=".8" stop-color="#4b4f55"/><stop offset="1" stop-color="#9ea2a7"/></radialGradient>
+    <radialGradient id="shadow"><stop offset="0" stop-color="#000" stop-opacity=".85"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <linearGradient id="archGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9c7c47"/><stop offset=".5" stop-color="#ead5a6"/><stop offset="1" stop-color="#9c7c47"/></linearGradient>
+    <pattern id="pad" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="9" height="9" fill="rgba(201,169,110,.55)"/><path d="M0 0 H9 M0 0 V9" stroke="rgba(255,238,200,.75)" stroke-width="1.4"/></pattern>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 0)">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".08" stop-color="#fff" stop-opacity=".55"/><stop offset=".16" stop-color="#fff" stop-opacity="0"/>
+      ${reduce ? "" : `<animate attributeName="x1" values="-1;1" dur="3.2s" repeatCount="indefinite"/><animate attributeName="x2" values="0;2" dur="3.2s" repeatCount="indefinite"/>`}
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3.2" result="b"/><feColorMatrix in="b" values="1 0 0 0 0  0 .85 0 0 0  0 0 .55 0 0  0 0 0 .9 0"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <clipPath id="bodyClip"><path d="${d}"/></clipPath>
+  </defs>
+  <ellipse cx="${X((xr + xf) / 2)}" cy="${GY + 3}" rx="${(L / 2 * S * 1.08).toFixed(1)}" ry="16" fill="url(#shadow)"/>
+  <path d="M ${X(xr - 0.4)} ${GY + 1} H ${X(xf + 0.4)}" stroke="url(#archGrad)" stroke-width="1" opacity=".5"/>
+  <g class="noisefx">${waves(wf)}${waves(wr)}${wind}</g>
+  <path class="paint" d="${d}" fill="url(#paint)" opacity=".62"/>
+  <path class="paint" d="M ${P(xr + 0.1, belt - 0.07)} L ${P(xf - 0.3, belt - 0.07)}" stroke="url(#refl)" stroke-width="10" opacity=".9"/>
+  <g class="interior">
+    <path class="solid" d="${rSeat}"/><path class="solid" d="${fSeat}"/>
+    <path d="${dash}"/>
+    <ellipse cx="${X(wheelC[0])}" cy="${Y(wheelC[1])}" rx="5" ry="${(0.16 * S).toFixed(1)}" transform="rotate(-24 ${X(wheelC[0])} ${Y(wheelC[1])})"/>
+    <path d="M ${P(wheelC[0], wheelC[1] - 0.05)} L ${P(gx1 - 0.18, belt - 0.08)}"/>
+    <path class="solid" d="${engine}"/><path d="${engLines}"/>
+  </g>
+  <path class="glass" d="${winF}"/><path class="glass" d="${winR}"/>
+  <g class="details">
+    <path class="seam" d="M ${P(bx, yb + 0.08)} L ${P(bx, roof - 0.04)} M ${P(gx1 - 0.02, yb + 0.1)} L ${P(gx1 - 0.02, belt + 0.02)} M ${P(wr + R * 0.42, yb + 0.12)} L ${P(wr + R * 0.42, belt + 0.02)}"/>
+    <path class="seam-hi" d="M ${P(bx + 0.012, yb + 0.08)} L ${P(bx + 0.012, belt)}"/>
+    <rect x="${X(gx1 - 0.32)}" y="${Y(belt - 0.1)}" width="${(0.16 * S).toFixed(1)}" height="5" rx="2.5" fill="#c9cdd2" opacity=".55"/>
+    <rect x="${X(bx - 0.3)}" y="${Y(belt - 0.1)}" width="${(0.16 * S).toFixed(1)}" height="5" rx="2.5" fill="#c9cdd2" opacity=".55"/>
+    <path d="M ${P(gx1 - 0.04, belt + 0.03)} q -14 -20 -2 -24 l 22 4 q 6 10 -2 20 z" fill="#0d0e10" stroke="rgba(236,213,166,.35)"/>
+    <path d="M ${P(xf - 0.27, frontTop - 0.05)} L ${P(xf - 0.02, frontTop - 0.08)} L ${P(xf - 0.01, frontTop - 0.15)} L ${P(xf - 0.24, frontTop - 0.12)} Z" fill="#f4eee2" filter="url(#glow)"/>
+    <path d="M ${P(xr + 0.01, belt - 0.07)} L ${P(xr + 0.14, belt - 0.06)} L ${P(xr + 0.14, belt - 0.13)} L ${P(xr + 0.01, belt - 0.15)} Z" fill="#b3261e" filter="url(#glow)"/>
+    <path d="M ${P(xf - 0.01, yb + 0.22)} L ${P(xf - 0.01, yb + 0.36)}" stroke="#0b0c0e" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <path class="outline" d="${d}" pathLength="1"/>
+  <g clip-path="url(#bodyClip)">
+    ${zone("doors", doorPath, 0, -26)}${zone("roof", roofPath, 0, -34)}${zone("floor", floorPath, 0, 30)}
+    ${zone("hood", hoodPath, 30, -24)}${zone("trunk", trunkPath, -30, -20)}
+  </g>
+  <g class="xt" data-x="squeak"><path d="${dash}" fill="none" stroke="var(--gold-hi)" stroke-width="2"/><path d="${fSeat}" fill="none" stroke="var(--gold-hi)" stroke-width="1.4" opacity=".7"/></g>
+  <g class="xt" data-x="rust"><path d="M ${P(xr + 0.15, yb - 0.01)} L ${P(wr - R, yb - 0.01)} M ${P(wr + R, yb - 0.01)} L ${P(wf - R, yb - 0.01)} M ${P(wf + R, yb - 0.01)} L ${P(xf - 0.2, yb - 0.01)}" stroke="#c58a55" stroke-width="7" stroke-linecap="round" filter="url(#glow)"/></g>
+  <g class="xt" data-x="spk2">${xtSpk(gx1 - 0.3, 11)}</g>
+  <g class="xt" data-x="spk4">${xtSpk(bx - 0.3, 11)}</g>
+  <g class="xt" data-x="sub">${`<circle class="spk" cx="${X(subX)}" cy="${Y(subY)}" r="16"/><circle class="spk pulse" cx="${X(subX)}" cy="${Y(subY)}" r="16"/><circle cx="${X(subX)}" cy="${Y(subY)}" r="6" fill="var(--gold-hi)"/>`}</g>
+  ${wheel(wr)}${wheel(wf)}
+  ${zone("arch", archArc(wf), 0, -16, "arch")}${zone("arch2", archArc(wr), 0, -16, "arch")}
+  <g class="arch-tag" id="archTag" opacity="0"><circle cx="${X(wf)}" cy="${Y(cy + R + 0.16)}" r="15" fill="var(--gold)"/><text class="arch-badge" x="${X(wf)}" y="${Y(cy + R + 0.16)}" text-anchor="middle" dominant-baseline="central" id="archTagT">×4</text></g>
+</svg>`;
 }
 
-document.querySelectorAll('[data-zone]').forEach(btn => {
-  btn.addEventListener('click', () => toggleZone(btn.dataset.zone));
+/* ---------- поля ---------- */
+const opt = (v, t) => Object.assign(document.createElement("option"), { value: v, textContent: t });
+const brand = $("#brand"), year = $("#year");
+brand.append(opt("", "Оберіть марку"));
+CONFIG.brands.forEach(b => brand.append(opt(b, b)));
+brand.append(opt("__other", "Інша марка…"));
+year.append(opt("", "Оберіть рік"));
+for (let y = NOW; y >= NOW - 35; y--) year.append(opt(y, y));
+year.append(opt(NOW - 36, "Раніше " + (NOW - 35)));
+$("#bodies").innerHTML = CONFIG.sizes.map(s => `
+  <div class="tile"><input type="radio" name="size" id="sz-${s.id}" value="${s.id}">
+    <label for="sz-${s.id}"><svg viewBox="0 0 64 30" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" aria-hidden="true"><path d="${s.icon}"/><circle cx="16" cy="24" r="4.5" fill="#0b0d10"/><circle cx="48" cy="24" r="4.5" fill="#0b0d10"/></svg>
+    ${s.name}<small>${s.hint}</small></label></div>`).join("");
+$("#zones").innerHTML = CONFIG.zones.map(z => `
+  <div class="chip"><input type="checkbox" id="z-${z.id}" value="${z.id}"><label for="z-${z.id}"><span>${z.name}<small id="zp-${z.id}"></small></span></label></div>`).join("");
+$("#squeak").innerHTML = CONFIG.squeak.map((s, i) => `
+  <input type="radio" name="squeak" id="sq-${i}" value="${s.id}" ${i ? "" : "checked"}><label for="sq-${i}">${s.name}${s.price ? `<small>${money(s.price)} грн</small>` : ""}</label>`).join("");
+const row = (type, name, id, v, label, price, checked) => `
+  <div class="opt"><input type="${type}" name="${name}" id="${id}" value="${v}" ${checked ? "checked" : ""}>
+    <label for="${id}"><span class="mk"></span>${label}${price ? `<span class="pr">${price}</span>` : ""}</label></div>`;
+$("#rust").innerHTML = CONFIG.rust.map((r, i) => row("radio", "rust", "ru-" + i, r.id, r.name, r.price ? "від " + money(r.price) + " грн" : "", !i)).join("");
+$("#audio").innerHTML = CONFIG.audio.map(a => row("checkbox", "audio", "au-" + a.id, a.id, a.name, money(a.price) + " грн")).join("");
+
+const val = s => ($(s) || {}).value;
+const brandName = () => brand.value === "__other" ? $("#brandOther").value.trim() : brand.value;
+let arches = 4;
+
+/* ---------- схема: стан ---------- */
+let carKey = "", prevOn = new Set();
+function drawCar() {
+  const b = brandName(), s = val("input[name=size]:checked") || "mid";
+  const sz = CONFIG.sizes.find(x => x.id === val("input[name=size]:checked"));
+  $("#capCar").textContent = b ? `${b}${sz ? " · " + sz.name.toLowerCase() : ""}` : (sz ? sz.name + " кузов" : "Оберіть марку");
+  const key = b + "|" + s; if (key === carKey) return; carKey = key;
+  $("#carWrap").innerHTML = carSVG(params(b, s));
+  const svg = $("#carWrap svg");
+  if (!reduce) svg.classList.add("draw");
+  $$("#carWrap .zn").forEach(g => g.addEventListener("click", () => onZoneTap(g.dataset.z === "arch2" ? "arch" : g.dataset.z)));
+  prevOn = new Set(); paintZones(); paintExtras();
+}
+function paintZones() {
+  const ins = val("input[name=ins]:checked");
+  const on = new Set(ins === "none" ? [] : CONFIG.zones.filter(z => $("#z-" + z.id).checked).map(z => z.id));
+  $$("#carWrap .zn").forEach(g => {
+    const id = g.dataset.z === "arch2" ? "arch" : g.dataset.z;
+    let isOn = on.has(id);
+    if (g.dataset.z === "arch2") isOn = isOn && arches >= 2;
+    const was = g.classList.contains("on");
+    g.classList.toggle("on", isOn);
+    g.classList.toggle("ghost", ins === "part" && !isOn);
+    if (isOn && !was) { g.classList.remove("fresh"); void g.getBBox; requestAnimationFrame(() => g.classList.add("fresh")); }
+    if (!isOn) g.classList.remove("fresh");
+  });
+  const tag = $("#archTag");
+  if (tag) { tag.setAttribute("opacity", on.has("arch") ? 1 : 0); $("#archTagT").textContent = "×" + arches; }
+  setNoise();
+}
+function paintExtras() {
+  const st = { squeak: !!val("input[name=squeak]:checked"), rust: !!val("input[name=rust]:checked"),
+    spk2: $("#au-a2").checked || $("#au-a4").checked || $("#au-amp").checked, spk4: $("#au-a4").checked, sub: $("#au-sub").checked };
+  $$("#carWrap .xt").forEach(g => g.classList.toggle("on", !!st[g.dataset.x]));
+  setNoise();
+}
+const noiseStates = [[0.78, "Гучно"], [0.5, "Помірно"], [0.2, "Тихо"], [-1, "Тиша"]];
+function setNoise() {
+  const ins = val("input[name=ins]:checked");
+  const full = CONFIG.zones.reduce((a, z) => a + z.std * (z.perUnit ? 4 : 1), 0);
+  const cov = ins === "none" ? 0 : CONFIG.zones.filter(z => $("#z-" + z.id).checked).reduce((a, z) => a + z.std * (z.perUnit ? arches : 1), 0) / full;
+  const extra = (val("input[name=squeak]:checked") ? 0.06 : 0);
+  noiseGoal = Math.max(0, 1 - Math.min(1, cov * 0.95 + extra));
+  $("#noiseState").textContent = noiseStates.find(([t]) => noiseGoal > t)[1];
+}
+
+/* ---------- події ---------- */
+function syncIns() {
+  const ins = val("input[name=ins]:checked");
+  $("#insBox").hidden = false;
+  $("#zones").hidden = ins === "none";
+  $("#zones").classList.toggle("locked", ins === "full");
+  CONFIG.zones.forEach(z => { const b = $("#z-" + z.id); if (ins === "full") b.checked = true; b.disabled = ins === "full"; });
+  if (ins === "full") arches = 4;
+  $("#archStep").hidden = !(ins === "part" && $("#z-arch").checked);
+  $("#archN").textContent = arches; $("#archMinus").disabled = arches <= 1; $("#archPlus").disabled = arches >= 4;
+  $("#zoneHint").textContent = ins === "full" ? "Обробляємо весь автомобіль, усі 4 арки." : ins === "part" ? "Оберіть зони у списку або торкніться пунктиру на схемі." : "Шумоізоляцію не рахуємо. Перейдіть далі до інших послуг.";
+  $("#matLbl").parentElement.hidden = ins === "none";
+  $("#capHint").textContent = ins === "part" ? "Торкніться зони на схемі" : "Схема в розрізі";
+  priceTags(); paintZones();
+}
+function priceTags() {
+  const mat = val("input[name=mat]:checked");
+  CONFIG.zones.forEach(z => $("#zp-" + z.id).textContent = (z.hint ? z.hint + " · " : "") + money(z[mat]) + " грн" + (z.perUnit ? "" : ""));
+}
+brand.addEventListener("change", () => { $("#brandOther").hidden = brand.value !== "__other"; if (!$("#brandOther").hidden) $("#brandOther").focus(); brand.classList.remove("bad"); drawCar(); });
+$("#brandOther").addEventListener("change", drawCar);
+year.addEventListener("change", () => year.classList.remove("bad"));
+$$("input[name=size]").forEach(r => r.addEventListener("change", drawCar));
+$$("input[name=ins]").forEach(r => r.addEventListener("change", () => {
+  if (r.value === "part" && r.checked) CONFIG.zones.forEach(z => $("#z-" + z.id).checked = false);
+  syncIns(); update();
+}));
+$$("#zones input").forEach(i => i.addEventListener("change", () => { if (i.id === "z-arch" && i.checked) arches = Math.max(arches, 1); syncIns(); update(); }));
+$$("input[name=mat]").forEach(r => r.addEventListener("change", () => { priceTags(); update(); }));
+$("#archMinus").addEventListener("click", () => { arches = Math.max(1, arches - 1); syncIns(); update(); });
+$("#archPlus").addEventListener("click", () => { arches = Math.min(4, arches + 1); syncIns(); update(); });
+$$("input[name=squeak], input[name=rust]").forEach(r => r.addEventListener("change", () => { paintExtras(); update(); }));
+$$("#audio input").forEach(inp => inp.addEventListener("change", () => {
+  const a = CONFIG.audio.find(x => "au-" + x.id === inp.id);
+  if (inp.checked && a.group) CONFIG.audio.filter(x => x.group === a.group && x !== a).forEach(x => $("#au-" + x.id).checked = false);
+  paintExtras(); update();
+}));
+function onZoneTap(id) {
+  if (val("input[name=ins]:checked") !== "part") return;
+  const b = $("#z-" + id); if (!b) return; b.checked = !b.checked; syncIns(); update();
+}
+
+/* ---------- розрахунок ---------- */
+function compute() {
+  const sz = CONFIG.sizes.find(s => s.id === val("input[name=size]:checked"));
+  if (!sz) return null;
+  const y = +year.value, yk = y && (NOW - y) > CONFIG.oldYears ? 1 + CONFIG.oldExtra : 1;
+  const ins = val("input[name=ins]:checked"), mat = val("input[name=mat]:checked");
+  const items = []; let total = 0;
+  if (ins !== "none") {
+    const zs = CONFIG.zones.filter(z => $("#z-" + z.id).checked);
+    if (zs.length) {
+      total += zs.reduce((a, z) => a + z[mat] * (z.perUnit ? arches : 1), 0) * sz.k * yk;
+      const names = zs.map(z => z.perUnit ? `${z.name.toLowerCase()} (${arches} шт.)` : z.name.toLowerCase());
+      items.push((ins === "full" ? "Шумоізоляція повна" : "Шумоізоляція: " + names.join(", ")) + ", " + CONFIG.matNames[mat]);
+    }
+  }
+  const sq = CONFIG.squeak.find(s => s.id === val("input[name=squeak]:checked"));
+  if (sq && sq.price) { items.push("Антирип: " + sq.name.toLowerCase()); total += sq.price; }
+  const ru = CONFIG.rust.find(r => r.id === val("input[name=rust]:checked"));
+  if (ru && ru.price) { items.push("Антикор: " + ru.name.toLowerCase()); total += ru.price * sz.k * yk; }
+  let audio = false;
+  CONFIG.audio.forEach(a => { if ($("#au-" + a.id).checked) { items.push(a.name); total += a.price; audio = true; } });
+  if (audio) items.push("Обладнання для аудіосистеми оплачується окремо");
+  const lo = r100(total * (1 - CONFIG.spread)), hi = r100(total * (1 + CONFIG.spread));
+  return { total, items, sz, brandName: brandName(), year: y ? (y < NOW - 35 ? "до " + (NOW - 35) : String(y)) : "",
+           range: total ? `${money(lo)} – ${money(hi)} грн` : "" };
+}
+let step = 1;
+function update() {
+  const q = compute(), v = $("#barSum");
+  if (!q) { v.textContent = "оберіть кузов"; v.classList.add("dim"); }
+  else if (!q.total) { v.textContent = "оберіть послугу"; v.classList.add("dim"); }
+  else { v.textContent = q.range; v.classList.remove("dim"); }
+}
+$("#calcBox").addEventListener("change", update);
+
+/* ---------- кроки ---------- */
+const labels = { 1: "Далі", 2: "Далі", 3: "Порахувати", 4: "Надіслати" };
+const names = ["Авто", "Шумоізоляція", "Додатково", "Заявка"];
+function scrollToPanel() {
+  const stage = $("#stage"), panel = $("#calcBox");
+  const sticky = innerWidth <= 960;
+  const offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--hdr")) + (sticky ? stage.offsetHeight : 0) + 12;
+  const t = panel.getBoundingClientRect().top;
+  if (t < offset || t > innerHeight * 0.55) scrollTo({ top: t + scrollY - offset, behavior: reduce ? "auto" : "smooth" });
+}
+function go(n) {
+  step = n;
+  $$(".step").forEach(s => s.classList.toggle("on", +s.dataset.step === n));
+  $$("#progress li").forEach((li, i) => { li.classList.toggle("done", i + 1 < n); li.classList.toggle("cur", i + 1 === n); });
+  $("#next").textContent = labels[n];
+  $("#stepLabel").textContent = `Крок ${n} з 4 · ${names[n - 1]}`;
+  $$(".err").forEach(e => e.textContent = "");
+  if (n === 4) {
+    const q = compute();
+    $("#finalSum").textContent = q.range;
+    $("#finalCar").textContent = `${q.brandName}, ${q.year} · ${q.sz.name.toLowerCase()} кузов`;
+    $("#finalList").innerHTML = q.items.map(i => `<li>${i}</li>`).join("");
+  }
+  scrollToPanel();
+  const h = $(`.step[data-step="${n}"] h3`); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); }
+}
+function check(n) {
+  if (n === 1) {
+    const miss = [], bn = brandName();
+    if (!bn) miss.push("марку");
+    if (!year.value) miss.push("рік випуску");
+    if (!val("input[name=size]:checked")) miss.push("тип кузова");
+    brand.classList.toggle("bad", !bn); year.classList.toggle("bad", !year.value);
+    return miss.length ? "Будь ласка, вкажіть " + miss.join(", ") + "." : "";
+  }
+  if (n === 2 && val("input[name=ins]:checked") === "part" && !CONFIG.zones.some(z => $("#z-" + z.id).checked)) return "Оберіть хоча б одну зону.";
+  if (n === 3 && !compute().total) return "Оберіть хоча б одну послугу: шумоізоляцію на кроці 2 або щось тут.";
+  return "";
+}
+$("#next").addEventListener("click", () => {
+  if (step === 4) return send();
+  const e = check(step); $("#e" + step).textContent = e;
+  if (!e) go(step + 1);
+});
+$$("[data-back]").forEach(b => b.addEventListener("click", () => go(step - 1)));
+
+/* ---------- телефон +380 ---------- */
+const phone = $("#phone");
+phone.addEventListener("focus", () => { if (!phone.value) phone.value = "+380 "; });
+phone.addEventListener("input", () => {
+  let d = phone.value.replace(/\D/g, ""), rest;
+  if (d.startsWith("380")) rest = d.slice(3); else if (d.startsWith("80")) rest = d.slice(2); else rest = d;
+  d = ("380" + rest.replace(/^0/, "")).slice(0, 12);
+  phone.value = "+" + [d.slice(0, 3), d.slice(3, 5), d.slice(5, 8), d.slice(8, 10), d.slice(10, 12)].filter(Boolean).join(" ");
 });
 
-document.querySelectorAll('[data-car]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('[data-car]').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    state.car = btn.dataset.car;
-    state.zones.clear();
-    document.querySelectorAll('[data-zone]').forEach(b => b.classList.remove('active'));
-    buildCar(state.car);
-    document.getElementById('scene-overlay').classList.add('hidden');
-    enableControls();
-    updatePrice();
-    updateHelper();
-  });
-});
-
-document.querySelectorAll('[data-mat]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    if (btn.disabled) return;
-    document.querySelectorAll('[data-mat]').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    state.material = btn.dataset.mat;
-    updatePrice();
-    updateHelper();
-  });
-});
-
-document.getElementById('carModel').addEventListener('input', e => state.carModel = e.target.value.trim());
-document.getElementById('carYear').addEventListener('input', e => state.carYear = e.target.value.trim());
-
-function enableControls() {
-  document.querySelectorAll('[data-mat]').forEach(b => b.disabled = false);
-  if (!state.material) {
-    state.material = 'standard';
-    document.querySelector('[data-mat="standard"]').classList.add('active');
-  }
-  document.querySelectorAll('[data-zone]').forEach(b => b.disabled = false);
-  refreshZonePrices();
+/* ---------- відправка ---------- */
+$("#leadForm").addEventListener("submit", e => { e.preventDefault(); send(); });
+async function send() {
+  const name = $("#name").value.trim(), digits = phone.value.replace(/\D/g, "");
+  $("#name").classList.toggle("bad", !name); phone.classList.toggle("bad", digits.length !== 12);
+  if (!name) { $("#e4").textContent = "Вкажіть, будь ласка, ваше ім'я."; $("#name").focus(); return; }
+  if (digits.length !== 12) { $("#e4").textContent = "Перевірте номер телефону: +380 і ще 9 цифр."; phone.focus(); return; }
+  $("#e4").textContent = "";
+  const q = compute(), btn = $("#next");
+  btn.disabled = true; btn.textContent = "Відправляємо…";
+  try {
+    if (!CONFIG.demo) {
+      const r = await fetch(CONFIG.endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
+        name, phone: phone.value, comment: $("#comment").value.trim(), website: $("#website").value,
+        brand: q.brandName, year: q.year, size: q.sz.name + " (" + q.sz.hint + ")", sum: q.range,
+        services: q.items.filter(i => !i.startsWith("Обладнання")) }) });
+      if (!r.ok) throw 0;
+    } else await new Promise(r => setTimeout(r, 600));
+    $("#leadWrap").hidden = true; $("#done").hidden = false; $("#bar").hidden = true;
+    $$("#progress li").forEach(li => li.classList.add("done"));
+    scrollToPanel();
+  } catch {
+    $("#e4").innerHTML = `Не вдалося відправити. Спробуйте ще раз або зателефонуйте: <a href="tel:${CONFIG.phoneHref}" style="color:inherit">${CONFIG.phoneText}</a>`;
+  } finally { btn.disabled = false; btn.textContent = labels[4]; }
 }
 
-function refreshZonePrices() {
-  if (!state.material || !state.car) return;
-  document.querySelectorAll('[data-zone]').forEach(btn => {
-    const z = btn.dataset.zone;
-    const base = PRICES[state.material]?.[z] ?? 0;
-    btn.querySelector('.price').textContent = '+ ' + base.toLocaleString('uk-UA') + ' ₴' + (z === 'arches' ? '/шт' : '');
-  });
-}
-
-function calcTotal() {
-  if (!state.car || !state.material) return 0;
-  let sum = 0;
-  state.zones.forEach(z => {
-    const p = PRICES[state.material][z] || 0;
-    if (z === 'arches') sum += p * 4; // Умножаем на 4 арки
-    else sum += p;
-  });
-  return sum;
-}
-
-function updatePrice() {
-  const total = calcTotal();
-  const el = document.getElementById('total-val');
-  el.innerHTML = total > 0 ? total.toLocaleString('uk-UA') + ' <small>₴</small>' : '— <small>₴</small>';
-  refreshZonePrices();
-  const nextBtn = document.getElementById('nextBtn');
-  nextBtn.disabled = !(state.car && state.material && state.zones.size > 0);
-}
-
-/* ============================================================
-   ПОМОЩНИК
-   ============================================================ */
-const helperTitle = document.getElementById('helper-title');
-const helperMsg   = document.getElementById('helper-msg');
-const helperMouth = document.getElementById('helper-mouth');
-
-function updateHelper() {
-  const n = state.zones.size;
-  if (!state.car) {
-    helperTitle.textContent = 'Оберіть авто';
-    helperMsg.textContent = 'Спочатку оберіть тип кузова.';
-    helperMouth.setAttribute('d', 'M20 34 Q28 32 36 34');
-  } else if (!state.material) {
-    helperTitle.textContent = 'Оберіть матеріали';
-    helperMsg.textContent = 'Тепер оберіть рівень матеріалів.';
-    helperMouth.setAttribute('d', 'M20 34 Q28 34 36 34');
-  } else if (n === 0) {
-    helperTitle.textContent = 'Оберіть зони';
-    helperMsg.textContent = 'Клікайте по деталях на схемі або по кнопках справа.';
-    helperMouth.setAttribute('d', 'M20 34 Q28 33 36 34');
-  } else if (n <= 2) {
-    helperTitle.textContent = 'Гарний початок';
-    helperMsg.textContent = 'Вже краще! Додайте ще кілька зон.';
-    helperMouth.setAttribute('d', 'M20 34 Q28 37 36 34');
-  } else if (n <= 4) {
-    helperTitle.textContent = 'Чудовий вибір';
-    helperMsg.textContent = 'Ви на правильному шляху. Ще трохи.';
-    helperMouth.setAttribute('d', 'M18 32 Q28 40 38 32');
-  } else {
-    helperTitle.textContent = 'Максимальна тиша';
-    helperMsg.textContent = 'Ідеально! Ви обрали майже все.';
-    helperMouth.setAttribute('d', 'M16 30 Q28 42 40 30');
-  }
-}
-
-/* ============================================================
-   ВОЛНА
-   ============================================================ */
-const waveCanvas = document.getElementById('wave');
-const wctx = waveCanvas.getContext('2d');
-let waveOffset = 0;
-
-function resizeWave() {
-  const rect = waveCanvas.parentElement.getBoundingClientRect();
-  waveCanvas.width  = Math.max(rect.width, 100) * devicePixelRatio;
-  waveCanvas.height = 50 * devicePixelRatio;
-}
-
-function drawWave() {
-  const W = waveCanvas.width, H = waveCanvas.height;
-  if (!W || !H) { requestAnimationFrame(drawWave); return; }
-  wctx.clearRect(0, 0, W, H);
-  const totalZones = 6;
-  const quietness = Math.min(state.zones.size / totalZones, 1);
-  const noiseLevel = 1 - quietness;
-  const amp   = 3 + noiseLevel * 22 * devicePixelRatio;
-  const freq  = 0.008 + noiseLevel * 0.03;
-  const speed = 0.4 + noiseLevel * 1.4;
-  waveOffset += speed * 0.4;
-
-  const grad = wctx.createLinearGradient(0, 0, W, 0);
-  grad.addColorStop(0,   'rgba(201,162,75,0)');
-  grad.addColorStop(0.2, 'rgba(201,162,75,0.65)');
-  grad.addColorStop(0.5, 'rgba(230,200,120,1)');
-  grad.addColorStop(0.8, 'rgba(201,162,75,0.65)');
-  grad.addColorStop(1,   'rgba(201,162,75,0)');
-  wctx.strokeStyle = grad;
-  wctx.lineWidth = 2 * devicePixelRatio;
-  wctx.beginPath();
-  for (let x = 0; x < W; x += 3) {
-    const nx = x * freq + waveOffset;
-    const noise  = Math.sin(nx*7.3) * Math.sin(nx*3.1) * Math.cos(nx*11.7);
-    const smooth = Math.sin(nx);
-    const v = smooth * (1 - noiseLevel) + noise * noiseLevel;
-    const y = H/2 + v * amp;
-    if (x === 0) wctx.moveTo(x, y); else wctx.lineTo(x, y);
-  }
-  wctx.stroke();
-  requestAnimationFrame(drawWave);
-}
-
-/* ============================================================
-   МОДАЛКА
-   ============================================================ */
-const modalBackdrop = document.getElementById('modalBackdrop');
-const modalContent  = document.getElementById('modalContent');
-
-document.getElementById('nextBtn').addEventListener('click', openForm);
-
-function openForm() {
-  const total = calcTotal();
-  const zonesList = [...state.zones].map(z => ({
-    doors:'Двері (передні + задні)', floor:'Підлога', arches:'Арки (4 шт)',
-    roof:'Дах', trunk:'Багажник + кришка', hood:'Капот'
-  }[z])).join(', ');
-  const matLabel = { eco:'Економ', standard:'Стандарт', premium:'Преміум' }[state.material];
-  const carLabel = CAR_LABELS[state.car];
-
-  modalContent.innerHTML = `
-    <button class="close" id="closeModal" aria-label="Закрити">×</button>
-    <h2>Оформлення <em>заявки</em></h2>
-    <p class="sub">Залиште контакти — ми зателефонуємо протягом години.</p>
-
-    <div class="summary">
-      <div><b>Авто:</b> ${carLabel}${state.carModel ? ' · ' + escapeHtml(state.carModel) : ''}${state.carYear ? ' · ' + escapeHtml(state.carYear) + ' р.' : ''}</div>
-      <div><b>Матеріали:</b> ${matLabel}</div>
-      <div><b>Зони:</b> ${zonesList}</div>
-      <div style="margin-top:8px"><b>Орієнтовно:</b> <span class="sum">${total.toLocaleString('uk-UA')} ₴</span></div>
-    </div>
-
-    <form id="leadForm" novalidate>
-      <div class="field">
-        <label>Ваше ім'я *</label>
-        <input type="text" id="leadName" placeholder="Іван" required autocomplete="name">
-      </div>
-      <div class="field">
-        <label>Телефон *</label>
-        <input type="tel" id="leadPhone" placeholder="+380 __ ___ __ __" required autocomplete="tel">
-      </div>
-      <button type="submit" class="submit">Надіслати заявку</button>
-      <div style="margin-top:12px; font-size:11px; color:var(--muted); text-align:center; line-height:1.5">
-        Натискаючи кнопку, ви погоджуєтесь на обробку даних.
-      </div>
-    </form>
-  `;
-
-  modalBackdrop.classList.add('open');
-  document.body.style.overflow = 'hidden';
-
-  document.getElementById('closeModal').addEventListener('click', closeModal);
-  document.getElementById('leadForm').addEventListener('submit', submitLead);
-}
-
-function closeModal() {
-  modalBackdrop.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-modalBackdrop.addEventListener('click', (e) => {
-  if (e.target === modalBackdrop) closeModal();
-});
-
-function submitLead(e) {
-  e.preventDefault();
-  const name  = document.getElementById('leadName').value.trim();
-  const phone = document.getElementById('leadPhone').value.trim();
-
-  if (!name || name.length < 2) {
-    document.getElementById('leadName').style.borderColor = '#ff5722';
-    return;
-  }
-  if (!phone || phone.replace(/\D/g,'').length < 9) {
-    document.getElementById('leadPhone').style.borderColor = '#ff5722';
-    return;
-  }
-
-  console.log('LEAD:', {
-    name, phone,
-    car: state.car, carModel: state.carModel, carYear: state.carYear,
-    material: state.material,
-    zones: [...state.zones],
-    total: calcTotal(),
-  });
-
-  modalContent.innerHTML = `
-    <div class="thankyou">
-      <div class="checkmark">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
-      </div>
-      <h3>Дякуємо, ${escapeHtml(name)}!</h3>
-      <p>Заявку отримано. Зателефонуємо найближчим часом.<br>Якщо питання термінове — телефонуйте:<br><a href="tel:+380661038471" style="color:var(--gold);text-decoration:none;font-weight:600">+380 66 103 84 71</a></p>
-      <button class="submit" id="closeThanks">Закрити</button>
-    </div>
-  `;
-  document.getElementById('closeThanks').addEventListener('click', closeModal);
-}
-
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-/* ============================================================
-   СТАРТ
-   ============================================================ */
-requestAnimationFrame(() => {
-  resizeWave();
-  drawWave();
-  updateHelper();
-  updatePrice();
-});
+drawCar(); syncIns(); paintExtras(); update();
+})();
 </script>
 </body>
 </html>
