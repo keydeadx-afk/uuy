@@ -1,934 +1,801 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
-    <!-- TikTok Pixel Code Start -->
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
-
-  ttq.load('D9B796RC77UBS5FSBT40');
-  ttq.page();
-}(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Шумоізоляція Чернівці | VSAUTO 0542</title>
-    <style>
-        :root {
-            --bg-dark: #090a0f;
-            --card-bg: #12151f;
-            --card-border: #1f2738;
-            --text-white: #f8fafc;
-            --text-gray: #94a3b8;
-            --cyan: #00f0ff;
-            --cyan-glow: rgba(0, 240, 255, 0.3);
-            --magenta: #ff007f;
-            --magenta-glow: rgba(255, 0, 127, 0.35);
-            --radius: 14px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            line-height: 1.5;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            padding-bottom: env(safe-area-inset-bottom, 20px);
-        }
-
-        /* Хедер */
-        header {
-            background: rgba(9, 10, 15, 0.9);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 999;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 16px;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .brand-logo {
-            font-size: 1.15rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            color: var(--cyan);
-            text-transform: uppercase;
-        }
-
-        .brand-logo span {
-            color: #fff;
-        }
-
-        .location-tag {
-            font-size: 0.78rem;
-            color: var(--text-gray);
-            background: rgba(255, 255, 255, 0.05);
-            padding: 4px 10px;
-            border-radius: 20px;
-            border: 1px solid var(--card-border);
-        }
-
-        /* Основний блок */
-        main {
-            flex: 1;
-            padding: 76px 14px 20px;
-            max-width: 600px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        /* Прогрес-бар */
-        .progress-box {
-            margin-bottom: 16px;
-        }
-
-        .progress-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.78rem;
-            color: var(--text-gray);
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .progress-track {
-            width: 100%;
-            height: 5px;
-            background: var(--card-border);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 20%;
-            background: linear-gradient(90deg, var(--cyan), var(--magenta));
-            box-shadow: 0 0 10px var(--cyan-glow);
-            transition: width 0.3s ease;
-        }
-
-        /* Квіз картка */
-        .quiz-sheet {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius);
-            padding: 22px 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-        }
-
-        .quiz-step {
-            display: none;
-        }
-
-        .quiz-step.active {
-            display: block;
-            animation: fadeIn 0.25s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .step-heading {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #fff;
-        }
-
-        .step-subtext {
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            margin-bottom: 20px;
-        }
-
-        /* Поля вводу */
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-
-        .custom-input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1.5px solid var(--card-border);
-            border-radius: 12px;
-            padding: 14px 16px;
-            font-size: 0.95rem;
-            color: #fff;
-            outline: none;
-            transition: 0.2s;
-        }
-
-        .custom-input:focus {
-            border-color: var(--cyan);
-            box-shadow: 0 0 10px var(--cyan-glow);
-        }
-
-        /* Вибір кузовів (5 варіантів) */
-        .body-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .body-grid .body-item:last-child {
-            grid-column: span 2;
-        }
-
-        .body-item {
-            position: relative;
-        }
-
-        .body-item input {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-
-        .body-label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 8px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1.5px solid var(--card-border);
-            text-align: center;
-            transition: 0.2s all;
-        }
-
-        .body-label strong {
-            font-size: 0.95rem;
-            color: #fff;
-        }
-
-        .body-label span {
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            margin-top: 2px;
-        }
-
-        .body-item input:checked + .body-label {
-            border-color: var(--cyan);
-            background: rgba(0, 240, 255, 0.08);
-            box-shadow: 0 0 12px var(--cyan-glow);
-        }
-
-        /* Вибір зон та допів (Чекбокси) */
-        .item-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .checkbox-row {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1.5px solid var(--card-border);
-            border-radius: 12px;
-            padding: 12px 14px;
-            cursor: pointer;
-            transition: 0.2s border-color;
-        }
-
-        .checkbox-row:active {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .checkbox-row input {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--cyan);
-            margin-right: 14px;
-            flex-shrink: 0;
-        }
-
-        .checkbox-info strong {
-            display: block;
-            font-size: 0.92rem;
-            color: #fff;
-        }
-
-        .checkbox-info span {
-            display: block;
-            font-size: 0.78rem;
-            color: var(--text-gray);
-            margin-top: 1px;
-        }
-
-        /* Вибір пакету */
-        .pack-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .pack-item input {
-            position: absolute;
-            opacity: 0;
-        }
-
-        .pack-label {
-            display: flex;
-            flex-direction: column;
-            padding: 16px 12px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1.5px solid var(--card-border);
-            cursor: pointer;
-            height: 100%;
-            text-align: center;
-        }
-
-        .pack-label strong {
-            font-size: 1rem;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-
-        .pack-label span {
-            font-size: 0.75rem;
-            color: var(--text-gray);
-        }
-
-        .pack-item input:checked + .pack-label {
-            border-color: var(--cyan);
-            background: rgba(0, 240, 255, 0.08);
-            box-shadow: 0 0 12px var(--cyan-glow);
-        }
-
-        .pack-item input#pack_prem:checked + .pack-label {
-            border-color: var(--magenta);
-            background: rgba(255, 0, 127, 0.08);
-            box-shadow: 0 0 12px var(--magenta-glow);
-        }
-
-        /* Кнопки керування */
-        .btn-panel {
-            display: flex;
-            gap: 10px;
-            margin-top: 22px;
-        }
-
-        .btn-ui {
-            flex: 1;
-            height: 48px;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s all;
-        }
-
-        .btn-back {
-            flex: 0 0 45%;
-            background: transparent;
-            color: var(--text-gray);
-            border: 1.5px solid var(--card-border);
-        }
-
-        .btn-next-action {
-            background: var(--cyan);
-            color: #000;
-            box-shadow: 0 0 14px var(--cyan-glow);
-        }
-
-        .btn-calc {
-            background: var(--magenta);
-            color: #fff;
-            box-shadow: 0 0 14px var(--magenta-glow);
-        }
-
-        /* Лоадер */
-        .loader-block {
-            text-align: center;
-            padding: 30px 10px;
-        }
-
-        .spinner-ring {
-            width: 54px;
-            height: 54px;
-            margin: 0 auto 20px;
-            border: 4px solid var(--card-border);
-            border-top: 4px solid var(--cyan);
-            border-right: 4px solid var(--magenta);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-
-        .loader-title {
-            font-size: 1.15rem;
-            margin-bottom: 8px;
-        }
-
-        .loader-msg {
-            font-size: 0.85rem;
-            color: var(--cyan);
-            font-family: monospace;
-            min-height: 20px;
-        }
-
-        /* Фінальний екран */
-        .results-block {
-            text-align: center;
-        }
-
-        .summary-specs {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 14px;
-            text-align: left;
-            margin-bottom: 20px;
-            font-size: 0.85rem;
-        }
-
-        .spec-line {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .spec-line:last-child {
-            border-bottom: none;
-        }
-
-        .spec-key {
-            color: var(--text-gray);
-        }
-
-        .spec-val {
-            color: #fff;
-            font-weight: 600;
-            max-width: 65%;
-            text-align: right;
-        }
-
-        .price-output {
-            margin: 18px 0 22px;
-        }
-
-        .price-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-gray);
-        }
-
-        .price-digits {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #fff;
-            text-shadow: 0 0 15px var(--cyan-glow);
-        }
-
-        .price-digits span {
-            color: var(--cyan);
-            font-size: 1.4rem;
-            margin-left: 4px;
-        }
-
-        /* Telegram CTA */
-        .telegram-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            height: 52px;
-            background: linear-gradient(135deg, #0088cc, var(--cyan));
-            color: #fff;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-decoration: none;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 136, 204, 0.5);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .telegram-btn:active {
-            transform: scale(0.98);
-        }
-
-        .reset-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--text-gray);
-            font-size: 0.8rem;
-            text-decoration: underline;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        footer {
-            text-align: center;
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            padding: 12px;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VS AUTO 0542 — шумоізоляція авто в Чернівцях</title>
+<meta name="description" content="Шумоізоляція автомобіля в Чернівцях: повна та точкова, антирип, антикор, аудіосистеми під ключ. Розрахуйте орієнтовну вартість онлайн.">
+<meta name="theme-color" content="#14181c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#14181c; --night-2:#1c2228; --night-line:#2c343c; --on-night:#eef0f1; --on-night-muted:#a9b1b8;
+  --paper:#f4f1ec; --paper-2:#ebe6de; --card:#fffdf9; --ink:#1b2127; --muted:#58616a; --line:#ddd6cb;
+  --brass:#c9a66b; --brass-deep:#8a6a33; --brass-soft:#f3eadb; --err:#a8402e;
+  --serif:"Cormorant Garamond",Georgia,serif; --sans:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --r:16px; --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3{margin:0;font-weight:600}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--brass);outline-offset:3px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- кнопки ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 30px;border-radius:999px;border:0;background:var(--brass);color:var(--night);font-weight:700;font-size:1rem;letter-spacing:.01em;text-decoration:none;cursor:pointer;transition:transform .2s var(--ease),background .2s}
+.btn:hover{background:#d4b47e}
+.btn:active{transform:scale(.98)}
+.btn[disabled]{opacity:.55;cursor:wait}
+.btn-line{background:transparent;color:var(--on-night);box-shadow:inset 0 0 0 1.5px var(--night-line)}
+.btn-line:hover{background:rgba(255,255,255,.06)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:#2a323a}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* ---------- шапка ---------- */
+.top{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,box-shadow .3s}
+.top.solid{background:rgba(20,24,28,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--night-line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;color:var(--on-night);text-decoration:none;font-weight:700;letter-spacing:.08em;font-size:.95rem}
+.logo svg{width:30px;height:16px}
+.call{display:inline-flex;align-items:center;gap:10px;color:var(--on-night);text-decoration:none;font-weight:600;min-height:44px;padding:0 4px}
+.call .ic{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--night-line)}
+.call svg{width:18px;height:18px}
+
+/* ---------- главный экран ---------- */
+.hero{position:relative;background:var(--night);color:var(--on-night);min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:120px 0 80px}
+.hero canvas{position:absolute;left:0;right:0;bottom:6%;width:100%;height:46%;pointer-events:none}
+.hero .wrap{position:relative;width:100%}
+.eyebrow{font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600;margin-bottom:22px}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.7rem,7.6vw,5.4rem);line-height:1.02;letter-spacing:-.01em;max-width:11ch}
+.hero h1 em{font-style:italic;color:var(--brass)}
+.hero .lead{margin-top:24px;max-width:30em;color:var(--on-night-muted);font-size:1.12rem}
+.hero .ctas{margin-top:36px;display:flex;flex-wrap:wrap;gap:14px}
+.scroll-cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);color:var(--on-night-muted);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase}
+
+/* ---------- секции ---------- */
+section{padding:104px 0}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:baseline;margin-bottom:48px}
+.sec-num{font-family:var(--serif);font-size:1.3rem;color:var(--brass-deep);font-style:italic}
+.sec-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,5vw,3.2rem);line-height:1.08}
+.sec-head p{grid-column:2;color:var(--muted);max-width:34em;margin-top:10px}
+.quiet-line{height:1px;background:linear-gradient(90deg,transparent,var(--line) 15%,var(--line) 85%,transparent)}
+
+/* услуги */
+.svc{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line)}
+.svc article{padding:36px 32px 36px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:56px 1fr;gap:20px;align-items:start}
+.svc article:nth-child(odd){border-right:1px solid var(--line)}
+.svc article:nth-child(even){padding-left:32px}
+.svc .ico{width:56px;height:56px;border-radius:50%;background:var(--brass-soft);display:grid;place-items:center;color:var(--brass-deep)}
+.svc .ico svg{width:28px;height:28px}
+.svc h3{font-size:1.2rem;font-weight:700;margin-bottom:6px}
+.svc p{color:var(--muted)}
+.svc .tag{display:inline-block;margin-top:12px;font-size:.88rem;color:var(--brass-deep);font-weight:600}
+
+/* ---------- калькулятор ---------- */
+#calc{background:var(--paper-2)}
+.calc{background:var(--card);border-radius:24px;box-shadow:0 1px 2px rgba(27,33,39,.05),0 20px 60px -20px rgba(27,33,39,.18);max-width:760px;margin:0 auto;position:relative}
+.calc-body{padding:36px 40px 28px}
+.progress{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:28px 40px 0}
+.progress li{list-style:none;font-size:.85rem;color:var(--muted);font-weight:600}
+.progress li::before{content:"";display:block;height:4px;border-radius:4px;background:var(--line);margin-bottom:10px;transition:background .4s var(--ease)}
+.progress li.done::before,.progress li.cur::before{background:var(--brass)}
+.progress li.cur{color:var(--ink)}
+.progress{margin:0}
+.step-label{display:none;padding:12px 18px 0;font-size:.88rem;font-weight:600;color:var(--muted)}
+
+.step{display:none}
+.step.on{display:block;animation:in .45s var(--ease)}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.step h3{font-family:var(--serif);font-weight:600;font-size:2rem;line-height:1.15;margin-bottom:6px}
+.step .sub{color:var(--muted);margin-bottom:28px}
+.back{background:none;border:0;padding:8px 0;margin:-8px 0 8px;color:var(--muted);cursor:pointer;font-weight:600;font-size:.95rem;min-height:44px}
+.back:hover{color:var(--ink)}
+
+.fld{margin-bottom:22px}
+.fld>label,.lbl{display:block;font-weight:600;font-size:.95rem;margin-bottom:10px}
+.lbl small{font-weight:500;color:var(--muted)}
+.row2{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+.input,select.input,textarea.input{width:100%;min-height:58px;border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:14px 16px;font:500 1.05rem var(--sans);color:var(--ink);transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none}
+select.input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none' stroke='%2358616a' stroke-width='2'%3E%3Cpath d='M1 1l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center;padding-right:44px}
+textarea.input{min-height:110px;resize:vertical;line-height:1.5}
+.input:focus{outline:none;border-color:var(--brass-deep);box-shadow:0 0 0 4px var(--brass-soft)}
+.input.bad{border-color:var(--err)}
+
+/* кузов: карточки-силуэты */
+.bodies{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tile{position:relative}
+.tile input{position:absolute;opacity:0;pointer-events:none}
+.tile label{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;min-height:128px;padding:16px 10px;border:1.5px solid var(--line);border-radius:16px;background:#fff;cursor:pointer;font-weight:600;font-size:.95rem;line-height:1.3;transition:border-color .2s,background .2s,transform .2s var(--ease)}
+.tile label small{font-weight:500;color:var(--muted);font-size:.82rem}
+.tile svg{width:72px;height:36px;color:var(--muted);transition:color .2s}
+.tile input:checked+label{border-color:var(--brass-deep);background:var(--brass-soft);box-shadow:inset 0 0 0 1px var(--brass-deep)}
+.tile input:checked+label svg{color:var(--brass-deep)}
+.tile input:focus-visible+label{outline:3px solid var(--brass);outline-offset:2px}
+.tile label:active{transform:scale(.98)}
+
+/* сегменты */
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;padding:6px;background:var(--paper);border-radius:16px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:56px;padding:8px 10px;border-radius:12px;cursor:pointer;font-weight:600;font-size:.98rem;line-height:1.25;color:var(--muted);transition:background .2s,color .2s,box-shadow .2s}
+.seg label small{font-weight:500;font-size:.82rem;margin-top:2px}
+.seg input:checked+label{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.05)}
+.seg input:focus-visible+label{outline:3px solid var(--brass);outline-offset:-3px}
+
+/* схема авто */
+.car{margin:26px 0 8px;background:var(--paper);border-radius:18px;padding:18px 14px 8px}
+.car svg{display:block;width:100%;height:auto;max-height:220px}
+.car .z{fill:var(--paper-2);stroke:none;transition:fill .35s var(--ease)}
+.car .z.on{fill:var(--brass)}
+.car .arch{fill:none;stroke:var(--paper-2);stroke-width:9;stroke-linecap:round;transition:stroke .35s var(--ease)}
+.car .arch.on{stroke:var(--brass)}
+.car.part .z,.car.part .arch{cursor:pointer}
+.car .glass{fill:#fff;opacity:.55}
+.car .outline{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+.car .tyre{fill:var(--ink)}
+.car .rim{fill:var(--paper)}
+.car-hint{text-align:center;font-size:.9rem;color:var(--muted);margin-top:4px;min-height:1.5em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip label{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-weight:600;font-size:.95rem;transition:all .2s}
+.chip label::before{content:"";width:16px;height:16px;border-radius:50%;border:1.5px solid #a7aeb4;transition:all .2s}
+.chip input:checked+label{border-color:var(--brass-deep);background:var(--brass-soft)}
+.chip input:checked+label::before{background:var(--brass-deep);border-color:var(--brass-deep);box-shadow:inset 0 0 0 3px var(--brass-soft)}
+.chip input:focus-visible+label{outline:3px solid var(--brass);outline-offset:2px}
+.chips.locked label{pointer-events:none}
+
+/* списки опций */
+.list{display:grid;gap:10px}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt label{display:flex;align-items:center;gap:14px;min-height:58px;padding:12px 18px;border:1.5px solid var(--line);border-radius:14px;background:#fff;cursor:pointer;font-weight:600;font-size:1rem;line-height:1.35;transition:all .2s}
+.opt label .mk{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid #a7aeb4;transition:all .2s}
+.opt input[type=checkbox]+label .mk{border-radius:7px}
+.opt label .pr{margin-left:auto;font-weight:600;color:var(--muted);font-size:.92rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+.opt input:checked+label{border-color:var(--brass-deep);background:var(--brass-soft)}
+.opt input:checked+label .mk{border-color:var(--brass-deep);background:var(--brass-deep);box-shadow:inset 0 0 0 4px var(--brass-soft)}
+.opt input:focus-visible+label{outline:3px solid var(--brass);outline-offset:2px}
+.group{margin-bottom:30px}
+
+/* результат */
+.price-card{background:var(--night);color:var(--on-night);border-radius:20px;padding:30px 28px;position:relative;overflow:hidden}
+.price-card .k{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);font-weight:600}
+.price-card .v{font-family:var(--serif);font-size:clamp(2.3rem,8vw,3.3rem);font-weight:600;line-height:1.1;margin:10px 0 6px;font-variant-numeric:lining-nums}
+.price-card .car-name{color:var(--on-night-muted)}
+.price-card ul{list-style:none;padding:0;margin:20px 0 0;border-top:1px solid var(--night-line)}
+.price-card li{padding:10px 0;border-bottom:1px solid var(--night-line);color:var(--on-night-muted);font-size:.98rem}
+.note{display:flex;gap:12px;align-items:flex-start;margin:18px 0 34px;padding:16px 18px;border-radius:14px;background:var(--brass-soft);color:#5e4720;font-size:.98rem}
+.note svg{flex:none;width:22px;height:22px;margin-top:1px}
+.lead-title{font-family:var(--serif);font-weight:600;font-size:1.8rem;line-height:1.15;margin-bottom:6px}
+.req{color:var(--err)}
+.err{color:var(--err);font-size:.95rem;font-weight:600;margin-top:8px;min-height:0}
+.err:empty{display:none}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.done{text-align:center;padding:24px 0 12px}
+.done .tick{width:84px;height:84px;margin:0 auto 22px;border-radius:50%;background:var(--brass-soft);display:grid;place-items:center;color:var(--brass-deep)}
+.done .tick svg{width:40px;height:40px}
+.done h3{font-family:var(--serif);font-size:2.2rem;font-weight:600;margin-bottom:10px}
+.done p{color:var(--muted);max-width:26em;margin:0 auto}
+
+/* нижняя панель с ценой */
+.bar{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 40px calc(16px + env(safe-area-inset-bottom));background:rgba(255,253,249,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);border-radius:0 0 24px 24px}
+.bar .k{font-size:.82rem;color:var(--muted);font-weight:600}
+.bar .v{font-weight:700;font-size:1.15rem;font-variant-numeric:tabular-nums;line-height:1.3}
+.bar .v.dim{color:var(--muted);font-weight:600;font-size:1rem}
+.bar .btn{min-width:180px}
+.bar[hidden]{display:none}
+
+/* ---------- контакты ---------- */
+#contacts{background:var(--night);color:var(--on-night);position:relative;overflow:hidden}
+#contacts .sec-num{color:var(--brass)}
+#contacts .sec-head p{color:var(--on-night-muted)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cbox{display:flex;align-items:center;gap:20px;padding:28px;border-radius:20px;background:var(--night-2);box-shadow:inset 0 0 0 1px var(--night-line);text-decoration:none;color:var(--on-night);transition:background .25s,transform .25s var(--ease)}
+.cbox:hover{background:#232a31}
+.cbox:active{transform:scale(.99)}
+.cbox .ic{flex:none;width:60px;height:60px;border-radius:50%;background:var(--brass);color:var(--night);display:grid;place-items:center}
+.cbox .ic svg{width:26px;height:26px}
+.cbox .k{font-size:.85rem;color:var(--on-night-muted);font-weight:600}
+.cbox .v{font-size:1.35rem;font-weight:700;line-height:1.3}
+.flatline{margin-top:72px;display:flex;align-items:center;gap:14px;color:var(--on-night-muted);font-size:.85rem;letter-spacing:.18em;text-transform:uppercase}
+.flatline::before,.flatline::after{content:"";flex:1;height:1px;background:var(--night-line)}
+footer{background:var(--night);color:#7d868e;font-size:.9rem;padding:0 0 calc(40px + env(safe-area-inset-bottom))}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* ---------- мобільна версія ---------- */
+@media (max-width:760px){
+  body{font-size:17px}
+  .wrap{padding:0 20px}
+  section{padding:76px 0}
+  .hero{padding:110px 0 64px;min-height:92svh}
+  .hero canvas{height:34%;bottom:3%}
+  .hero .ctas .btn{flex:1 1 100%}
+  .call .num{display:none}
+  .sec-head{grid-template-columns:1fr;margin-bottom:32px}
+  .sec-head p{grid-column:1}
+  .svc{grid-template-columns:1fr}
+  .svc article,.svc article:nth-child(even){padding:26px 0;border-right:0}
+  .svc article{grid-template-columns:48px 1fr;gap:16px}
+  .svc .ico{width:48px;height:48px}
+  #calc .wrap{padding:0 10px}
+  .calc{border-radius:20px}
+  .calc-body{padding:26px 18px 22px}
+  .progress{padding:22px 18px 0;gap:6px}
+  .progress li{font-size:0}
+  .step-label{display:block}
+  .step h3{font-size:1.75rem}
+  .row2{grid-template-columns:1fr;gap:0}
+  .row2 .fld{margin-bottom:22px}
+  .bodies{grid-template-columns:1fr 1fr;gap:10px}
+  .tile label{min-height:118px}
+  .bar{padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-radius:0 0 20px 20px}
+  .bar .btn{min-width:0;padding:0 24px}
+  .cgrid{grid-template-columns:1fr}
+  .cbox{padding:22px}
+  .cbox .v{font-size:1.2rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
 </head>
 <body>
 
-<header>
-    <div class="brand-logo">VSAUTO <span>0542</span></div>
-    <div class="location-tag">Чернівці</div>
+<!-- ============ ШАПКА ============ -->
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="VS AUTO 0542, на початок">
+      <svg viewBox="0 0 30 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1 8h3l2-6 3 12 3-9 2 5 2-2h13"/></svg>
+      VS AUTO 0542
+    </a>
+    <a class="call" href="tel:+380000000000" data-tel>
+      <span class="num" data-tel-text>+38 (000) 000-00-00</span>
+      <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 3h3l2 5-2.5 1.5a11 11 0 0 0 7 7L16 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></span>
+      <span class="sr">Подзвонити</span>
+    </a>
+  </div>
 </header>
 
-<main>
-    <!-- Прогрес -->
-    <div class="progress-box" id="progress_wrapper">
-        <div class="progress-labels">
-            <span id="step_label">Крок 1 з 5</span>
-            <span id="step_percent">20%</span>
-        </div>
-        <div class="progress-track">
-            <div class="progress-bar" id="progress_bar"></div>
-        </div>
+<!-- ============ ГОЛОВНИЙ ЕКРАН ============ -->
+<section class="hero" aria-labelledby="h1">
+  <canvas id="wave" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="eyebrow">Шумоізоляція авто · Чернівці</div>
+    <h1 id="h1">Залиште шум <em>за&nbsp;дверима</em></h1>
+    <p class="lead">Робимо салон тихим: прибираємо гул коліс, вітер і скрипи. Порахуйте орієнтовну вартість за хвилину, і ми передзвонимо.</p>
+    <div class="ctas">
+      <a class="btn" href="#calc">Розрахувати вартість
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-line" href="tel:+380000000000" data-tel>Подзвонити</a>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true">тиша нижче</div>
+</section>
+
+<!-- ============ ПОСЛУГИ ============ -->
+<section id="services" aria-labelledby="svc-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2 id="svc-h">Що ми робимо</h2>
+    </div>
+    <div class="svc">
+      <article>
+        <div class="ico"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 14h3l2-6 3 12 3-9 2 5 2-2h7"/></svg></div>
+        <div><h3>Шумоізоляція</h3><p>Повна під ключ або точкова: двері, дах, підлога, арки, багажник, капот.</p><span class="tag">Повна або точкова</span></div>
+      </article>
+      <article>
+        <div class="ico"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="20" height="10" rx="3"/><path d="M9 9V6M19 9V6M9 22v-3M19 22v-3"/></svg></div>
+        <div><h3>Антирип салону</h3><p>Прибираємо скрипи й деренчання пластику, панелей та обшивок.</p></div>
+      </article>
+      <article>
+        <div class="ico"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M14 3l9 4v6c0 6-4 10-9 12-5-2-9-6-9-12V7z"/><path d="M10 14l3 3 5-6" stroke-linecap="round"/></svg></div>
+        <div><h3>Антикор</h3><p>Захищаємо днище, пороги й приховані порожнини від іржі.</p></div>
+      </article>
+      <article>
+        <div class="ico"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="3" width="16" height="22" rx="3"/><circle cx="14" cy="16" r="4.5"/><circle cx="14" cy="8" r="1.5"/></svg></div>
+        <div><h3>Аудіосистеми під ключ</h3><p>Підбираємо та встановлюємо колонки, підсилювачі й сабвуфери.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ КАЛЬКУЛЯТОР ============ -->
+<section id="calc" aria-labelledby="calc-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2 id="calc-h">Скільки коштує тиша</h2>
+      <p>Чотири короткі кроки. Ціна оновлюється одразу, внизу екрана.</p>
     </div>
 
-    <div class="quiz-sheet">
+    <div class="calc" id="calcBox">
+      <ol class="progress" id="progress" aria-label="Кроки">
+        <li>1 · Авто</li><li>2 · Шумоізоляція</li><li>3 · Додатково</li><li>4 · Заявка</li>
+      </ol>
+      <div class="step-label" id="stepLabel" aria-hidden="true">Крок 1 з 4 · Авто</div>
 
-        <!-- КРОК 1: Марка та рік -->
-        <div class="quiz-step active" data-step="1">
-            <div class="step-heading">1. Ваш автомобіль</div>
-            <div class="step-subtext">Вкажіть дані авто для точного підбору технологічної карти</div>
-            <div class="form-group">
-                <input type="text" id="input_car" class="custom-input" placeholder="Марка і модель (напр. Kia Optima)" autocomplete="off">
-                <input type="number" id="input_year" class="custom-input" placeholder="Рік випуску (напр. 2022)" min="1990" max="2026">
+      <div class="calc-body">
+        <!-- КРОК 1 -->
+        <div class="step on" data-step="1">
+          <h3>Ваш автомобіль</h3>
+          <p class="sub">Від розміру й віку авто залежить обсяг роботи.</p>
+          <div class="row2">
+            <div class="fld">
+              <label for="brand">Марка</label>
+              <select class="input" id="brand"></select>
+              <input class="input" type="text" id="brandOther" placeholder="Напишіть марку" style="margin-top:10px" hidden maxlength="40">
             </div>
-            <div class="btn-panel">
-                <button type="button" class="btn-ui btn-next-action" onclick="nextStep(2)">Далі →</button>
+            <div class="fld">
+              <label for="year">Рік випуску</label>
+              <select class="input" id="year"></select>
             </div>
+          </div>
+          <div class="fld" style="margin-bottom:0">
+            <span class="lbl" id="bodyLbl">Тип кузова</span>
+            <div class="bodies" id="bodies" role="radiogroup" aria-labelledby="bodyLbl"></div>
+          </div>
+          <div class="err" id="e1" role="alert"></div>
         </div>
 
-        <!-- КРОК 2: Тип кузова (5 варіантів) -->
-        <div class="quiz-step" data-step="2">
-            <div class="step-heading">2. Тип кузова</div>
-            <div class="step-subtext">Від цього залежить площа металу та об'єм розбору</div>
-            <div class="body-grid">
-                <label class="body-item">
-                    <input type="radio" name="body_type" value="sedan" checked>
-                    <div class="body-label">
-                        <strong>Седан</strong>
-                        <span>Kia Optima тощо</span>
-                    </div>
-                </label>
-                <label class="body-item">
-                    <input type="radio" name="body_type" value="crossover">
-                    <div class="body-label">
-                        <strong>Кросовер</strong>
-                        <span>Qashqai / RAV4</span>
-                    </div>
-                </label>
-                <label class="body-item">
-                    <input type="radio" name="body_type" value="hatchback">
-                    <div class="body-label">
-                        <strong>Хетчбек</strong>
-                        <span>Golf / Focus тощо</span>
-                    </div>
-                </label>
-                <label class="body-item">
-                    <input type="radio" name="body_type" value="wagon">
-                    <div class="body-label">
-                        <strong>Універсал</strong>
-                        <span>Passat Variant тощо</span>
-                    </div>
-                </label>
-                <label class="body-item">
-                    <input type="radio" name="body_type" value="suv">
-                    <div class="body-label">
-                        <strong>Позашляховик</strong>
-                        <span>LC Prado / Touareg</span>
-                    </div>
-                </label>
+        <!-- КРОК 2 -->
+        <div class="step" data-step="2">
+          <button class="back" type="button" data-back>← Назад</button>
+          <h3>Шумоізоляція</h3>
+          <p class="sub">Повна дає найбільший ефект. Точкова підходить, якщо заважає щось конкретне.</p>
+          <div class="seg" role="radiogroup" aria-label="Варіант шумоізоляції">
+            <input type="radio" name="ins" id="ins-full" value="full" checked><label for="ins-full">Повна<small>під ключ</small></label>
+            <input type="radio" name="ins" id="ins-part" value="part"><label for="ins-part">Точкова<small>окремі зони</small></label>
+            <input type="radio" name="ins" id="ins-none" value="none"><label for="ins-none">Не треба<small>інші послуги</small></label>
+          </div>
+
+          <div id="insBox">
+            <div class="car" id="car" aria-hidden="true">
+              <svg viewBox="0 0 400 156">
+                <defs><clipPath id="bodyClip"><path id="bodyPath" d="M20,104 L20,86 Q21,74 38,71 L116,64 L148,34 Q156,27 170,27 L248,27 Q262,27 271,36 L300,64 L360,70 Q382,74 384,92 L384,104 Q384,114 374,114 L338,114 A33,33 0 0 0 272,114 L128,114 A33,33 0 0 0 62,114 L30,114 Q20,114 20,104 Z"/></clipPath></defs>
+                <g clip-path="url(#bodyClip)">
+                  <rect class="z" data-z="trunk" x="18" y="20" width="106" height="100"/>
+                  <rect class="z" data-z="roof"  x="124" y="20" width="160" height="13"/>
+                  <rect class="z" data-z="rd"    x="124" y="33" width="85"  height="74"/>
+                  <rect class="z" data-z="fd"    x="211" y="33" width="68"  height="74"/>
+                  <rect class="z" data-z="floor" x="124" y="107" width="155" height="10"/>
+                  <rect class="z" data-z="hood"  x="281" y="20" width="106" height="100"/>
+                </g>
+                <path class="glass" d="M152,62 L162,41 Q166,35 174,35 L207,35 L207,62 Z"/>
+                <path class="glass" d="M213,35 L247,35 Q257,35 263,41 L284,62 L213,62 Z"/>
+                <use href="#bodyPath" class="outline"/>
+                <path class="outline" d="M124,64 L124,110 M210,35 L210,110 M281,64 L281,108" stroke-width="1.3"/>
+                <path class="arch" data-z="arch" d="M58,116 A37,37 0 0 1 132,116"/>
+                <path class="arch" data-z="arch" d="M268,116 A37,37 0 0 1 342,116"/>
+                <circle class="tyre" cx="95" cy="118" r="24"/><circle class="rim" cx="95" cy="118" r="11"/>
+                <circle class="tyre" cx="305" cy="118" r="24"/><circle class="rim" cx="305" cy="118" r="11"/>
+                <path d="M8,143 H392" stroke="#cfc7bb" stroke-width="1.5" stroke-dasharray="2 6" stroke-linecap="round"/>
+              </svg>
+              <div class="car-hint" id="carHint"></div>
             </div>
-            <div class="btn-panel">
-                <button type="button" class="btn-ui btn-back" onclick="nextStep(1)">← Назад</button>
-                <button type="button" class="btn-ui btn-next-action" onclick="nextStep(3)">Далі →</button>
+            <div class="chips" id="zones" role="group" aria-label="Зони шумоізоляції"></div>
+
+            <div class="fld" style="margin:28px 0 0">
+              <span class="lbl" id="matLbl">Матеріали</span>
+              <div class="seg" role="radiogroup" aria-labelledby="matLbl">
+                <input type="radio" name="mat" id="mat-e" value="eco" checked><label for="mat-e">Стандарт<small>оптимальна ціна</small></label>
+                <input type="radio" name="mat" id="mat-p" value="prem"><label for="mat-p">Преміум<small>максимальна тиша</small></label>
+              </div>
             </div>
+          </div>
+          <div class="err" id="e2" role="alert"></div>
         </div>
 
-        <!-- КРОК 3: Зони обробки -->
-        <div class="quiz-step" data-step="3">
-            <div class="step-heading">3. Зони шумоізоляції</div>
-            <div class="step-subtext">Виберіть зони, які турбують найбільше</div>
-            <div class="item-list">
-                <label class="checkbox-row">
-                    <input type="checkbox" name="zone" value="doors" checked>
-                    <div class="checkbox-info">
-                        <strong>Двері (передні + задні)</strong>
-                        <span>Забирає вуличний гул, покращує звучання динаміків</span>
-                    </div>
-                </label>
-                <label class="checkbox-row">
-                    <input type="checkbox" name="zone" value="floor">
-                    <div class="checkbox-info">
-                        <strong>Салон (Підлога)</strong>
-                        <span>Знижує шум коліс, днища та вихлопу</span>
-                    </div>
-                </label>
-                <label class="checkbox-row">
-                    <input type="checkbox" name="zone" value="trunk">
-                    <div class="checkbox-info">
-                        <strong>Багажник</strong>
-                        <span>Прибирає гул задніх арок та резонанс ляди</span>
-                    </div>
-                </label>
-                <label class="checkbox-row">
-                    <input type="checkbox" name="zone" value="arches">
-                    <div class="checkbox-info">
-                        <strong>Колісні арки</strong>
-                        <span>Шум від шин, каміння та мокрої дороги</span>
-                    </div>
-                </label>
-                <label class="checkbox-row">
-                    <input type="checkbox" name="zone" value="roof">
-                    <div class="checkbox-info">
-                        <strong>Дах (Криша)</strong>
-                        <span>Прибирає дзвін дощу та аеродинамічний свист</span>
-                    </div>
-                </label>
-                <label class="checkbox-row">
-                    <input type="checkbox" name="zone" value="hood">
-                    <div class="checkbox-info">
-                        <strong>Капот</strong>
-                        <span>Знижує вібрації від двигуна у салон</span>
-                    </div>
-                </label>
-            </div>
-            <div class="btn-panel">
-                <button type="button" class="btn-ui btn-back" onclick="nextStep(2)">← Назад</button>
-                <button type="button" class="btn-ui btn-next-action" onclick="nextStep(4)">Далі →</button>
-            </div>
+        <!-- КРОК 3 -->
+        <div class="step" data-step="3">
+          <button class="back" type="button" data-back>← Назад</button>
+          <h3>Додатково</h3>
+          <p class="sub">За бажанням. Можна пропустити.</p>
+          <div class="group">
+            <span class="lbl" id="sqLbl">Антирип салону</span>
+            <div class="seg" role="radiogroup" aria-labelledby="sqLbl" id="squeak"></div>
+          </div>
+          <div class="group">
+            <span class="lbl" id="ruLbl">Антикор</span>
+            <div class="list" role="radiogroup" aria-labelledby="ruLbl" id="rust"></div>
+          </div>
+          <div class="group" style="margin-bottom:0">
+            <span class="lbl" id="auLbl">Аудіосистема <small>· робота, обладнання окремо</small></span>
+            <div class="list" role="group" aria-labelledby="auLbl" id="audio"></div>
+          </div>
+          <div class="err" id="e3" role="alert"></div>
         </div>
 
-        <!-- КРОК 4: Пакет матеріалів -->
-        <div class="quiz-step" data-step="4">
-            <div class="step-heading">4. Матеріали</div>
-            <div class="step-subtext">Оберіть клас матеріалів та ефективність</div>
-            <div class="pack-grid">
-                <label class="pack-item">
-                    <input type="radio" id="pack_econ" name="pack_type" value="economy" checked>
-                    <div class="pack-label">
-                        <strong>Економ</strong>
-                        <span>Оптимальний баланс ціни та зменшення шуму</span>
-                    </div>
-                </label>
-                <label class="pack-item">
-                    <input type="radio" id="pack_prem" name="pack_type" value="premium">
-                    <div class="pack-label">
-                        <strong style="color: var(--magenta);">Преміум</strong>
-                        <span>Топові багатошарові мастики для максимальної тиші</span>
-                    </div>
-                </label>
+        <!-- КРОК 4 -->
+        <div class="step" data-step="4">
+          <div id="leadWrap">
+            <button class="back" type="button" data-back>← Змінити параметри</button>
+            <div class="price-card" aria-live="polite">
+              <div class="k">Орієнтовна вартість</div>
+              <div class="v" id="finalSum">—</div>
+              <div class="car-name" id="finalCar"></div>
+              <ul id="finalList"></ul>
             </div>
-            <div class="btn-panel">
-                <button type="button" class="btn-ui btn-back" onclick="nextStep(3)">← Назад</button>
-                <button type="button" class="btn-ui btn-next-action" onclick="nextStep(5)">Далі →</button>
+            <div class="note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.5"/></svg>
+              <span>Ціна орієнтовна. Точну суму назвемо після огляду автомобіля, це безкоштовно.</span>
             </div>
+
+            <form id="leadForm" novalidate>
+              <div class="lead-title">Залиште заявку</div>
+              <p class="sub" style="color:var(--muted);margin-bottom:22px">Передзвонимо, відповімо на питання й домовимося про огляд.</p>
+              <div class="fld">
+                <label for="name">Ваше ім'я <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" type="text" id="name" autocomplete="given-name" required maxlength="80">
+              </div>
+              <div class="fld">
+                <label for="phone">Номер телефону <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" type="tel" id="phone" autocomplete="tel" inputmode="tel" required maxlength="19" placeholder="+380 __ ___ __ __">
+              </div>
+              <div class="fld" style="margin-bottom:0">
+                <label for="comment">Що турбує найбільше <small style="font-weight:500;color:var(--muted)">· необов'язково</small></label>
+                <textarea class="input" id="comment" maxlength="1000" placeholder="Наприклад: гул від коліс на трасі, скрипить панель"></textarea>
+              </div>
+              <div class="hp" aria-hidden="true"><label>Не заповнюйте<input type="text" id="website" tabindex="-1" autocomplete="off"></label></div>
+              <div class="err" id="e4" role="alert"></div>
+              <button type="submit" class="sr">Відправити</button>
+            </form>
+          </div>
+
+          <div class="done" id="done" hidden>
+            <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+            <h3>Дякуємо!</h3>
+            <p>Заявку отримано. Зателефонуємо найближчим часом. Якщо питання термінове, телефонуйте: <a href="tel:+380000000000" data-tel style="color:var(--brass-deep);font-weight:700" data-tel-text>+38 (000) 000-00-00</a></p>
+          </div>
         </div>
+      </div>
 
-        <!-- КРОК 5: Додаткові послуги -->
-        <div class="quiz-step" data-step="5">
-            <div class="step-heading">5. Додаткові послуги</div>
-            <div class="step-subtext">Роботи, які зручно поєднати з розбором салону</div>
-            <div class="item-list">
-                <label class="checkbox-row">
-                    <input type="checkbox" name="extra" value="antiskryp">
-                    <div class="checkbox-info">
-                        <strong>Антискрип салону</strong>
-                        <span>Усунення скрипів стиків пластику та торпеди</span>
-                    </div>
-                </label>
-                <label class="checkbox-row">
-                    <input type="checkbox" name="extra" value="antykor">
-                    <div class="checkbox-info">
-                        <strong>Антикор</strong>
-                        <span>Захист металу в прихованих порожнинах</span>
-                    </div>
-                </label>
-                <label class="checkbox-row">
-                    <input type="checkbox" name="extra" value="music">
-                    <div class="checkbox-info">
-                        <strong>Установка музики</strong>
-                        <span>Монтаж акустики, прокладка проводки</span>
-                    </div>
-                </label>
-            </div>
-            <div class="btn-panel">
-                <button type="button" class="btn-ui btn-back" onclick="nextStep(4)">← Назад</button>
-                <button type="button" class="btn-ui btn-calc" onclick="runAnalysis()">Розрахувати ⚡</button>
-            </div>
+      <div class="bar" id="bar">
+        <div>
+          <div class="k">Орієнтовно</div>
+          <div class="v dim" id="barSum">оберіть авто</div>
         </div>
-
-        <!-- ЕКРАН АНАЛІЗУ (Лоадер) -->
-        <div class="quiz-step" id="loader_step">
-            <div class="loader-block">
-                <div class="spinner-ring"></div>
-                <div class="loader-title">VSAUTO 0542 рахує кошторис...</div>
-                <div class="loader-msg" id="loader_status">Оцінка параметрів кузова...</div>
-            </div>
-        </div>
-
-        <!-- ФІНАЛЬНИЙ ЕКРАН -->
-        <div class="quiz-step" id="final_step">
-            <div class="results-block">
-                <div class="step-heading" style="color: var(--cyan);">Розрахунок готовий</div>
-                <div class="step-subtext">Попередній прорахунок для м. Чернівці</div>
-
-                <div class="summary-specs">
-                    <div class="spec-line">
-                        <span class="spec-key">Автомобіль:</span>
-                        <span class="spec-val" id="res_car_title">—</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-key">Кузов:</span>
-                        <span class="spec-val" id="res_body_title">—</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-key">Обрані зони:</span>
-                        <span class="spec-val" id="res_zones_title">—</span>
-                    </div>
-                    <div class="spec-line">
-                        <span class="spec-key">Пакет:</span>
-                        <span class="spec-val" id="res_pack_title">—</span>
-                    </div>
-                    <div class="spec-line" id="res_extras_line" style="display: none;">
-                        <span class="spec-key">Додатково:</span>
-                        <span class="spec-val" id="res_extras_title">—</span>
-                    </div>
-                </div>
-
-                <div class="price-output">
-                    <div class="price-title">Орієнтовна вартість:</div>
-                    <div class="price-digits" id="final_price_number">0 <span>грн</span></div>
-                </div>
-
-                <a id="telegram_btn_link" href="https://t.me/Borovv" target="_blank" class="telegram-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-                    Отримати повну вартість
-                </a>
-
-                <div>
-                    <button type="button" class="reset-link" onclick="restartQuiz()">Розрахувати для іншого авто</button>
-                </div>
-            </div>
-        </div>
-
+        <button class="btn btn-dark" type="button" id="next">Далі</button>
+      </div>
     </div>
-</main>
+  </div>
+</section>
 
-<footer>
-    © 2026 VSAUTO 0542 | м. Чернівці
-</footer>
+<!-- ============ КОНТАКТИ ============ -->
+<section id="contacts" aria-labelledby="ct-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2 id="ct-h">Контакти</h2>
+      <p>Працюємо в Чернівцях на різних локаціях, тому місце й час узгоджуємо телефоном.</p>
+    </div>
+    <div class="cgrid">
+      <a class="cbox" href="tel:+380000000000" data-tel>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 3h3l2 5-2.5 1.5a11 11 0 0 0 7 7L16 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></span>
+        <span><span class="k">Телефон · натисніть, щоб подзвонити</span><br><span class="v" data-tel-text>+38 (000) 000-00-00</span></span>
+      </a>
+      <a class="cbox" href="https://t.me/your_channel" target="_blank" rel="noopener" data-tg>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 4.3L2.9 11.5c-1.1.4-1.1 1.1-.2 1.4l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.4-1.9zM8.4 14.1l9.8-6.2c.5-.3.9-.1.5.2l-8.2 7.4-.3 3.5z"/></svg></span>
+        <span><span class="k">Telegram-канал</span><br><span class="v">Наші роботи й новини</span></span>
+      </a>
+    </div>
+    <div class="flatline">тиша</div>
+  </div>
+</section>
+<footer><div class="wrap"><span>© VS AUTO 0542</span><span>Чернівці</span></div></footer>
 
 <script>
-    /* --- ДАНІ ТА КОЕФІЦІЄНТИ --- */
-    const basePricing = {
-        // Базові двері за типами кузовів (Економ)
-        doorsByBody: {
-            sedan: 8000,      // Kia Optima
-            crossover: 7500,  // Nissan Qashqai
-            hatchback: 7000,
-            wagon: 8000,
-            suv: 9000
-        },
-        premiumRatio: 1.25, // Преміум +25% (8000 -> 10000, 7500 -> 9375/9500)
-        
-        // Коефіцієнти площ інших зон відносно дверей
-        zonesCoeff: {
-            doors: 1.0,
-            floor: 1.4,
-            trunk: 0.8,
-            roof: 0.7,
-            arches: 0.6,
-            hood: 0.25
-        },
-        // Модифікатори кузова для зон крім дверей
-        bodyMod: {
-            hatchback: 0.9,
-            sedan: 1.0,
-            wagon: 1.15,
-            crossover: 1.2,
-            suv: 1.45
-        },
-        extrasPrice: {
-            antiskryp: 3000,
-            antykor: 6000,
-            music: 2500
-        }
-    };
+/* =========================================================
+   НАЛАШТУВАННЯ: міняйте тут
+   ========================================================= */
+const CONFIG = {
+  phoneHref: "+380000000000",           // номер для дзвінка, без пробілів
+  phoneText: "+38 (000) 000-00-00",     // як номер показувати на сайті
+  telegramChannel: "https://t.me/your_channel",
+  endpoint: "/api/lead",                // адреса відправки заявки (Cloudflare Function)
 
-    const dictionary = {
-        sedan: 'Седан',
-        crossover: 'Кросовер',
-        hatchback: 'Хетчбек',
-        wagon: 'Універсал',
-        suv: 'Позашляховик',
-        doors: 'Двері',
-        floor: 'Салон (Підлога)',
-        trunk: 'Багажник',
-        arches: 'Арки',
-        roof: 'Дах',
-        hood: 'Капот',
-        economy: 'Економ',
-        premium: 'Преміум',
-        antiskryp: 'Антискрип',
-        antykor: 'Антикор',
-        music: 'Установка музики'
-    };
+  // Ціни клієнту, грн (з вашого прайсу; «Стандарт» = економ)
+  zones: [
+    { id:"fd",    name:"Передні двері",  eco:4569, prem:9233 },
+    { id:"rd",    name:"Задні двері",    eco:3945, prem:7764 },
+    { id:"roof",  name:"Дах",            eco:4118, prem:8378 },
+    { id:"floor", name:"Підлога",        eco:5792, prem:11740 },
+    { id:"trunk", name:"Багажник",       eco:2896, prem:5870 },
+    { id:"arch",  name:"Арки коліс",     eco:1805, prem:3420 },
+    { id:"hood",  name:"Капот і моторний щит", eco:2510, prem:5044 },
+  ],
+  squeak: [
+    { id:"",   name:"Не треба",   price:0 },
+    { id:"s1", name:"1–2 зони",   price:1020 },
+    { id:"s2", name:"Весь салон", price:3060 },
+  ],
+  rust: [
+    { id:"",   name:"Не потрібно", price:0 },
+    { id:"r1", name:"Днище, базовий", price:1530 },
+    { id:"r2", name:"Днище, преміум (гумо-бітум)", price:3740 },
+    { id:"r3", name:"Повний: днище, пороги, порожнини", price:5950 },
+  ],
+  audio: [
+    { id:"a2",  name:"Заміна 2 колонок", price:680, group:"spk" },
+    { id:"a4",  name:"Заміна 4 колонок", price:1360, group:"spk" },
+    { id:"amp", name:"Встановлення підсилювача", price:1700 },
+    { id:"sub", name:"Встановлення сабвуфера", price:1190 },
+  ],
 
-    function updateProgress(step) {
-        const percent = Math.round((step / 5) * 100);
-        document.getElementById('step_label').innerText = `Крок ${step} з 5`;
-        document.getElementById('step_percent').innerText = `${percent}%`;
-        document.getElementById('progress_bar').style.width = `${percent}%`;
-    }
+  // Коефіцієнт за розміром кузова (шумоізоляція й антикор)
+  sizes: [
+    { id:"small", name:"Малий",   hint:"хетчбек A/B", k:0.85, icon:"M6,24 L6,17 Q7,14 12,13 L20,12 L28,6 L44,6 Q48,6 50,10 L54,14 Q58,15 58,19 L58,24 Z" },
+    { id:"mid",   name:"Середній", hint:"седан, універсал", k:1.0, icon:"M3,24 L3,18 Q4,15 9,15 L18,14 L25,7 L41,7 L49,14 L58,15 Q61,16 61,19 L61,24 Z" },
+    { id:"big",   name:"Великий", hint:"бізнес, кросовер", k:1.2, icon:"M3,24 L3,14 Q4,11 9,11 L16,10 L22,4 L44,4 L52,10 L58,11 Q61,12 61,16 L61,24 Z" },
+    { id:"suv",   name:"Позашляховик", hint:"мінівен, бус", k:1.35, icon:"M3,24 L3,7 Q3,3 8,3 L46,3 Q50,3 53,8 L58,14 Q61,15 61,18 L61,24 Z" },
+  ],
+  oldYears: 15, oldExtra: 0.10,   // авто старші за 15 років: +10% до шумоізоляції й антикору
+  spread: 0.10,                   // діапазон ціни: ±10%
 
-    function nextStep(step) {
-        if (step === 2) {
-            const carVal = document.getElementById('input_car').value.trim();
-            if (!carVal) {
-                alert('Будь ласка, введіть марку та модель вашого автомобіля');
-                document.getElementById('input_car').focus();
-                return;
-            }
-        }
-
-        document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
-        const target = document.querySelector(`.quiz-step[data-step="${step}"]`);
-        if (target) {
-            target.classList.add('active');
-            updateProgress(step);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    }
-
-    function runAnalysis() {
-        document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
-        document.getElementById('progress_wrapper').style.display = 'none';
-
-        const loader = document.getElementById('loader_step');
-        loader.classList.add('active');
-
-        const status = document.getElementById('loader_status');
-
-        setTimeout(() => { status.innerText = "Підбір товщини вібропоглинача StP/Comfortmat..."; }, 900);
-        setTimeout(() => { status.innerText = "Формування спеціальної пропозиції VSAUTO 0542..."; }, 1900);
-        setTimeout(() => {
-            loader.classList.remove('active');
-            renderResult();
-        }, 2800);
-    }
-
-    function renderResult() {
-        const car = document.getElementById('input_car').value.trim() || "Автомобіль клієнта";
-        const year = document.getElementById('input_year').value.trim();
-        const fullCar = year ? `${car} (${year})` : car;
-
-        const body = document.querySelector('input[name="body_type"]:checked').value;
-        const zones = Array.from(document.querySelectorAll('input[name="zone"]:checked')).map(el => el.value);
-        const pack = document.querySelector('input[name="pack_type"]:checked').value;
-        const extras = Array.from(document.querySelectorAll('input[name="extra"]:checked')).map(el => el.value);
-
-        const isPremium = (pack === 'premium');
-        const mult = isPremium ? basePricing.premiumRatio : 1.0;
-        const bodyMod = basePricing.bodyMod[body];
-
-        let total = 0;
-
-        zones.forEach(zone => {
-            let zPrice = 0;
-            if (zone === 'doors') {
-                zPrice = basePricing.doorsByBody[body] * mult;
-            } else {
-                const baseSedanDoors = basePricing.doorsByBody.sedan;
-                zPrice = baseSedanDoors * basePricing.zonesCoeff[zone] * bodyMod * mult;
-            }
-            total += zPrice;
-        });
-
-        extras.forEach(item => {
-            total += basePricing.extrasPrice[item];
-        });
-
-        const formatted = Math.round(total).toLocaleString('uk-UA');
-
-        // Запис у картку
-        document.getElementById('res_car_title').innerText = fullCar;
-        document.getElementById('res_body_title').innerText = dictionary[body];
-        document.getElementById('res_zones_title').innerText = zones.length > 0 ? zones.map(z => dictionary[z]).join(', ') : 'Не обрано';
-        document.getElementById('res_pack_title').innerText = dictionary[pack];
-
-        const extRow = document.getElementById('res_extras_line');
-        if (extras.length > 0) {
-            extRow.style.display = 'flex';
-            document.getElementById('res_extras_title').innerText = extras.map(e => dictionary[e]).join(', ');
-        } else {
-            extRow.style.display = 'none';
-        }
-
-        document.getElementById('final_price_number').innerHTML = `${formatted} <span>грн</span>`;
-
-        // Генерація посилання в Telegram
-        const zonesTxt = zones.map(z => dictionary[z]).join(', ');
-        const extrasTxt = extras.length > 0 ? `%0A➕ Додатково: ${extras.map(e => dictionary[e]).join(', ')}` : '';
-        const tgMsg = `Вітаю! Пройшов розрахунок на сайті VSAUTO 0542.%0A%0A🚗 Авто: ${encodeURIComponent(fullCar)}%0A🚘 Кузов: ${dictionary[body]}%0A📍 Зони: ${encodeURIComponent(zonesTxt)}%0A📦 Пакет: ${dictionary[pack]}${encodeURIComponent(extrasTxt)}%0A💰 Орієнтовна сума: ~${formatted} грн.%0A%0AПідкажіть точну вартість та коли є вільне вікно на огляд?`;
-
-        document.getElementById('telegram_btn_link').href = `https://t.me/Borovv?text=${tgMsg}`;
-
-        document.getElementById('final_step').classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function restartQuiz() {
-        document.getElementById('final_step').classList.remove('active');
-        document.getElementById('progress_wrapper').style.display = 'block';
-        nextStep(1);
-    }
+  brands: ["Audi","BMW","Chevrolet","Citroën","Dacia","Daewoo","Fiat","Ford","Honda","Hyundai","Kia","Lada (ВАЗ)","Land Rover","Lexus","Mazda","Mercedes-Benz","Mitsubishi","Nissan","Opel","Peugeot","Renault","Seat","Škoda","Subaru","Suzuki","Tesla","Toyota","Volkswagen","Volvo","ЗАЗ"],
+};
 </script>
 
+<script>
+(() => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const money = n => Math.round(n).toLocaleString("uk-UA").replace(/\s/g, " ");
+  const r100 = n => Math.round(n / 100) * 100;
+  const NOW = new Date().getFullYear();
+
+  /* ---------- контакти ---------- */
+  $$("[data-tel]").forEach(a => a.href = "tel:" + CONFIG.phoneHref);
+  $$("[data-tel-text]").forEach(e => e.textContent = CONFIG.phoneText);
+  $$("[data-tg]").forEach(a => a.href = CONFIG.telegramChannel);
+
+  /* ---------- шапка ---------- */
+  const top = $("#top");
+  const onScroll = () => top.classList.toggle("solid", scrollY > 40);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  /* ---------- хвиля: шум → тиша ---------- */
+  (function wave() {
+    const c = $("#wave"), ctx = c.getContext("2d");
+    let W, H, t = 0, run = true, calm = 0;
+    const lines = [
+      { a: 1.00, f: 0.021, s: 0.9, p: 0.0, o: 0.85, w: 1.6 },
+      { a: 0.75, f: 0.034, s: 1.3, p: 1.7, o: 0.45, w: 1.2 },
+      { a: 0.55, f: 0.052, s: 1.8, p: 3.1, o: 0.30, w: 1.0 },
+      { a: 0.85, f: 0.015, s: 0.6, p: 4.4, o: 0.22, w: 1.0 },
+      { a: 0.40, f: 0.071, s: 2.4, p: 5.2, o: 0.18, w: 0.8 },
+    ];
+    const size = () => {
+      const d = Math.min(devicePixelRatio || 1, 2);
+      W = c.clientWidth; H = c.clientHeight;
+      c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    };
+    const smooth = (a, b, x) => { const k = Math.max(0, Math.min(1, (x - a) / (b - a))); return k * k * (3 - 2 * k); };
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      const mid = H / 2, amp = H * 0.42 * (1 - calm * 0.75);
+      const quietFrom = W * (W < 700 ? 0.08 : 0.12), quietTo = W * (W < 700 ? 0.78 : 0.68);
+      for (const L of lines) {
+        ctx.beginPath();
+        for (let x = 0; x <= W; x += 3) {
+          const env = Math.pow(1 - smooth(quietFrom, quietTo, x), 1.6);
+          const y = mid + env * amp * L.a * (
+            Math.sin(x * L.f + t * L.s + L.p) * 0.6 +
+            Math.sin(x * L.f * 2.3 - t * L.s * 1.4 + L.p) * 0.3 +
+            Math.sin(x * L.f * 5.1 + t * L.s * 2.1) * 0.1);
+          x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+        }
+        ctx.strokeStyle = `rgba(201,166,107,${L.o})`; ctx.lineWidth = L.w; ctx.stroke();
+      }
+      // ровная линия тишины + тихий пульс
+      const px = quietTo + ((t * 60) % (W - quietTo + 80)) - 40;
+      const g = ctx.createRadialGradient(px, mid, 0, px, mid, 26);
+      g.addColorStop(0, "rgba(238,240,241,.55)"); g.addColorStop(1, "rgba(238,240,241,0)");
+      ctx.fillStyle = g; ctx.fillRect(px - 26, mid - 26, 52, 52);
+    }
+    function loop() { if (!run) return; t += 0.012; draw(); requestAnimationFrame(loop); }
+    size(); addEventListener("resize", () => { size(); draw(); });
+    addEventListener("scroll", () => { calm = Math.min(1, scrollY / (innerHeight * 0.8)); if (reduce) draw(); }, { passive: true });
+    if (reduce) { t = 2; draw(); return; }
+    new IntersectionObserver(([e]) => { const was = run; run = e.isIntersecting; if (run && !was) loop(); }).observe(c);
+    loop();
+  })();
+
+  /* ---------- побудова полів ---------- */
+  const opt = (v, t) => Object.assign(document.createElement("option"), { value: v, textContent: t });
+  const brand = $("#brand"), year = $("#year");
+  brand.append(opt("", "Оберіть марку"));
+  CONFIG.brands.forEach(b => brand.append(opt(b, b)));
+  brand.append(opt("__other", "Інша марка…"));
+  year.append(opt("", "Оберіть рік"));
+  for (let y = NOW; y >= NOW - 35; y--) year.append(opt(y, y));
+  year.append(opt(NOW - 36, "Раніше " + (NOW - 35)));
+
+  $("#bodies").innerHTML = CONFIG.sizes.map(s => `
+    <div class="tile"><input type="radio" name="size" id="sz-${s.id}" value="${s.id}">
+      <label for="sz-${s.id}"><svg viewBox="0 0 64 30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="${s.icon}"/><circle cx="16" cy="24" r="4.5" fill="#fff"/><circle cx="48" cy="24" r="4.5" fill="#fff"/></svg>
+      ${s.name}<small>${s.hint}</small></label></div>`).join("");
+
+  $("#zones").innerHTML = CONFIG.zones.map(z => `
+    <div class="chip"><input type="checkbox" id="z-${z.id}" value="${z.id}"><label for="z-${z.id}">${z.name}</label></div>`).join("");
+
+  $("#squeak").innerHTML = CONFIG.squeak.map((s, i) => `
+    <input type="radio" name="squeak" id="sq-${i}" value="${s.id}" ${i ? "" : "checked"}><label for="sq-${i}">${s.name}${s.price ? `<small>${money(s.price)} грн</small>` : ""}</label>`).join("");
+
+  const row = (type, name, id, val, label, price, checked) => `
+    <div class="opt"><input type="${type}" name="${name}" id="${id}" value="${val}" ${checked ? "checked" : ""}>
+      <label for="${id}"><span class="mk"></span>${label}${price ? `<span class="pr">${price}</span>` : ""}</label></div>`;
+  $("#rust").innerHTML = CONFIG.rust.map((r, i) => row("radio", "rust", "ru-" + i, r.id, r.name, r.price ? "від " + money(r.price) + " грн" : "", !i)).join("");
+  $("#audio").innerHTML = CONFIG.audio.map(a => row("checkbox", "audio", "au-" + a.id, a.id, a.name, money(a.price) + " грн")).join("");
+
+  /* ---------- поведінка полів ---------- */
+  brand.addEventListener("change", () => { $("#brandOther").hidden = brand.value !== "__other"; if (!$("#brandOther").hidden) $("#brandOther").focus(); });
+  $$("#audio input").forEach(inp => inp.addEventListener("change", () => {
+    const a = CONFIG.audio.find(x => "au-" + x.id === inp.id);
+    if (inp.checked && a.group) CONFIG.audio.filter(x => x.group === a.group && x !== a).forEach(x => $("#au-" + x.id).checked = false);
+  }));
+
+  const car = $("#car");
+  function syncCar() {
+    const ins = $("input[name=ins]:checked").value;
+    $("#insBox").hidden = ins === "none";
+    car.classList.toggle("part", ins === "part");
+    $("#zones").classList.toggle("locked", ins === "full");
+    CONFIG.zones.forEach(z => {
+      const box = $("#z-" + z.id);
+      if (ins === "full") box.checked = true;
+      box.disabled = ins === "full";
+      $$(`#car [data-z="${z.id}"]`).forEach(el => el.classList.toggle("on", box.checked));
+    });
+    $("#carHint").textContent = ins === "full" ? "Обробляємо весь автомобіль" : "Натисніть на зону на схемі або в списку";
+  }
+  $$("input[name=ins]").forEach(r => r.addEventListener("change", () => {
+    if (r.value === "part" && r.checked) CONFIG.zones.forEach(z => $("#z-" + z.id).checked = false);
+    syncCar(); update();
+  }));
+  $$("#zones input").forEach(i => i.addEventListener("change", () => { syncCar(); update(); }));
+  $$("#car [data-z]").forEach(el => el.addEventListener("click", () => {
+    if ($("input[name=ins]:checked").value !== "part") return;
+    const box = $("#z-" + el.dataset.z); box.checked = !box.checked; syncCar(); update();
+  }));
+  syncCar();
+
+  /* ---------- розрахунок ---------- */
+  const val = s => ($(s) || {}).value;
+  function compute() {
+    const sz = CONFIG.sizes.find(s => s.id === val("input[name=size]:checked"));
+    const y = +year.value;
+    const brandName = brand.value === "__other" ? $("#brandOther").value.trim() : brand.value;
+    if (!sz) return null;
+    const yk = y && (NOW - y) > CONFIG.oldYears ? 1 + CONFIG.oldExtra : 1;
+    const ins = val("input[name=ins]:checked"), mat = val("input[name=mat]:checked");
+    const items = []; let total = 0;
+    if (ins !== "none") {
+      const zs = CONFIG.zones.filter(z => $("#z-" + z.id).checked);
+      if (zs.length) {
+        const p = zs.reduce((a, z) => a + z[mat], 0) * sz.k * yk;
+        const nm = (ins === "full" ? "Шумоізоляція повна" : "Шумоізоляція: " + zs.map(z => z.name.toLowerCase()).join(", ")) + (mat === "prem" ? ", преміум" : ", стандарт");
+        items.push(nm); total += p;
+      }
+    }
+    const sq = CONFIG.squeak.find(s => s.id === val("input[name=squeak]:checked"));
+    if (sq && sq.price) { items.push("Антирип: " + sq.name.toLowerCase()); total += sq.price; }
+    const ru = CONFIG.rust.find(r => r.id === val("input[name=rust]:checked"));
+    if (ru && ru.price) { items.push("Антикор: " + ru.name.toLowerCase()); total += ru.price * sz.k * yk; }
+    let audio = false;
+    CONFIG.audio.forEach(a => { if ($("#au-" + a.id).checked) { items.push(a.name); total += a.price; audio = true; } });
+    if (audio) items.push("Обладнання для аудіосистеми оплачується окремо");
+    const lo = r100(total * (1 - CONFIG.spread)), hi = r100(total * (1 + CONFIG.spread));
+    return { total, lo, hi, items, sz, brandName, year: y ? (y < NOW - 35 ? "до " + (NOW - 35) : String(y)) : "",
+             range: total ? `${money(lo)} – ${money(hi)} грн` : "" };
+  }
+
+  let step = 1;
+  function update() {
+    const q = compute(), v = $("#barSum");
+    if (!q) { v.textContent = "оберіть кузов"; v.classList.add("dim"); }
+    else if (!q.total) { v.textContent = "оберіть послугу"; v.classList.add("dim"); }
+    else { v.textContent = q.range; v.classList.remove("dim"); }
+  }
+  $("#calcBox").addEventListener("change", update);
+  $("#calcBox").addEventListener("input", e => { if (e.target.id === "brandOther") update(); });
+
+  /* ---------- кроки ---------- */
+  const labels = { 1: "Далі", 2: "Далі", 3: "Показати вартість", 4: "Відправити заявку" };
+  function go(n) {
+    step = n;
+    $$(".step").forEach(s => s.classList.toggle("on", +s.dataset.step === n));
+    $$("#progress li").forEach((li, i) => { li.classList.toggle("done", i + 1 < n); li.classList.toggle("cur", i + 1 === n); });
+    $("#next").textContent = labels[n];
+    $("#stepLabel").textContent = `Крок ${n} з 4 · ` + ["Авто","Шумоізоляція","Додатково","Заявка"][n-1];
+    $$(".err").forEach(e => e.textContent = "");
+    if (n === 4) {
+      const q = compute();
+      $("#finalSum").textContent = q.range;
+      $("#finalCar").textContent = `${q.brandName}, ${q.year} · ${q.sz.name.toLowerCase()} кузов`;
+      $("#finalList").innerHTML = q.items.map(i => `<li>${i}</li>`).join("");
+    }
+    const box = $("#calcBox").getBoundingClientRect();
+    if (box.top < 0 || box.top > innerHeight * 0.4) $("#calcBox").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    const focusEl = $(`.step[data-step="${n}"] h3`);
+    if (focusEl) { focusEl.tabIndex = -1; focusEl.focus({ preventScroll: true }); }
+  }
+  // відступ під фіксовану шапку при прокрутці до калькулятора
+  $("#calcBox").style.scrollMarginTop = "84px";
+
+  function check(n) {
+    if (n === 1) {
+      const miss = [];
+      const bn = brand.value === "__other" ? $("#brandOther").value.trim() : brand.value;
+      if (!bn) miss.push("марку");
+      if (!year.value) miss.push("рік випуску");
+      if (!val("input[name=size]:checked")) miss.push("тип кузова");
+      brand.classList.toggle("bad", !bn); year.classList.toggle("bad", !year.value);
+      return miss.length ? "Будь ласка, вкажіть " + miss.join(", ") + "." : "";
+    }
+    if (n === 2) {
+      if (val("input[name=ins]:checked") === "part" && !CONFIG.zones.some(z => $("#z-" + z.id).checked)) return "Оберіть хоча б одну зону.";
+    }
+    if (n === 3) { if (!compute().total) return "Оберіть хоча б одну послугу: шумоізоляцію на кроці 2 або щось тут."; }
+    return "";
+  }
+  brand.addEventListener("change", () => brand.classList.remove("bad"));
+  year.addEventListener("change", () => year.classList.remove("bad"));
+
+  $("#next").addEventListener("click", () => {
+    if (step === 4) return send();
+    const e = check(step);
+    $("#e" + step).textContent = e;
+    if (!e) go(step + 1);
+  });
+  $$("[data-back]").forEach(b => b.addEventListener("click", () => go(step - 1)));
+
+  /* ---------- телефон: маска +380 ---------- */
+  const phone = $("#phone");
+  phone.addEventListener("focus", () => { if (!phone.value) phone.value = "+380 "; });
+  phone.addEventListener("input", () => {
+    let d = phone.value.replace(/\D/g, "");
+    if (d.startsWith("0")) d = "38" + d;
+    if (!d.startsWith("380")) d = "380" + d.replace(/^3?8?0?/, "");
+    d = d.slice(0, 12);
+    const p = [d.slice(0, 3), d.slice(3, 5), d.slice(5, 8), d.slice(8, 10), d.slice(10, 12)].filter(Boolean);
+    phone.value = "+" + p.join(" ");
+  });
+
+  /* ---------- відправка ---------- */
+  $("#leadForm").addEventListener("submit", e => { e.preventDefault(); send(); });
+  async function send() {
+    const name = $("#name").value.trim(), digits = phone.value.replace(/\D/g, "");
+    $("#name").classList.toggle("bad", !name);
+    phone.classList.toggle("bad", digits.length !== 12);
+    if (!name) { $("#e4").textContent = "Вкажіть, будь ласка, ваше ім'я."; $("#name").focus(); return; }
+    if (digits.length !== 12) { $("#e4").textContent = "Перевірте номер телефону: +380 і ще 9 цифр."; phone.focus(); return; }
+    $("#e4").textContent = "";
+    const q = compute(), btn = $("#next");
+    btn.disabled = true; btn.textContent = "Відправляємо…";
+    try {
+      const r = await fetch(CONFIG.endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
+        name, phone: phone.value, comment: $("#comment").value.trim(), website: $("#website").value,
+        brand: q.brandName, year: q.year, size: q.sz.name + " (" + q.sz.hint + ")", sum: q.range,
+        services: q.items.filter(i => !i.startsWith("Обладнання"))
+      }) });
+      if (!r.ok) throw 0;
+      $("#leadWrap").hidden = true; $("#done").hidden = false; $("#bar").hidden = true;
+      $$("#progress li").forEach(li => { li.classList.add("done"); });
+      $("#calcBox").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    } catch {
+      $("#e4").innerHTML = `Не вдалося відправити. Спробуйте ще раз або зателефонуйте: <a href="tel:${CONFIG.phoneHref}">${CONFIG.phoneText}</a>`;
+    } finally { btn.disabled = false; btn.textContent = labels[4]; }
+  }
+
+  update();
+})();
+</script>
 </body>
 </html>
