@@ -7,199 +7,247 @@
 <style>
   :root{
     --bg:#08080a;
-    --panel:rgba(18,18,22,.72);
-    --stroke:rgba(255,255,255,.08);
+    --panel:rgba(18,18,22,.78);
+    --stroke:rgba(255,255,255,.09);
     --text:#ececec;
     --muted:#8a8a92;
-    --gold:#c9a24b;      /* премиальный акцент вместо оранжевого */
+    --gold:#c9a24b;
     --gold-soft:#e6c878;
-    --danger:#ff5722;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{
     font-family:'Inter','Helvetica Neue',system-ui,sans-serif;
-    background:var(--bg); color:var(--text); overflow-x:hidden;
+    background:var(--bg); color:var(--text);
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
+
   /* ---------- ШАПКА ---------- */
   header{
-    position:fixed; top:0; left:0; right:0; z-index:50;
+    position:fixed; top:0; left:0; right:0; z-index:100;
     display:flex; justify-content:space-between; align-items:center;
-    padding:20px 32px; backdrop-filter:blur(14px);
-    background:linear-gradient(180deg, rgba(8,8,10,.8), rgba(8,8,10,0));
+    padding:16px 28px;
+    backdrop-filter:blur(14px);
+    background:linear-gradient(180deg, rgba(8,8,10,.9), rgba(8,8,10,.4));
     border-bottom:1px solid var(--stroke);
   }
-  .logo{ font-size:14px; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); font-weight:600}
+  .logo{ font-size:13px; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); font-weight:600}
   .logo span{ color:var(--text); font-weight:300}
-  nav a{
-    color:var(--muted); text-decoration:none; font-size:13px; margin-left:24px;
-    letter-spacing:.05em; transition:.2s;
-  }
+  nav a{ color:var(--muted); text-decoration:none; font-size:13px; margin-left:22px; transition:.2s}
   nav a:hover{ color:var(--gold) }
   .insta-btn{
     display:inline-flex; align-items:center; gap:8px;
     padding:8px 16px; border:1px solid var(--stroke); border-radius:999px;
-    color:var(--text); text-decoration:none; font-size:12px; letter-spacing:.08em;
+    color:var(--text); text-decoration:none; font-size:12px;
     transition:.2s;
   }
   .insta-btn:hover{ border-color:var(--gold); color:var(--gold) }
 
-  /* ---------- ГЕРОЙ / ПРИВЕТСТВИЕ ---------- */
+  /* ---------- ГЕРОЙ ---------- */
   #hero{
     min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
-    position:relative; text-align:center; padding:120px 24px 80px;
+    text-align:center; padding:120px 24px 80px;
     background:
       radial-gradient(ellipse at 50% 20%, rgba(201,162,75,.10), transparent 60%),
       radial-gradient(ellipse at 80% 80%, rgba(201,162,75,.05), transparent 50%);
   }
   .hero-kicker{
-    font-size:12px; letter-spacing:.5em; text-transform:uppercase; color:var(--gold);
-    margin-bottom:24px; opacity:.9;
+    font-size:11px; letter-spacing:.5em; text-transform:uppercase; color:var(--gold);
+    margin-bottom:22px;
   }
   .hero-title{
-    font-size:clamp(38px, 6vw, 84px); line-height:1.02; font-weight:300;
-    margin:0 0 24px; max-width:1100px; letter-spacing:-.02em;
+    font-size:clamp(36px, 6vw, 78px); line-height:1.04; font-weight:300;
+    margin:0 0 22px; max-width:1000px; letter-spacing:-.02em;
   }
   .hero-title em{ font-style:italic; color:var(--gold); font-weight:400 }
-  .hero-sub{
-    font-size:17px; color:var(--muted); max-width:560px; line-height:1.6; margin-bottom:36px;
-  }
+  .hero-sub{ font-size:16px; color:var(--muted); max-width:540px; line-height:1.6; margin-bottom:34px }
   .hero-phrases{
-    display:flex; gap:36px; flex-wrap:wrap; justify-content:center; margin-bottom:44px;
-    font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);
+    display:flex; gap:30px; flex-wrap:wrap; justify-content:center; margin-bottom:40px;
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
   }
-  .hero-phrases span{ position:relative; padding-left:18px }
-  .hero-phrases span::before{
-    content:''; position:absolute; left:0; top:50%; width:8px; height:1px; background:var(--gold);
-  }
+  .hero-phrases span{ position:relative; padding-left:16px }
+  .hero-phrases span::before{ content:''; position:absolute; left:0; top:50%; width:8px; height:1px; background:var(--gold) }
   .hero-cta{
-    display:inline-block; padding:16px 40px; border-radius:999px;
+    display:inline-block; padding:15px 38px; border-radius:999px;
     background:var(--gold); color:#0a0a0a; font-weight:600; letter-spacing:.1em;
-    text-decoration:none; text-transform:uppercase; font-size:13px;
+    text-decoration:none; text-transform:uppercase; font-size:12px;
     transition:.25s; box-shadow:0 10px 40px -10px rgba(201,162,75,.5);
   }
-  .hero-cta:hover{ transform:translateY(-2px); box-shadow:0 18px 50px -10px rgba(201,162,75,.7) }
+  .hero-cta:hover{ transform:translateY(-2px) }
 
-  /* Бегущая строка звука */
+  /* Бегущая строка */
   .marquee{
-    margin-top:64px; width:100%; max-width:1200px; overflow:hidden;
+    margin-top:56px; width:100%; max-width:1200px; overflow:hidden;
     border-top:1px solid var(--stroke); border-bottom:1px solid var(--stroke);
-    padding:18px 0; position:relative;
+    padding:16px 0;
   }
   .marquee-inner{
-    display:flex; gap:60px; white-space:nowrap;
-    animation:scroll 40s linear infinite;
-    font-size:13px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted);
+    display:flex; gap:56px; white-space:nowrap;
+    animation:scroll 42s linear infinite;
+    font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted);
   }
   .marquee-inner span em{ color:var(--gold); font-style:normal; margin-right:10px }
   @keyframes scroll{ to{ transform:translateX(-50%) } }
 
   /* ---------- КОНФИГУРАТОР ---------- */
   #configurator{
-    position:relative; width:100%; height:100vh; min-height:640px;
-    overflow:hidden; border-top:1px solid var(--stroke);
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    padding-top:80px;      /* отступ под fixed-шапку */
+    display:grid;
+    grid-template-rows: 1fr auto;   /* сцена + итог */
+    grid-template-columns: 100%;
+    background:radial-gradient(ellipse at 50% 40%, rgba(201,162,75,.05), transparent 60%);
+    border-top:1px solid var(--stroke);
   }
-  #scene{ position:absolute; inset:0; width:100%; height:100%; display:block }
 
-  .ui-layer{
-    position:absolute; inset:0; pointer-events:none; z-index:5;
-    display:grid; grid-template-columns: 300px 1fr 320px; gap:20px; padding:24px;
+  .stage-wrap{
+    position:relative;
+    width:100%;
+    min-height:640px;
+    display:grid;
+    grid-template-columns: 320px 1fr 340px;   /* левая | сцена | правая */
+    gap:20px;
+    padding:20px 24px;
+    align-items:stretch;
   }
+
+  /* Канвас — центр */
+  #scene{
+    position:relative;
+    width:100%;
+    height:100%;
+    min-height:600px;
+    border-radius:20px;
+    border:1px solid var(--stroke);
+    background:
+      radial-gradient(ellipse at 50% 55%, rgba(201,162,75,.08), transparent 65%),
+      #0a0a0c;
+    overflow:hidden;
+    display:block;
+  }
+  /* грузим поверх канваса сообщение «оберіть авто» */
+  #scene-overlay{
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:14px;
+    pointer-events:none; text-align:center; z-index:2;
+    transition:opacity .4s;
+    padding:24px;
+  }
+  #scene-overlay.hidden{ opacity:0; pointer-events:none }
+  #scene-overlay .badge{
+    font-size:11px; letter-spacing:.35em; text-transform:uppercase;
+    color:var(--gold); border:1px solid var(--gold); border-radius:999px;
+    padding:7px 18px;
+  }
+  #scene-overlay h4{ margin:0; font-size:22px; font-weight:300 }
+  #scene-overlay p{ margin:0; color:var(--muted); font-size:13px; max-width:340px; line-height:1.5 }
+
+  /* Панели */
   .panel{
-    pointer-events:auto; background:var(--panel); backdrop-filter:blur(18px);
-    border:1px solid var(--stroke); border-radius:18px; padding:20px;
-    align-self:start; max-height:calc(100vh - 48px); overflow:auto;
+    background:var(--panel); backdrop-filter:blur(18px);
+    border:1px solid var(--stroke); border-radius:18px; padding:18px;
+    height:100%; max-height:calc(100vh - 120px); overflow:auto;
   }
   .panel h3{
-    margin:0 0 14px; font-size:11px; text-transform:uppercase; letter-spacing:.25em;
+    margin:0 0 12px; font-size:11px; text-transform:uppercase; letter-spacing:.24em;
     color:var(--gold); font-weight:600;
   }
-  .panel .hint{ font-size:12px; color:var(--muted); margin:0 0 14px; line-height:1.5 }
+  .panel .hint{ font-size:12px; color:var(--muted); margin:0 0 12px; line-height:1.5 }
 
-  .chip-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px }
+  .chip-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:6px }
   .chip{
-    flex:1; min-width:90px; padding:10px 12px; font-size:13px;
+    flex:1; min-width:80px; padding:10px 10px; font-size:12px;
     background:rgba(255,255,255,.04); border:1px solid var(--stroke);
     color:var(--text); border-radius:12px; cursor:pointer; transition:.2s;
     font-family:inherit; text-align:center;
   }
-  .chip:hover{ background:rgba(255,255,255,.08) }
+  .chip:hover:not(:disabled){ background:rgba(255,255,255,.08) }
   .chip.active{ background:var(--gold); border-color:var(--gold); color:#0a0a0a; font-weight:600 }
+  .chip:disabled{ opacity:.35; cursor:not-allowed }
 
   .zone-btn{
     display:flex; justify-content:space-between; align-items:center;
-    width:100%; padding:12px 14px; margin-bottom:8px;
+    width:100%; padding:11px 13px; margin-bottom:7px;
     background:rgba(255,255,255,.03); border:1px solid var(--stroke);
     color:var(--text); border-radius:12px; cursor:pointer; font-family:inherit;
     font-size:13px; text-align:left; transition:.2s;
   }
-  .zone-btn:hover{ background:rgba(255,255,255,.07) }
+  .zone-btn:hover:not(:disabled){ background:rgba(255,255,255,.07) }
   .zone-btn.active{ background:rgba(201,162,75,.15); border-color:var(--gold) }
-  .zone-btn .price{ font-size:12px; color:var(--muted) }
+  .zone-btn:disabled{ opacity:.35; cursor:not-allowed }
+  .zone-btn .price{ font-size:12px; color:var(--muted); white-space:nowrap; margin-left:8px }
   .zone-btn.active .price{ color:var(--gold-soft) }
   .zone-btn .check{
-    width:16px; height:16px; border-radius:50%; border:1px solid var(--stroke); margin-right:10px;
+    width:15px; height:15px; border-radius:50%; border:1px solid var(--stroke); margin-right:9px;
     display:inline-block; flex-shrink:0; position:relative;
   }
   .zone-btn.active .check{ border-color:var(--gold); background:var(--gold) }
   .zone-btn.active .check::after{
     content:'✓'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    color:#0a0a0a; font-size:11px; font-weight:800;
+    color:#0a0a0a; font-size:10px; font-weight:800;
   }
   .zone-btn .lbl{ display:flex; align-items:center; flex:1 }
 
-  /* Человечек-помощник */
+  /* Помощник */
   #helper{
-    display:flex; align-items:center; gap:14px; margin-top:16px;
-    padding:14px; background:rgba(201,162,75,.06); border:1px solid rgba(201,162,75,.2);
+    display:flex; align-items:center; gap:12px; margin-top:14px;
+    padding:12px; background:rgba(201,162,75,.06); border:1px solid rgba(201,162,75,.2);
     border-radius:14px;
   }
   #helper svg{ flex-shrink:0 }
   #helper .helper-text{ font-size:12px; line-height:1.4; color:var(--muted) }
-  #helper .helper-text b{ color:var(--gold-soft); display:block; margin-bottom:3px; font-size:13px }
+  #helper .helper-text b{ color:var(--gold-soft); display:block; margin-bottom:2px; font-size:12px }
 
-  /* Итог */
+  /* Итог — отдельная строка снизу конфигуратора, не поверх панелей */
   #total{
-    position:absolute; bottom:0; left:0; right:0; z-index:6;
     display:flex; justify-content:space-between; align-items:center; gap:16px;
-    padding:18px 32px; background:linear-gradient(0deg, rgba(8,8,10,.95), rgba(8,8,10,0));
+    padding:16px 32px;
+    background:rgba(14,14,18,.95);
     border-top:1px solid var(--stroke);
+    flex-wrap:wrap;
   }
-  #total .lbl{ font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted) }
-  #total .val{ font-size:26px; font-weight:600; color:var(--gold) }
-  #total .val small{ font-size:13px; color:var(--muted); font-weight:400; margin-left:8px }
+  #total .lbl{ font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted) }
+  #total .val{ font-size:24px; font-weight:600; color:var(--gold); line-height:1.1 }
+  #total .val small{ font-size:12px; color:var(--muted); font-weight:400; margin-left:6px }
   .cta-call{
-    display:inline-flex; align-items:center; gap:10px;
-    padding:12px 22px; border-radius:999px; background:var(--gold); color:#0a0a0a;
-    text-decoration:none; font-weight:700; font-size:14px; letter-spacing:.05em;
-    transition:.2s;
+    display:inline-flex; align-items:center; gap:9px;
+    padding:11px 22px; border-radius:999px; background:var(--gold); color:#0a0a0a;
+    text-decoration:none; font-weight:700; font-size:13px;
+    transition:.2s; white-space:nowrap;
   }
-  .cta-call:hover{ transform:translateY(-1px); box-shadow:0 10px 30px -8px rgba(201,162,75,.6) }
+  .cta-call:hover{ transform:translateY(-1px) }
 
-  /* Бегущая звуковая линия */
+  /* Звуковая линия */
   #wave{
-    position:absolute; bottom:80px; left:0; right:0; height:60px; z-index:4;
-    pointer-events:none; opacity:.7;
+    position:absolute; bottom:0; left:0; right:0; height:50px;
+    pointer-events:none; opacity:.6; z-index:1;
   }
 
   /* ---------- ФУТЕР ---------- */
   footer{
-    padding:60px 32px 40px; border-top:1px solid var(--stroke);
+    padding:56px 32px 36px; border-top:1px solid var(--stroke);
     background:linear-gradient(180deg, transparent, rgba(201,162,75,.03));
     font-size:13px; color:var(--muted); text-align:center;
   }
   footer a{ color:var(--gold); text-decoration:none }
-  footer .row{ margin-top:12px; display:flex; gap:28px; justify-content:center; flex-wrap:wrap }
-  footer .phone{ color:var(--text); font-size:16px; letter-spacing:.05em; text-decoration:none; margin-top:8px; display:inline-block }
+  footer .row{ margin-top:14px; display:flex; gap:26px; justify-content:center; flex-wrap:wrap }
+  footer .phone{ color:var(--text); font-size:16px; letter-spacing:.04em; text-decoration:none; margin-top:10px; display:inline-block }
   footer .phone:hover{ color:var(--gold) }
 
-  @media (max-width:900px){
-    .ui-layer{ grid-template-columns:1fr; grid-template-rows:auto 1fr auto; max-height:none; position:absolute; inset:0; overflow:auto; padding:12px }
+  /* ---------- АДАПТИВ ---------- */
+  @media (max-width:1100px){
+    .stage-wrap{
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+      min-height:auto;
+    }
+    #scene{ min-height:440px }
     .panel{ max-height:none }
-    #configurator{ height:auto; min-height:auto }
-    #scene{ position:relative; height:50vh }
     nav{ display:none }
+    #total{ position:relative; padding:16px 20px }
   }
 </style>
 </head>
@@ -230,13 +278,12 @@
   </p>
   <div class="hero-phrases">
     <span>Без компромісів</span>
-    <span>Тільки перевірені матеріали</span>
+    <span>Перевірені матеріали</span>
     <span>Гарантія на роботи</span>
     <span>Преміум-сервіс</span>
   </div>
   <a class="hero-cta" href="#configurator">Розрахувати вартість</a>
 
-  <!-- Бегущая строка -->
   <div class="marquee">
     <div class="marquee-inner">
       <span><em>01</em> Тиша — це не розкіш, це необхідність</span>
@@ -255,84 +302,88 @@
 
 <!-- ================= КОНФИГУРАТОР ================= -->
 <section id="configurator">
-  <canvas id="scene"></canvas>
+  <div class="stage-wrap">
 
-  <!-- бегущая звуковая линия -->
-  <canvas id="wave"></canvas>
-
-  <div class="ui-layer">
-    <!-- ЛЕВАЯ ПАНЕЛЬ: тип авто + материалы -->
+    <!-- ЛЕВАЯ ПАНЕЛЬ -->
     <div class="panel">
-      <h3>Ваш автомобіль</h3>
-      <p class="hint">Оберіть тип кузова — від цього залежить обсяг робіт.</p>
+      <h3>Крок 1 · Ваш автомобіль</h3>
+      <p class="hint">Оберіть тип кузова. Після цього з'явиться 3D-модель.</p>
       <div class="chip-row">
-        <button class="chip active" data-car="sedan">Седан</button>
-        <button class="chip" data-car="suv">Позашляховик</button>
+        <button class="chip" data-car="sedan">Седан</button>
+        <button class="chip" data-car="suv">SUV</button>
         <button class="chip" data-car="hatch">Хетчбек</button>
       </div>
 
-      <h3 style="margin-top:22px">Матеріали</h3>
+      <h3 style="margin-top:20px">Крок 2 · Матеріали</h3>
       <p class="hint">Три рівні тиші — оберіть свій.</p>
       <div class="chip-row">
-        <button class="chip" data-mat="eco">Економ</button>
-        <button class="chip active" data-mat="standard">Стандарт</button>
-        <button class="chip" data-mat="premium">Преміум</button>
+        <button class="chip" data-mat="eco" disabled>Економ</button>
+        <button class="chip" data-mat="standard" disabled>Стандарт</button>
+        <button class="chip" data-mat="premium" disabled>Преміум</button>
       </div>
 
-      <!-- Помощник -->
       <div id="helper">
-        <svg id="helper-face" width="56" height="56" viewBox="0 0 56 56">
+        <svg id="helper-face" width="52" height="52" viewBox="0 0 56 56">
           <circle cx="28" cy="28" r="26" fill="#1a1a1e" stroke="#c9a24b" stroke-width="1.5"/>
           <circle cx="20" cy="24" r="2.5" fill="#e6c878"/>
           <circle cx="36" cy="24" r="2.5" fill="#e6c878"/>
-          <path id="helper-mouth" d="M20 34 Q28 38 36 34" stroke="#e6c878" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path id="helper-mouth" d="M20 34 Q28 32 36 34" stroke="#e6c878" stroke-width="2" fill="none" stroke-linecap="round"/>
         </svg>
         <div class="helper-text">
-          <b id="helper-title">Оберіть зони</b>
-          <span id="helper-msg">Додайте хоча б одну зону шумоізоляції, щоб я почав посміхатися.</span>
+          <b id="helper-title">Оберіть авто</b>
+          <span id="helper-msg">Спочатку оберіть тип кузова — після цього я підкажу, що робити далі.</span>
         </div>
       </div>
     </div>
 
-    <div></div>
+    <!-- ЦЕНТР: 3D -->
+    <div style="position:relative">
+      <canvas id="scene"></canvas>
+      <div id="scene-overlay">
+        <div class="badge">Крок 1</div>
+        <h4>Оберіть автомобіль зліва</h4>
+        <p>Після вибору тут з'явиться 3D-модель у розрізі — можна буде клікати по деталях.</p>
+      </div>
+      <canvas id="wave"></canvas>
+    </div>
 
-    <!-- ПРАВА ПАНЕЛЬ: зоны -->
+    <!-- ПРАВА ПАНЕЛЬ -->
     <div class="panel">
-      <h3>Шумоізоляція</h3>
-      <p class="hint">Клікніть на зону — вона підсвітиться на авто.</p>
+      <h3>Крок 3 · Шумоізоляція</h3>
+      <p class="hint">Клікніть по кнопці або прямо по деталі на 3D-моделі.</p>
 
-      <button class="zone-btn" data-zone="doors">
+      <button class="zone-btn" data-zone="doors" disabled>
         <span class="lbl"><span class="check"></span>Двері</span>
-        <span class="price">+ 0 ₴</span>
+        <span class="price">—</span>
       </button>
-      <button class="zone-btn" data-zone="floor">
+      <button class="zone-btn" data-zone="floor" disabled>
         <span class="lbl"><span class="check"></span>Підлога</span>
-        <span class="price">+ 0 ₴</span>
+        <span class="price">—</span>
       </button>
-      <button class="zone-btn" data-zone="arches">
+      <button class="zone-btn" data-zone="arches" disabled>
         <span class="lbl"><span class="check"></span>Арки</span>
-        <span class="price">+ 0 ₴</span>
+        <span class="price">—</span>
       </button>
-      <button class="zone-btn" data-zone="roof">
+      <button class="zone-btn" data-zone="roof" disabled>
         <span class="lbl"><span class="check"></span>Дах</span>
-        <span class="price">+ 0 ₴</span>
+        <span class="price">—</span>
       </button>
-      <button class="zone-btn" data-zone="trunk">
+      <button class="zone-btn" data-zone="trunk" disabled>
         <span class="lbl"><span class="check"></span>Багажник</span>
-        <span class="price">+ 0 ₴</span>
+        <span class="price">—</span>
       </button>
-      <button class="zone-btn" data-zone="hood">
+      <button class="zone-btn" data-zone="hood" disabled>
         <span class="lbl"><span class="check"></span>Капот</span>
-        <span class="price">+ 0 ₴</span>
+        <span class="price">—</span>
       </button>
 
-      <div style="margin-top:18px; font-size:11px; color:var(--muted); line-height:1.5">
-        * Ціни орієнтовні. Точну суму назвемо після огляду автомобіля — безкоштовно.
+      <div style="margin-top:14px; font-size:11px; color:var(--muted); line-height:1.5">
+        * Ціни орієнтовні. Точну суму назвемо після огляду — безкоштовно.
       </div>
     </div>
   </div>
 
-  <!-- Итог -->
+  <!-- ИТОГ -->
   <div id="total">
     <div>
       <div class="lbl">Орієнтовна вартість</div>
@@ -355,7 +406,7 @@
     <a href="tel:+380661038471">Подзвонити</a>
     <a href="#configurator">Розрахувати вартість</a>
   </div>
-  <div style="margin-top:28px; font-size:11px; opacity:.5">© 2026 VS Auto. Усі права захищені.</div>
+  <div style="margin-top:26px; font-size:11px; opacity:.5">© 2026 VS Auto. Усі права захищені.</div>
 </footer>
 
 <!-- ================= THREE.JS ================= -->
@@ -371,24 +422,30 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 /* ============================================================
-   ⚙️  ЦІНИ — ЗАМІНІТЬ ЦИФРИ НА СВОЇ
+   ⚙️  ЦІНИ — ЗАМІНІТЬ НА СВОЇ
    ============================================================ */
 const PRICES = {
-  // базова вартість за зону (грн), залежить від матеріалу
-  eco:      { doors:1200, floor:1800, arches:1400, roof:900, trunk:700, hood:600 },
+  eco:      { doors:1200, floor:1800, arches:1400, roof:900,  trunk:700,  hood:600 },
   standard: { doors:2000, floor:3200, arches:2400, roof:1500, trunk:1200, hood:1000 },
   premium:  { doors:3500, floor:5500, arches:4200, roof:2600, trunk:2000, hood:1700 },
 };
-// коефіцієнт за тип кузова
 const CAR_COEF = { sedan:1, suv:1.35, hatch:0.9 };
 
 /* ============================================================
-   3D СЦЕНА
+   СОСТОЯНИЕ
+   ============================================================ */
+const state = {
+  car: null,          // null = ещё не выбрано → 3D скрыто
+  material: null,     // null = ещё не выбрано
+  zones: new Set(),
+};
+
+/* ============================================================
+   3D СЦЕНА (создаётся сразу, но группа авто пустая)
    ============================================================ */
 const canvas = document.getElementById('scene');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 renderer.shadowMap.enabled = true;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.1;
@@ -397,7 +454,7 @@ const scene = new THREE.Scene();
 scene.background = null;
 scene.fog = new THREE.Fog(0x08080a, 9, 24);
 
-const camera = new THREE.PerspectiveCamera(38, canvas.clientWidth/canvas.clientHeight, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
 camera.position.set(4.2, 2.4, 5.2);
 
 const controls = new OrbitControls(camera, canvas);
@@ -409,22 +466,17 @@ controls.minDistance = 4;
 controls.maxDistance = 10;
 controls.maxPolarAngle = Math.PI/2.1;
 
-/* Свет — тёплый премиальный */
+/* Свет */
 scene.add(new THREE.HemisphereLight(0xfff6e6, 0x141418, 0.9));
-
 const key = new THREE.DirectionalLight(0xffe8c4, 2.4);
 key.position.set(5, 8, 4);
 key.castShadow = true;
 key.shadow.mapSize.set(1024,1024);
 scene.add(key);
-
 const rim = new THREE.DirectionalLight(0xc9a24b, 2.0);
 rim.position.set(-6, 3, -5);
 scene.add(rim);
-
-const fill = new THREE.DirectionalLight(0x88aaff, 0.4);
-fill.position.set(-3, 1, 5);
-scene.add(fill);
+scene.add(new THREE.DirectionalLight(0x88aaff, 0.4).translateX(-3).translateY(1).translateZ(5));
 
 /* Пол */
 const floor = new THREE.Mesh(
@@ -435,136 +487,111 @@ floor.rotation.x = -Math.PI/2;
 floor.receiveShadow = true;
 scene.add(floor);
 
-/* ============================================================
-   АВТО В РАЗРЕЗЕ (стилизованная «кассетная» модель)
-   Кузов полупрозрачный, внутри светящиеся зоны.
-   ============================================================ */
+/* Группа авто — пустая до выбора */
 const carGroup = new THREE.Group();
+carGroup.visible = false;
 scene.add(carGroup);
 
+/* Материалы кузова */
 const bodyMat = new THREE.MeshPhysicalMaterial({
-  color: 0x2a2a30,
-  metalness: 0.85,
-  roughness: 0.25,
-  clearcoat: 1.0,
-  clearcoatRoughness: 0.15,
-  transparent: true,
-  opacity: 0.55,           // «разрез» — кузов просвечивает
-  transmission: 0.2,
-  side: THREE.DoubleSide,
+  color: 0x2a2a30, metalness: 0.85, roughness: 0.25,
+  clearcoat: 1.0, clearcoatRoughness: 0.15,
+  transparent: true, opacity: 0.55,
+  transmission: 0.2, side: THREE.DoubleSide,
 });
-
 const glassMat = new THREE.MeshPhysicalMaterial({
   color: 0x9fc4e6, metalness:0, roughness:0.05, transmission:0.9,
   transparent:true, opacity:0.35, side:THREE.DoubleSide,
 });
-
-function glowMat(color = 0xc9a24b) {
+function glowMat() {
   return new THREE.MeshStandardMaterial({
-    color, emissive: color, emissiveIntensity: 0.0,
+    color: 0xc9a24b, emissive: 0xc9a24b, emissiveIntensity: 0.0,
     transparent: true, opacity: 0.25, side: THREE.DoubleSide,
   });
 }
 
-function buildCar(type = 'sedan') {
+/* ============================================================
+   ПОСТРОЕНИЕ АВТО (только после выбора)
+   ============================================================ */
+const glowTargets = [];      // объекты зон (для анимации + raycast)
+const zoneObjects = new Map(); // zone -> [meshes]
+
+function buildCar(type) {
   carGroup.clear();
+  glowTargets.length = 0;
+  zoneObjects.clear();
 
   const cfg = {
-    sedan: { len:4.2, bodyH:0.62, cabLen:1.9, cabShift:0.1, cabH:0.55, archR:0.42 },
-    suv:   { len:4.4, bodyH:0.85, cabLen:2.2, cabShift:-0.1, cabH:0.75, archR:0.5 },
-    hatch: { len:3.6, bodyH:0.6, cabLen:1.7, cabShift:-0.1, cabH:0.55, archR:0.42 },
+    sedan: { len:4.2, bodyH:0.62, cabLen:1.9, cabShift:0.1,  cabH:0.55, archR:0.42 },
+    suv:   { len:4.4, bodyH:0.85, cabLen:2.2, cabShift:-0.1, cabH:0.75, archR:0.5  },
+    hatch: { len:3.6, bodyH:0.6,  cabLen:1.7, cabShift:-0.1, cabH:0.55, archR:0.42 },
   }[type];
 
-  const W = 1.85;
-  const baseY = 0.5;
+  const W = 1.85, baseY = 0.5;
 
-  /* --- нижний кузов (разрез) --- */
-  const lower = new THREE.Mesh(
-    new THREE.BoxGeometry(W, cfg.bodyH, cfg.len),
-    bodyMat
-  );
+  // нижний кузов
+  const lower = new THREE.Mesh(new THREE.BoxGeometry(W, cfg.bodyH, cfg.len), bodyMat);
   lower.position.y = baseY + cfg.bodyH/2;
   lower.castShadow = true;
   carGroup.add(lower);
 
-  /* --- кабина --- */
-  const cabin = new THREE.Mesh(
-    new THREE.BoxGeometry(W*0.9, cfg.cabH, cfg.cabLen),
-    bodyMat
-  );
+  // кабина
+  const cabin = new THREE.Mesh(new THREE.BoxGeometry(W*0.9, cfg.cabH, cfg.cabLen), bodyMat);
   cabin.position.set(0, baseY + cfg.bodyH + cfg.cabH/2, cfg.cabShift);
   cabin.castShadow = true;
   carGroup.add(cabin);
 
-  /* --- стёкла --- */
-  const glass = new THREE.Mesh(
-    new THREE.BoxGeometry(W*0.92, cfg.cabH*0.75, cfg.cabLen*0.9),
-    glassMat
-  );
+  // стёкла
+  const glass = new THREE.Mesh(new THREE.BoxGeometry(W*0.92, cfg.cabH*0.75, cfg.cabLen*0.9), glassMat);
   glass.position.copy(cabin.position);
   carGroup.add(glass);
 
-  /* --- ЗОНЫ (внутри кузова, светятся) --- */
+  // ---- ЗОНЫ ----
+  const addZone = (zone, mesh) => {
+    mesh.userData.zone = zone;
+    carGroup.add(mesh);
+    glowTargets.push(mesh);
+    if (!zoneObjects.has(zone)) zoneObjects.set(zone, []);
+    zoneObjects.get(zone).push(mesh);
+  };
+
   // пол
-  const floorZone = new THREE.Mesh(
-    new THREE.BoxGeometry(W*0.92, 0.06, cfg.len*0.85),
-    glowMat()
-  );
+  const floorZone = new THREE.Mesh(new THREE.BoxGeometry(W*0.92, 0.06, cfg.len*0.85), glowMat());
   floorZone.position.set(0, baseY + 0.1, 0);
-  floorZone.userData.zone = 'floor';
-  carGroup.add(floorZone);
+  addZone('floor', floorZone);
 
-  // двері (два)
+  // двери (два)
   [-1,1].forEach(s => {
-    const d = new THREE.Mesh(new THREE.BoxGeometry(0.05, cfg.bodyH*0.7, cfg.len*0.28), glowMat());
+    const d = new THREE.Mesh(new THREE.BoxGeometry(0.06, cfg.bodyH*0.7, cfg.len*0.28), glowMat());
     d.position.set(s*W/2, baseY + cfg.bodyH*0.55, 0.1);
-    d.userData.zone = 'doors';
-    carGroup.add(d);
+    addZone('doors', d);
   });
 
-  // дах
-  const roof = new THREE.Mesh(
-    new THREE.BoxGeometry(W*0.85, 0.05, cfg.cabLen*0.85),
-    glowMat()
-  );
+  // крыша
+  const roof = new THREE.Mesh(new THREE.BoxGeometry(W*0.85, 0.05, cfg.cabLen*0.85), glowMat());
   roof.position.set(0, baseY + cfg.bodyH + cfg.cabH + 0.03, cfg.cabShift);
-  roof.userData.zone = 'roof';
-  carGroup.add(roof);
+  addZone('roof', roof);
 
-  // арки (дуги над колёсами)
-  [-1,1].forEach(s => {
-    [-1,1].forEach(front => {
-      const arch = new THREE.Mesh(
-        new THREE.TorusGeometry(cfg.archR, 0.07, 8, 24, Math.PI),
-        glowMat()
-      );
-      arch.rotation.z = Math.PI;
-      arch.rotation.y = Math.PI/2;
-      arch.position.set(s*W*0.5, baseY + 0.05, front*cfg.len*0.32);
-      arch.userData.zone = 'arches';
-      carGroup.add(arch);
-    });
-  });
+  // арки (4 дуги)
+  [-1,1].forEach(s => [-1,1].forEach(front => {
+    const arch = new THREE.Mesh(new THREE.TorusGeometry(cfg.archR, 0.07, 8, 24, Math.PI), glowMat());
+    arch.rotation.z = Math.PI;
+    arch.rotation.y = Math.PI/2;
+    arch.position.set(s*W*0.5, baseY + 0.05, front*cfg.len*0.32);
+    addZone('arches', arch);
+  }));
 
   // багажник
-  const trunk = new THREE.Mesh(
-    new THREE.BoxGeometry(W*0.88, 0.05, 0.5),
-    glowMat()
-  );
+  const trunk = new THREE.Mesh(new THREE.BoxGeometry(W*0.88, 0.05, 0.5), glowMat());
   trunk.position.set(0, baseY + cfg.bodyH*0.9, -cfg.len/2 + 0.3);
-  trunk.userData.zone = 'trunk';
-  carGroup.add(trunk);
+  addZone('trunk', trunk);
 
   // капот
-  const hood = new THREE.Mesh(
-    new THREE.BoxGeometry(W*0.88, 0.05, 0.7),
-    glowMat()
-  );
+  const hood = new THREE.Mesh(new THREE.BoxGeometry(W*0.88, 0.05, 0.7), glowMat());
   hood.position.set(0, baseY + cfg.bodyH*0.9, cfg.len/2 - 0.5);
-  hood.userData.zone = 'hood';
-  carGroup.add(hood);
+  addZone('hood', hood);
 
-  /* --- колёса --- */
+  // колёса (не зоны)
   const wheelMat = new THREE.MeshStandardMaterial({ color:0x0a0a0a, roughness:0.7 });
   const rimMat = new THREE.MeshStandardMaterial({ color:0x2a2a2e, metalness:0.9, roughness:0.3 });
   const wheelGeo = new THREE.CylinderGeometry(cfg.archR, cfg.archR, 0.22, 24);
@@ -581,7 +608,8 @@ function buildCar(type = 'sedan') {
     carGroup.add(r);
   });
 
-  /* --- появление с анимацией --- */
+  // анимация появления
+  carGroup.visible = true;
   carGroup.scale.setScalar(0.01);
   const t0 = performance.now();
   const grow = () => {
@@ -591,76 +619,142 @@ function buildCar(type = 'sedan') {
     if (p < 1) requestAnimationFrame(grow);
   };
   grow();
-
-  // обновляем helper-состояние (число зон не изменилось, но объекты новые)
-  collectGlow();
 }
 
 /* ============================================================
-   СОСТОЯНИЕ
+   КЛИК ПО 3D-ДЕТАЛИ (raycast)
    ============================================================ */
-const state = {
-  car: 'sedan',
-  material: 'standard',
-  zones: new Set(),
-  quietness: 0,   // 0..1 — насколько «тихо»
-};
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
 
-const glowTargets = [];
-function collectGlow() {
-  glowTargets.length = 0;
-  carGroup.traverse(o => { if (o.userData?.zone) glowTargets.push(o); });
-}
+canvas.addEventListener('pointerdown', (e) => {
+  if (!state.car) return; // модель ещё не появилась
 
-buildCar(state.car);
-collectGlow();
+  const rect = canvas.getBoundingClientRect();
+  pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+  raycaster.setFromCamera(pointer, camera);
+  const hits = raycaster.intersectObjects(glowTargets, false);
+  if (hits.length) {
+    const zone = hits[0].object.userData.zone;
+    toggleZone(zone);
+  }
+});
 
 /* ============================================================
-   UI
+   ЛОГИКА ЗОН
    ============================================================ */
-// тип авто
+function toggleZone(zone) {
+  if (!state.car || !state.material) return;
+
+  if (state.zones.has(zone)) state.zones.delete(zone);
+  else state.zones.add(zone);
+
+  // синхронизируем кнопку в панели
+  const btn = document.querySelector(`[data-zone="${zone}"]`);
+  if (btn) {
+    if (state.zones.has(zone)) btn.classList.add('active');
+    else btn.classList.remove('active');
+  }
+
+  updatePrice();
+  updateHelper();
+}
+
+// кнопки зон
+document.querySelectorAll('[data-zone]').forEach(btn => {
+  btn.addEventListener('click', () => toggleZone(btn.dataset.zone));
+});
+
+/* ============================================================
+   ВЫБОР АВТО
+   ============================================================ */
 document.querySelectorAll('[data-car]').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('[data-car]').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     state.car = btn.dataset.car;
+
+    // сбрасываем выбранные зоны (т.к. модель новая)
+    state.zones.clear();
+    document.querySelectorAll('[data-zone]').forEach(b => b.classList.remove('active'));
+
+    // строим модель
     buildCar(state.car);
+
+    // прячем оверлей
+    document.getElementById('scene-overlay').classList.add('hidden');
+
+    // активируем материалы (если ещё не выбран) и зоны
+    enableControls();
+
+    // если материал уже выбран ранее — оставляем
     updatePrice();
+    updateHelper();
   });
 });
 
-// материалы
+/* ============================================================
+   ВЫБОР МАТЕРИАЛА
+   ============================================================ */
 document.querySelectorAll('[data-mat]').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (btn.disabled) return;
     document.querySelectorAll('[data-mat]').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     state.material = btn.dataset.mat;
     updatePrice();
-  });
-});
-
-// зоны
-document.querySelectorAll('[data-zone]').forEach(btn => {
-  const z = btn.dataset.zone;
-  btn.querySelector('.price').textContent = '+ ' + PRICES[state.material][z].toLocaleString('uk-UA') + ' ₴';
-  btn.addEventListener('click', () => {
-    if (state.zones.has(z)) { state.zones.delete(z); btn.classList.remove('active'); }
-    else { state.zones.add(z); btn.classList.add('active'); }
-    updatePrice();
     updateHelper();
-    updateQuietness();
   });
 });
 
-function updatePrice() {
-  // обновить подписи цен в зонах (материал мог смениться)
+/* ============================================================
+   АКТИВАЦИЯ КНОПОК ПОСЛЕ ВЫБОРА АВТО
+   ============================================================ */
+function enableControls() {
+  // материалы
+  document.querySelectorAll('[data-mat]').forEach(b => b.disabled = false);
+
+  // если материал ещё не выбран — авто-выбираем «Стандарт»
+  if (!state.material) {
+    state.material = 'standard';
+    const std = document.querySelector('[data-mat="standard"]');
+    if (std) std.classList.add('active');
+  }
+
+  // зоны
+  document.querySelectorAll('[data-zone]').forEach(b => b.disabled = false);
+
+  // проставляем цены в кнопках под текущий материал
+  refreshZonePrices();
+}
+
+function refreshZonePrices() {
+  if (!state.material) return;
   document.querySelectorAll('[data-zone]').forEach(btn => {
     const z = btn.dataset.zone;
-    btn.querySelector('.price').textContent = '+ ' + PRICES[state.material][z].toLocaleString('uk-UA') + ' ₴';
+    const base = PRICES[state.material]?.[z] ?? 0;
+    const withCoef = Math.round(base * (CAR_COEF[state.car] || 1));
+    btn.querySelector('.price').textContent = '+ ' + withCoef.toLocaleString('uk-UA') + ' ₴';
   });
+}
+
+/* ============================================================
+   РАСЧЁТ СТОИМОСТИ
+   ============================================================ */
+function updatePrice() {
+  if (!state.car || !state.material) {
+    document.getElementById('total-val').innerHTML = '— <small>₴</small>';
+    return;
+  }
+
+  refreshZonePrices();
 
   let sum = 0;
-  state.zones.forEach(z => sum += PRICES[state.material][z] || 0);
+  state.zones.forEach(z => {
+    sum += PRICES[state.material][z] || 0;
+  });
   sum = Math.round(sum * (CAR_COEF[state.car] || 1));
 
   const el = document.getElementById('total-val');
@@ -669,52 +763,53 @@ function updatePrice() {
 }
 
 /* ============================================================
-   ПОМОЩНИК-ЧЕЛОВЕЧЕК
+   ПОМОЩНИК
    ============================================================ */
 const helperTitle = document.getElementById('helper-title');
 const helperMsg   = document.getElementById('helper-msg');
 const helperMouth = document.getElementById('helper-mouth');
 
 function updateHelper() {
-  const n = state.zones.size;
   const face = document.getElementById('helper-face');
-  const mouth = helperMouth;
+  const n = state.zones.size;
 
-  if (n === 0) {
-    helperTitle.textContent = 'Оберіть зони';
-    helperMsg.textContent = 'Додайте хоча б одну зону шумоізоляції, щоб я почав посміхатися.';
-    mouth.setAttribute('d', 'M20 34 Q28 32 36 34');        // грустный
+  if (!state.car) {
+    helperTitle.textContent = 'Оберіть авто';
+    helperMsg.textContent = 'Спочатку оберіть тип кузова — після цього я підкажу, що робити далі.';
+    helperMouth.setAttribute('d', 'M20 34 Q28 32 36 34');
     face.querySelector('circle').setAttribute('stroke', '#555');
+  } else if (!state.material) {
+    helperTitle.textContent = 'Оберіть матеріали';
+    helperMsg.textContent = 'Тепер оберіть рівень матеріалів — Економ, Стандарт або Преміум.';
+    helperMouth.setAttribute('d', 'M20 34 Q28 34 36 34');
+    face.querySelector('circle').setAttribute('stroke', '#c9a24b');
+  } else if (n === 0) {
+    helperTitle.textContent = 'Оберіть зони';
+    helperMsg.textContent = 'Клікайте по деталях на 3D-моделі або по кнопках справа.';
+    helperMouth.setAttribute('d', 'M20 34 Q28 33 36 34');
+    face.querySelector('circle').setAttribute('stroke', '#c9a24b');
   } else if (n <= 2) {
     helperTitle.textContent = 'Гарний початок';
     helperMsg.textContent = 'Вже краще! Додайте ще кілька зон — і тиша стане відчутною.';
-    mouth.setAttribute('d', 'M20 34 Q28 37 36 34');        // лёгкая улыбка
+    helperMouth.setAttribute('d', 'M20 34 Q28 37 36 34');
     face.querySelector('circle').setAttribute('stroke', '#c9a24b');
   } else if (n <= 4) {
     helperTitle.textContent = 'Чудовий вибір';
     helperMsg.textContent = 'Ви на правильному шляху. Ще трохи — і салон стане по-справжньому тихим.';
-    mouth.setAttribute('d', 'M18 32 Q28 40 38 32');        // широкая улыбка
+    helperMouth.setAttribute('d', 'M18 32 Q28 40 38 32');
     face.querySelector('circle').setAttribute('stroke', '#e6c878');
   } else {
     helperTitle.textContent = 'Максимальна тиша';
-    helperMsg.textContent = 'Ідеально! Ви обрали майже все — я в захваті. Саме так і має бути.';
-    mouth.setAttribute('d', 'M16 30 Q28 42 40 30');        // очень широкая
+    helperMsg.textContent = 'Ідеально! Ви обрали майже все — я в захваті.';
+    helperMouth.setAttribute('d', 'M16 30 Q28 42 40 30');
     face.querySelector('circle').setAttribute('stroke', '#e6c878');
   }
 }
 
-/* «Тишина» = сколько зон выбрано / общее число */
-function updateQuietness() {
-  const totalZones = 6;
-  state.quietness = Math.min(state.zones.size / totalZones, 1);
-  // можно использовать позже для звука/эффектов
-}
-
 /* ============================================================
-   АНИМАЦИЯ
+   АНИМАЦИЯ СЦЕНЫ
    ============================================================ */
 const clock = new THREE.Clock();
-
 function animateScene() {
   const t = clock.getElapsedTime();
   const pulse = (Math.sin(t * 2.6) + 1) / 2;
@@ -733,26 +828,44 @@ function animateScene() {
 animateScene();
 
 /* ============================================================
-   БЕГУЩАЯ ЗВУКОВАЯ ЛИНИЯ
-   Чем больше зон — тем плавнее (меньше шума).
+   РАЗМЕРЫ / RESIZE
+   ============================================================ */
+function resize() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const w = Math.max(rect.width, 200);
+  const h = Math.max(rect.height, 200);
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  resizeWave();
+}
+addEventListener('resize', resize);
+
+/* ============================================================
+   ЗВУКОВАЯ ЛИНИЯ
    ============================================================ */
 const waveCanvas = document.getElementById('wave');
 const wctx = waveCanvas.getContext('2d');
 let waveOffset = 0;
 
 function resizeWave() {
-  waveCanvas.width  = waveCanvas.clientWidth  * devicePixelRatio;
-  waveCanvas.height = waveCanvas.clientHeight * devicePixelRatio;
+  const rect = waveCanvas.parentElement.getBoundingClientRect();
+  waveCanvas.width  = Math.max(rect.width, 100) * devicePixelRatio;
+  waveCanvas.height = 50 * devicePixelRatio;
 }
+
 function drawWave() {
   const W = waveCanvas.width, H = waveCanvas.height;
+  if (!W || !H) { requestAnimationFrame(drawWave); return; }
   wctx.clearRect(0, 0, W, H);
 
-  const noiseLevel = 1 - state.quietness;      // 1 = шумно, 0 = тихо
-  const amp  = 4 + noiseLevel * 26 * devicePixelRatio;
-  const freq = 0.008 + noiseLevel * 0.03;
-  const speed = 0.4 + noiseLevel * 1.4;
+  const totalZones = 6;
+  const quietness = Math.min(state.zones.size / totalZones, 1);
+  const noiseLevel = 1 - quietness;
 
+  const amp   = 3 + noiseLevel * 22 * devicePixelRatio;
+  const freq  = 0.008 + noiseLevel * 0.03;
+  const speed = 0.4 + noiseLevel * 1.4;
   waveOffset += speed * 0.4;
 
   const grad = wctx.createLinearGradient(0, 0, W, 0);
@@ -768,32 +881,26 @@ function drawWave() {
 
   for (let x = 0; x < W; x += 3) {
     const nx = x * freq + waveOffset;
-    // смесь шумной пилы и чистой синусоиды
-    const noise = Math.sin(nx * 7.3) * Math.sin(nx * 3.1) * Math.cos(nx * 11.7);
+    const noise  = Math.sin(nx*7.3) * Math.sin(nx*3.1) * Math.cos(nx*11.7);
     const smooth = Math.sin(nx);
     const v = smooth * (1 - noiseLevel) + noise * noiseLevel;
     const y = H/2 + v * amp;
-    if (x === 0) wctx.moveTo(x, y);
-    else wctx.lineTo(x, y);
+    if (x === 0) wctx.moveTo(x, y); else wctx.lineTo(x, y);
   }
   wctx.stroke();
   requestAnimationFrame(drawWave);
 }
 
 /* ============================================================
-   RESIZE
+   СТАРТ
    ============================================================ */
-function resize() {
-  const w = canvas.clientWidth, h = canvas.clientHeight;
-  renderer.setSize(w, h, false);
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
-  resizeWave();
-}
-addEventListener('resize', resize);
-resizeWave();
-drawWave();
-updateHelper();
+// ждём кадр, чтобы у контейнера появились размеры
+requestAnimationFrame(() => {
+  resize();
+  drawWave();
+  updateHelper();
+  updatePrice();
+});
 </script>
 </body>
 </html>
